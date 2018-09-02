@@ -1,0 +1,70 @@
+/**
+ * Import Fonts
+ */
+
+
+ @font-face {
+    font-family: 'rubik-regular';
+    src: url('./fonts/rubik/rubik-regular-webfont.woff2') format('woff2'),
+        url('./fonts/rubik/rubik-regular-webfont.woff') format('woff'),
+        url('./fonts/rubik/Rubik-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+body {
+    background-color: white;
+    font-family: 'rubik-regular', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+#main-container {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 50px 6em auto;
+}
+
+.header-box {
+    background-color: lightslategray;
+    color: #f1f4f4;   
+    grid-column: 1 / 3;
+}
+
+.header-box button {
+    color: #f1f4f4;
+    font-family: 'rubik-regular', sans-serif;
+    font-size: 20px;
+    margin: 13px 10px 10px 10px;
+    padding: 0;
+    background-color: transparent;
+    border: none;
+    font-weight: normal;
+}
+
+.header-box button:hover,
+.header-box button:focus,
+.header-box button:active {
+    color: white;
+    margin: 13px 10px 10px 10px;
+    padding: 0;
+
+}
+
+.header-box button.active-item {
+    color: white;
+    font-weight: bolder;
+}
+
+.menu-item-headline {
+    color: lightslategray;
+    grid-column: 1 / 3;
+}
+
+.box {
+    border: 1px solid black;
+
+    /*background-color: lightslategray;*/
+}
