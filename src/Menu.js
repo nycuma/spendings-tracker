@@ -3,23 +3,32 @@ import React from 'react';
 
 class Menu extends React.Component {
 
-
-    //tem
     render() {
 
         const activeMenuItem = this.props.activeMenuItem;
-    // TODO highlight active menu i
+        const menuItems = ['Spendings', 'Statistics', 'Settings', 'Login'];
+
+        let menuButtons = menuItems.map((item, i) => {
+            let classes = '';
+            // highlight currently selected menu item
+            if(item === activeMenuItem) classes = 'active-item'; 
+            return (
+                <button 
+                    key={item.toLowerCase + '-btn-' + i} 
+                    id={item.toLowerCase + '-btn'} 
+                    className={classes} 
+                    onClick={(e) => this.props.onClick(e)}>
+                        {item}
+                </button>
+            );
+        });
     
         return (
             <div className="header-box">
-                    <button id="spendings-btn" className="active-item">Spendings</button>
-                    <button id="statistics-btn">Statistics</button>
-                    <button id="settings-btn">Settings</button>
-                    <button id="login-btn">Login</button>
+                    {menuButtons}
                 </div>
         );
     }
-
 }
 
 export default Menu;

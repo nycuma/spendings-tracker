@@ -68,3 +68,12 @@ body {
 
     /*background-color: lightslategray;*/
 }
+
+.active-day {
+    background: #f1f4f4;
+}
+
+#table-spendings td {
+    border: 0;
+    padding: 0;
+}

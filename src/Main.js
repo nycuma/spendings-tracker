@@ -16,7 +16,7 @@ class Main extends Component {
     }
 
     switchMenuItem(evt) {
-        this.setState({ activeMenuItem : evt.target.value });
+        this.setState({ activeMenuItem : evt.target.innerHTML });
     }
 
     render() {
@@ -32,7 +32,10 @@ class Main extends Component {
 
         return (
             <div id="main-container">
-                <Menu activeMenuItem={this.state.activeMenuItem} />
+                <Menu 
+                    activeMenuItem={this.state.activeMenuItem} 
+                    onClick={(evt) => this.switchMenuItem(evt)}
+                />
                 {menuItem}
             </div>
         );
