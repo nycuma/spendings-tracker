@@ -26,7 +26,8 @@ class Spendings extends React.Component {
                     selectedDay={this.state.selectedDay}
                     updateSelectedDay={this.updateSelectedDay}
                     totalAmount={this.state.totalAmount}/>
-                <SpendingsForm /> 
+                <SpendingsForm 
+                    selectedDay={this.state.selectedDay}/> 
             </div>
         );
     }

@@ -4,7 +4,7 @@ import dateFnsFormat from 'date-fns/format';
 import 'react-day-picker/lib/style.css';
 import Day from './Day';
 import Utils from '../utils/Utils';
-import Constants from '../utils/Constants'
+import Constants from '../utils/Constants';
 
 
 class Calender extends React.Component {
@@ -49,10 +49,7 @@ class Calender extends React.Component {
                     firstDayOfWeek={1}
                     onDayClick={this.props.updateSelectedDay}
                 />
-                {this.props.selectedDay ? 
-                    (<p>Selected day: {dateFnsFormat(this.props.selectedDay, Constants.DATE_FORMAT)}</p>) 
-                    : (<p>Please select a day</p>)}
-
+                <p>Selected day: {dateFnsFormat(this.props.selectedDay, Constants.DATE_FORMAT)}</p>
                 {this.renderTableMonth()}
             </div>
             

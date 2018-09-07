@@ -5,8 +5,19 @@ class Day extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            totalAmount : 0.0
+            totalAmount: 0.0,
+            spendingPositions: []
         };
+    }
+
+    addSpendingsPosition(cat, amount, comment) {
+        this.setState( {
+            spendingPositions: this.state.spendingPositions.concat({
+                cat: cat,
+                amount: amount,
+                comment: comment
+            })
+        });
     }
 
     render() {
