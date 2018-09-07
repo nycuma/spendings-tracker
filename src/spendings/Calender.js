@@ -2,32 +2,25 @@ import React from 'react';
 import DayPicker from 'react-day-picker';
 import dateFnsFormat from 'date-fns/format';
 import 'react-day-picker/lib/style.css';
+import Day from './Day';
 import Utils from '../utils/Utils';
+import Constants from '../utils/Constants'
+
 
 class Calender extends React.Component {
     constructor(props) {
         super(props);
-        this.handleDayClick = this.handleDayClick.bind(this);
         this.state = {
-            selectedDay : new Date()
+           
         };
     }
 
-    handleDayClick(day) {
-        this.setState({ selectedDay: day });
-    }
-
     renderTableMonth() {
-        let numRows = Utils.getNumDaysOfMonth(this.state.selectedDay);
-
+        let numRows = Utils.getNumDaysOfMonth(this.props.selectedDay);
         let tblRows = [];
         for(let i = 1; i <= numRows; i++) {   
-            let day = i < 10 ? '0'+i : i;
             tblRows.push(
-                <tr key={day} className={i === this.state.selectedDay.getDate() ? 'active-day' : ''}>
-                    <td>{day}</td>
-                    <td>0.00 €</td>
-                </tr> 
+                <Day i={i} selectedDay={this.props.selectedDay} />
             );
         }
 
@@ -35,7 +28,7 @@ class Calender extends React.Component {
             <table id="table-spendings">
                 <thead>
                     <tr>
-                        <th>{dateFnsFormat(this.state.selectedDay, 'MMMM YYYY')}</th>
+                        <th>{dateFnsFormat(this.props.selectedDay, 'MMMM YYYY')}</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,11 +38,8 @@ class Calender extends React.Component {
         );
     }
 
-
-
-
     render() {
-        const DATE_FORMAT = 'DD MMM YYYY';
+        
 
         return (
             <div className="section-left box">
@@ -57,10 +47,10 @@ class Calender extends React.Component {
                 <DayPicker
                     todayButton="Today"
                     firstDayOfWeek={1}
-                    onDayClick={this.handleDayClick}
+                    onDayClick={this.props.updateSelectedDay}
                 />
-                {this.state.selectedDay ? 
-                    (<p>Selected day: {dateFnsFormat(this.state.selectedDay, DATE_FORMAT)}</p>) 
+                {this.props.selectedDay ? 
+                    (<p>Selected day: {dateFnsFormat(this.props.selectedDay, Constants.DATE_FORMAT)}</p>) 
                     : (<p>Please select a day</p>)}
 
                 {this.renderTableMonth()}
