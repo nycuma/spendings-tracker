@@ -1,37 +1,15 @@
 import React from 'react';
-import Constants from '../utils/Constants';
+import { Constants, Settings } from '../utils/Constants';
 
 class Day extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            totalAmount: 0.0,
-            spendingPositions: []
-        };
-    }
-
-    addSpendingsPosition(cat, amount, comment) {
-        this.setState( {
-            spendingPositions: this.state.spendingPositions.concat({
-                cat: cat,
-                amount: amount,
-                comment: comment
-            })
-        });
-    }
-
+    
     render() {
         let day = this.props.i < 10 ? '0'+this.props.i : this.props.i;
         return( 
             <tr key={day} className={this.props.i === this.props.selectedDay.getDate() ? 'active-day' : ''}>
                 <td className="tbl-data-day">{day}</td>
                 <td className="tbl-data-amount">
-                    {this.state.totalAmount.toLocaleString('de-DE', { 
-                        style: 'currency', 
-                        currency: Constants.CURRENCY, 
-                        minimumFractionDigits: 2, 
-                        maximumFractionDigits: 2 
-                    })}
+                    {this.props.totalAmount.toLocaleString(Settings.LOCALE_CURRENCY, Constants.LOCALE_CURRENCY_OPTIONS)}
                 </td>
             </tr> 
         ); 

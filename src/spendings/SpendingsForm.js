@@ -1,6 +1,6 @@
 import React from 'react';
 import dateFnsFormat from 'date-fns/format';
-import Constants from '../utils/Constants';
+import { Constants, Settings } from '../utils/Constants';
 
 const MSG_PARSING_ERROR = 'Please enter a correct value';
 
@@ -15,15 +15,15 @@ class SpendingsForm extends React.Component {
         };
     }
 
-    updateCategory(e) {
+    handleCategory(e) {
         this.setState({ valCategory: e.target.value });
     }
 
-    updateAmount(e) {
+    handleAmount(e) {
         this.setState({ valAmount: e.target.value });
     }
 
-    updateComment(e) {
+    handleComment(e) {
         this.setState({ valComment: e.target.value });
     }
 
@@ -32,14 +32,16 @@ class SpendingsForm extends React.Component {
         let amount = parseFloat(this.state.valAmount);
         if(isNaN(amount)) {
             this.setState({ showParsingError: true });
+        } else {
+            this.setState({ showParsingError: false });
+            this.props.addSpendingsPosition(this.state.valCategory, amount, this.state.valComment);
         }
-        // TODO
-        //this.props.addSpendingsPosition(this.state.valCategory, amount.toFixed(2), this.state.valComment);
+        
     }
 
 
     render() {
-        let categories = Constants.SPENDING_CATEGORIES.map((cat) => {
+        let categories = Settings.SPENDING_CATEGORIES.map((cat) => {
             return (
                 <option key={cat.value} value={cat.value}>{cat.label}</option>
             );
@@ -60,11 +62,15 @@ class SpendingsForm extends React.Component {
                         <tbody>
                             <tr>
                                 <td>Category: </td>
-                                <td><select>{categories}</select></td>
+                                <td><select value={this.valCategory} onChange={(e) => this.handleAmount(e)}>{categories}</select></td>
                             </tr>
                             <tr>
                                 <td>Amount spent: </td>
-                                <td><input type="text" value={this.state.valAmount} onChange={(e) => this.updateAmount(e)} /></td>
+                                <td>
+                                    <input type="text" 
+                                           value={this.state.valAmount.toLocaleString(Settings.LOCALE_CURRENCY, Constants.LOCALE_DECIMAL_OPTIONS)} 
+                                           onChange={(e) => this.handleAmount(e)} />
+                                </td>
                             </tr>
                             <tr>
                                 <td></td>
@@ -72,11 +78,15 @@ class SpendingsForm extends React.Component {
                             </tr>
                             <tr>
                                 <td>Comment: </td>
-                                <td><input type="text" maxLength="150" value={this.state.valComment} onChange={(e) => this.updateComment(e)}/></td>
+                                <td>
+                                    <input type="text" 
+                                           maxLength="150" 
+                                           value={this.state.valComment} 
+                                           onChange={(e) => this.handleComment(e)} />
+                                </td>
                             </tr>
                             <tr>
-                                <td><button type="submit" 
-                                onClick={(e) => this.handleFormInput(e)}>Submit</button></td>
+                                <td><button type="submit" onClick={(e) => this.handleFormInput(e)}>Submit</button></td>
                             </tr>
                         </tbody>
                     </table>

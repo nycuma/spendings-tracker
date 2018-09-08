@@ -4,23 +4,21 @@ import dateFnsFormat from 'date-fns/format';
 import 'react-day-picker/lib/style.css';
 import Day from './Day';
 import Utils from '../utils/Utils';
-import Constants from '../utils/Constants';
+import { Constants } from '../utils/Constants';
 
 
 class Calender extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-           
-        };
-    }
-
+    
     renderTableMonth() {
+        
         let numRows = Utils.getNumDaysOfMonth(this.props.selectedDay);
         let tblRows = [];
         for(let i = 1; i <= numRows; i++) {   
+            let totalAmount = this.props.totalAmountsPerDay ? this.props.totalAmountsPerDay[i-1] : 0;
             tblRows.push(
-                <Day i={i} selectedDay={this.props.selectedDay} />
+                <Day i={i} 
+                     selectedDay={this.props.selectedDay} 
+                     totalAmount={totalAmount} />
             );
         }
 
