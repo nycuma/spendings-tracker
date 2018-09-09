@@ -1,8 +1,8 @@
 import React from 'react';
 import Calender from './spendings/Calender';
-import SpendingsForm from './spendings/SpendingsForm';
 import Utils from './utils/Utils';
 import exampleData from './utils/ExampleData';
+import SpendingsDayOverview from './spendings/SpendingsDayOverview';
 
 class Spendings extends React.Component {
     constructor(props) {
@@ -49,6 +49,18 @@ class Spendings extends React.Component {
         return totalAmounts;
     }
 
+    /**
+     * Returns all spending positions for the currently
+     * selected calender day
+     */
+    getSpendingPositionsForSelectedDay() {
+        return this.state.spendingPositions.filter((pos) => {
+            return pos.day.getDate() === this.state.selectedDay.getDate()
+                    && pos.day.getMonth() === this.state.selectedDay.getMonth()
+                    && pos.day.getFullYear() === this.state.selectedDay.getFullYear();
+        });
+    }
+
     render() {
         let totalAmountsPerDay = this.calculateTotalAmoutsPerDay(this.state.selectedDay.getMonth());
 
@@ -59,7 +71,9 @@ class Spendings extends React.Component {
                     totalAmountsPerDay={totalAmountsPerDay}
                     selectedDay={this.state.selectedDay}
                     updateSelectedDay={this.updateSelectedDay} />
-                <SpendingsForm 
+
+                <SpendingsDayOverview
+                    spendingsForDay={this.getSpendingPositionsForSelectedDay()}
                     selectedDay={this.state.selectedDay}
                     addSpendingsPosition={this.addSpendingsPosition} /> 
             </div>

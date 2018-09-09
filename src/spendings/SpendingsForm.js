@@ -1,5 +1,4 @@
 import React from 'react';
-import dateFnsFormat from 'date-fns/format';
 import { Constants, Settings } from '../utils/Constants';
 
 const MSG_PARSING_ERROR = 'Please enter a correct value';
@@ -53,9 +52,8 @@ class SpendingsForm extends React.Component {
         };
 
         return (
-            <div className="box">
-                <h2>Spendings for {dateFnsFormat(this.props.selectedDay, Constants.DATE_FORMAT)}</h2>
-
+            <div>
+                
                 <p>+ Add a new spendings position</p>
                 <form>
                     <table>
