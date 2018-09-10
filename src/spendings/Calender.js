@@ -4,7 +4,7 @@ import dateFnsFormat from 'date-fns/format';
 import 'react-day-picker/lib/style.css';
 import Day from './Day';
 import Utils from '../utils/Utils';
-import { Constants } from '../utils/Constants';
+import { Constants, Settings } from '../utils/Constants';
 
 
 class Calender extends React.Component {
@@ -32,6 +32,12 @@ class Calender extends React.Component {
                 <tbody>
                     {tblRows} 
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td>Total:</td>
+                        <td>{this.props.totalAmountMonth.toLocaleString(Settings.LOCALE_CURRENCY, Constants.LOCALE_CURRENCY_OPTIONS)}</td>
+                    </tr>
+                </tfoot>
             </table>
         );
     }

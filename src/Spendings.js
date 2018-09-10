@@ -49,6 +49,18 @@ class Spendings extends React.Component {
         return totalAmounts;
     }
 
+    calculateTotalAmountMonth() {
+        let spendingsMonth = this.getSpendingPositionsForSelectedMonth();
+        if (spendingsMonth) {
+            return spendingsMonth.map((item) => {
+                return item.amount;
+            }).reduce((prevAmount, nextAmount) => {
+                return prevAmount + nextAmount;
+            }, 0);
+        }
+        return 0;
+    }
+
     /**
      * Returns all spending positions for the currently
      * selected calender day
@@ -61,6 +73,13 @@ class Spendings extends React.Component {
         });
     }
 
+    getSpendingPositionsForSelectedMonth() {
+        return this.state.spendingPositions.filter((pos) => {
+            return pos.day.getMonth() === this.state.selectedDay.getMonth()
+                    && pos.day.getFullYear() === this.state.selectedDay.getFullYear();
+        });
+    }
+
     render() {
         let totalAmountsPerDay = this.calculateTotalAmoutsPerDay(this.state.selectedDay.getMonth());
 
@@ -69,6 +88,7 @@ class Spendings extends React.Component {
                 <h1 className="menu-item-headline">Spendings</h1>
                 <Calender 
                     totalAmountsPerDay={totalAmountsPerDay}
+                    totalAmountMonth={this.calculateTotalAmountMonth()}
                     selectedDay={this.state.selectedDay}
                     updateSelectedDay={this.updateSelectedDay} />
 
