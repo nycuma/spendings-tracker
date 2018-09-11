@@ -19,7 +19,7 @@ class SpendingsForm extends React.Component {
     }
 
     handleAmount(e) {
-        this.setState({ valAmount: e.target.value });
+        this.setState({ valAmount: e.target.value.replace(',', '.') });
     }
 
     handleComment(e) {
@@ -60,7 +60,7 @@ class SpendingsForm extends React.Component {
                         <tbody>
                             <tr>
                                 <td>Category: </td>
-                                <td><select value={this.valCategory} onChange={(e) => this.handleAmount(e)}>{categories}</select></td>
+                                <td><select value={this.valCategory} onChange={(e) => this.handleCategory(e)}>{categories}</select></td>
                             </tr>
                             <tr>
                                 <td>Amount spent: </td>
