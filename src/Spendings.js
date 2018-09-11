@@ -1,4 +1,5 @@
 import React from 'react';
+import { DateUtils } from "react-day-picker";
 import Calender from './spendings/Calender';
 import Utils from './utils/Utils';
 import exampleData from './utils/ExampleData';
@@ -9,6 +10,7 @@ class Spendings extends React.Component {
         super(props);
         this.updateSelectedDay = this.updateSelectedDay.bind(this);
         this.addSpendingsPosition = this.addSpendingsPosition.bind(this);
+        this.calculateTotalAmountAnyDay = this.calculateTotalAmountAnyDay.bind(this);
         this.state = {
             selectedDay: new Date(),
             spendingPositions: exampleData
@@ -61,22 +63,35 @@ class Spendings extends React.Component {
         return 0;
     }
 
+    calculateTotalAmountAnyDay(date) {
+        let spendings = this.getSpendingPositionsForDay(date);
+        if (spendings) {
+            return spendings.map((item) => {
+                return item.amount;
+            }).reduce((prevAmount, nextAmount) => {
+                return prevAmount + nextAmount;
+            }, 0);
+        }
+        return 0;
+    }
+
     /**
      * Returns all spending positions for the currently
      * selected calender day
      */
     getSpendingPositionsForSelectedDay() {
+        return this.getSpendingPositionsForDay(this.state.selectedDay);
+    }
+
+    getSpendingPositionsForDay(date) {
         return this.state.spendingPositions.filter((pos) => {
-            return pos.day.getDate() === this.state.selectedDay.getDate()
-                    && pos.day.getMonth() === this.state.selectedDay.getMonth()
-                    && pos.day.getFullYear() === this.state.selectedDay.getFullYear();
+            return DateUtils.isSameDay(pos.day, date);
         });
     }
 
     getSpendingPositionsForSelectedMonth() {
         return this.state.spendingPositions.filter((pos) => {
-            return pos.day.getMonth() === this.state.selectedDay.getMonth()
-                    && pos.day.getFullYear() === this.state.selectedDay.getFullYear();
+            return DateUtils.isSameMonth(pos.day, this.state.selectedDay);
         });
     }
 
@@ -90,7 +105,8 @@ class Spendings extends React.Component {
                     totalAmountsPerDay={totalAmountsPerDay}
                     totalAmountMonth={this.calculateTotalAmountMonth()}
                     selectedDay={this.state.selectedDay}
-                    updateSelectedDay={this.updateSelectedDay} />
+                    updateSelectedDay={this.updateSelectedDay} 
+                    calculateTotalAmountAnyDay={this.calculateTotalAmountAnyDay} />
 
                 <SpendingsDayOverview
                     spendingsForDay={this.getSpendingPositionsForSelectedDay()}
