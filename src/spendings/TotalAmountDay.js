@@ -11,7 +11,7 @@ class TotalAmountDay extends React.Component {
     render() {
         return( 
             <div className="hover-total-amount-day" style={this.props.position}>
-                {this.props.totalAmountDay.toLocaleString(Settings.LOCALE_CURRENCY, Constants.LOCALE_CURRENCY_OPTIONS)}
+                {this.props.totalAmountDay.toLocaleString(Settings.CURRENCY, Constants.LOCALE_CURRENCY_OPTIONS)}
             </div> 
         ); 
     }

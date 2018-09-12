@@ -12,20 +12,29 @@ import { Constants, Settings } from '../utils/Constants';
 class Calender extends React.Component {
     constructor(props) {
         super(props);
+        this.displayAmountSpent = this.displayAmountSpent.bind(this);
+        /*
         this.state = {
             dateDisplayingAmount: null
         };
+        */
     }
 
     displayAmountSpent(day, modifiers, evt) {
-        //let amountSpent = this.props.calculateTotalAmountAnyDay(day).toLocaleString(Settings.CURRENCY, Constants.LOCALE_CURRENCY_OPTIONS);
-        let position = {top: evt.pageY, left: evt.pageX};
-        ReactDOM.render(<TotalAmountDay position={position} totalAmountDay={'amountSpent'} />, 
+        //this.setState({ dateDisplayingAmount: day });
+
+        let amountSpent = this.props.calculateTotalAmountAnyDay(day);
+        if(amountSpent && amountSpent > 0) {
+            let position = {top: evt.pageY, left: evt.pageX};
+            ReactDOM.render(<TotalAmountDay position={position} totalAmountDay={amountSpent} />, 
                         document.getElementById('total-amount-day'));
+        }
+        
     }
 
     hideAmountSpent(day, modifiers, evt) {
-        //ReactDOM.unmountComponentAtNode(document.getElementById('total-amount-day'));
+        // TODO remove component when mouse leaves day-picker
+        ReactDOM.unmountComponentAtNode(document.getElementById('total-amount-day'));
     }
     
     renderTableMonth() {

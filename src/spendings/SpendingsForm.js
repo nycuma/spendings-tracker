@@ -35,7 +35,7 @@ class SpendingsForm extends React.Component {
             this.setState({ showParsingError: false });
             this.props.addSpendingsPosition(this.state.valCategory, amount, this.state.valComment);
         }
-        
+        this.setState({ valComment: '' });
     }
 
 

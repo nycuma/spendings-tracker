@@ -1,5 +1,5 @@
 .hover-total-amount-day {
-    position: fixed;
+    position: absolute;
     height: 15px;
     font-size: 12px;
     background-color: yellow;
