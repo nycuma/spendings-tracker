@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import DayPicker from 'react-day-picker';
 import dateFnsFormat from 'date-fns/format';
 import 'react-day-picker/lib/style.css';
-import Day from './Day';
 import Utils from '../utils/Utils';
 import TotalAmountDay from './TotalAmountDay';
 import { Constants, Settings } from '../utils/Constants';
@@ -36,55 +35,51 @@ class Calender extends React.Component {
         // TODO remove component when mouse leaves day-picker
         ReactDOM.unmountComponentAtNode(document.getElementById('total-amount-day'));
     }
-    
-    renderTableMonth() {
-        
-        let numRows = Utils.getNumDaysOfMonth(this.props.selectedDay);
-        let tblRows = [];
-        for(let i = 1; i <= numRows; i++) {   
-            let totalAmount = this.props.totalAmountsPerDay ? this.props.totalAmountsPerDay[i-1] : 0;
-            tblRows.push(
-                <Day key={'day'+i}
-                     i={i} 
-                     selectedDay={this.props.selectedDay} 
-                     totalAmount={totalAmount} />
-            );
-        }
+
+    renderTableSums() {
 
         return (
+
             <table id="table-spendings">
                 <thead>
                     <tr>
-                        <th>{dateFnsFormat(this.props.selectedDay, 'MMMM YYYY')}</th>
+                        <th>Total spendings...</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {tblRows} 
-                </tbody>
-                <tfoot>
+                     <tr>
+                        <td>...this day:</td>
+                        <td>{this.props.totalAmountDay.toLocaleString(Settings.LOCALE_CURRENCY, Constants.LOCALE_CURRENCY_OPTIONS)}</td>
+                    </tr>
                     <tr>
-                        <td>Total:</td>
+                        <td>...this week:</td>
+                        <td>{this.props.totalAmountWeek.toLocaleString(Settings.LOCALE_CURRENCY, Constants.LOCALE_CURRENCY_OPTIONS)}</td>
+                    </tr>
+                    <tr>
+                        <td>...this month:</td>
                         <td>{this.props.totalAmountMonth.toLocaleString(Settings.LOCALE_CURRENCY, Constants.LOCALE_CURRENCY_OPTIONS)}</td>
                     </tr>
-                </tfoot>
+                    <tr>
+                        <td>...this year:</td>
+                        <td>{this.props.totalAmountYear.toLocaleString(Settings.LOCALE_CURRENCY, Constants.LOCALE_CURRENCY_OPTIONS)}</td>
+                    </tr>
+                </tbody>
             </table>
         );
     }
 
     render() {
-        
-
         return (
             <div className="section-left box">
                 <h2>Calender</h2>
                 <DayPicker
                     todayButton="Today"
-                    firstDayOfWeek={1}
+                    firstDayOfWeek={Settings.FIRST_DAY_WEEK}
                     onDayClick={this.props.updateSelectedDay}
                     onDayMouseEnter={this.displayAmountSpent}
                     onDayMouseLeave={this.hideAmountSpent} />
                 <p>Selected day: {dateFnsFormat(this.props.selectedDay, Constants.DATE_FORMAT)}</p>
-                {this.renderTableMonth()}
+                {this.renderTableSums()}
             </div>
             
         );
