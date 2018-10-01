@@ -4,6 +4,7 @@
 let Settings = {
     CURRENCY: 'EUR',
     LOCALE_CURRENCY: 'de-DE',
+    FIRST_DAY_WEEK: 1, //0: Sunday, 1: Monday
     SPENDING_CATEGORIES: [
         { label: 'Food', value: 'food', descr: '' },
         { label: 'Coffee Shops, Bars & Restaurants', value: 'coffeeshop', descr: '' },
