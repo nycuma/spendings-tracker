@@ -82,44 +82,4 @@ body {
 }
 
 
-#table-spendings {
-    margin: auto;
-    width: 100%;
-    min-width: 150px;
-    max-width: 400px;
-}
-#table-spendings td {
-    
-    border: 0;
-    padding: 3px;
-
-}
-
-#table-spendings .tbl-data-day {
-    text-align: left;
-}
-#table-spendings .tbl-data-amount {
-    text-align: right;
-}
-
-
-.arrow-up {
-    position: relative;
-    bottom: 10px;
-    width: 0; 
-    height: 0; 
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-bottom: 5px solid black;
-  }
-
-  .arrow-down {
-    font-size: 0.1em;
-    width: 0; 
-    height: 0; 
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 5px solid black;
-  }
-
 /*orange #f2690d*/

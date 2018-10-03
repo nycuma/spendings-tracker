@@ -1,0 +1,19 @@
+#table-spendings {
+    margin: auto;
+    width: 100%;
+    min-width: 150px;
+    max-width: 400px;
+}
+#table-spendings td {
+    
+    border: 0;
+    padding: 3px;
+
+}
+
+#table-spendings .tbl-data-day {
+    text-align: left;
+}
+#table-spendings .tbl-data-amount {
+    text-align: right;
+}
