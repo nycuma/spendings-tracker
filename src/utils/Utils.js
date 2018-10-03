@@ -32,7 +32,7 @@ let Utils = {
     getDaysOfThisWeek(currentDay) {
 
         let numPastDays = -1, numFutureDays = -1;
-        let diff = currentDay - Settings.FIRST_DAY_WEEK;
+        let diff = currentDay.getDay()- Settings.FIRST_DAY_WEEK;
         let weekdays = [];
 
         if(diff >= 0) {
@@ -45,14 +45,14 @@ let Utils = {
 
         while(numPastDays > 0) {
             let weekday = new Date();
-            weekday.setDate(this.state.selectedDay.getDate() - numPastDays);
+            weekday.setDate(currentDay.getDate() - numPastDays);
             numPastDays--;
             weekdays.push(weekday);
         }
 
         while(numFutureDays > 0) {
             let weekday = new Date();
-            weekday.setDate(this.state.selectedDay.getDate() + numFutureDays);
+            weekday.setDate(currentDay.getDate() + numFutureDays);
             numFutureDays--;
             weekdays.push(weekday);
         }
