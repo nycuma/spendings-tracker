@@ -5,6 +5,7 @@ import Utils from './utils/Utils';
 import exampleData from './utils/ExampleData';
 import SpendingsDayOverview from './spendings/SpendingsDayOverview';
 
+
 class Spendings extends React.Component {
     constructor(props) {
         super(props);
@@ -51,22 +52,29 @@ class Spendings extends React.Component {
         return totalAmounts;
     }
 
+    calculateTotalAmountWeek() {
+        let spendingsWeek = this.getSpendingPositionsForSelectedWeek();
+        return this.calculateSumSpendingPositions(spendingsWeek);
+    }
+
     calculateTotalAmountMonth() {
         let spendingsMonth = this.getSpendingPositionsForSelectedMonth();
-        if (spendingsMonth) {
-            return spendingsMonth.map((item) => {
-                return item.amount;
-            }).reduce((prevAmount, nextAmount) => {
-                return prevAmount + nextAmount;
-            }, 0);
-        }
-        return 0;
+        return this.calculateSumSpendingPositions(spendingsMonth);
+    }
+
+    calculateTotalAmountYear() {
+        let spendingsYear = this.getSpendingPositionsForSelectedYear();
+        return this.calculateSumSpendingPositions(spendingsYear);
     }
 
     calculateTotalAmountAnyDay(date) {
         let spendings = this.getSpendingPositionsForDay(date);
-        if (spendings) {
-            return spendings.map((item) => {
+        return this.calculateSumSpendingPositions(spendings);
+    }
+
+    calculateSumSpendingPositions(positions) {
+        if (positions) {
+            return positions.map((item) => {
                 return item.amount;
             }).reduce((prevAmount, nextAmount) => {
                 return prevAmount + nextAmount;
@@ -89,21 +97,41 @@ class Spendings extends React.Component {
         });
     }
 
+    getSpendingPositionsForSelectedWeek() {
+        let weekdays = Utils.getDaysOfThisWeek(this.state.selectedDay);
+
+        return this.state.spendingPositions.filter((pos) => {
+            return DateUtils.isSameDay(pos.day, this.state.selectedDay)
+                || DateUtils.isSameDay(pos.day, weekdays[0])
+                || DateUtils.isSameDay(pos.day, weekdays[1])
+                || DateUtils.isSameDay(pos.day, weekdays[2])
+                || DateUtils.isSameDay(pos.day, weekdays[3])
+                || DateUtils.isSameDay(pos.day, weekdays[4])
+                || DateUtils.isSameDay(pos.day, weekdays[5]);
+        });
+    }
+
     getSpendingPositionsForSelectedMonth() {
         return this.state.spendingPositions.filter((pos) => {
             return DateUtils.isSameMonth(pos.day, this.state.selectedDay);
         });
     }
 
-    render() {
-        let totalAmountsPerDay = this.calculateTotalAmoutsPerDay(this.state.selectedDay.getMonth());
+    getSpendingPositionsForSelectedYear() {
+        return this.state.spendingPositions.filter((pos) => {
+            return pos.day.getFullYear === this.state.selectedDay.getFullYear;
+        });
+    }
 
+    render() {
         return (
             <div id="spendings">
                 <h1 className="menu-item-headline">Spendings</h1>
                 <Calender 
-                    totalAmountsPerDay={totalAmountsPerDay}
+                    totalAmountDay={this.calculateTotalAmountAnyDay(this.state.selectedDay)}
+                    totalAmountWeek={this.calculateTotalAmountWeek()}
                     totalAmountMonth={this.calculateTotalAmountMonth()}
+                    totalAmountYear={this.calculateTotalAmountYear()}
                     selectedDay={this.state.selectedDay}
                     updateSelectedDay={this.updateSelectedDay} 
                     calculateTotalAmountAnyDay={this.calculateTotalAmountAnyDay} />

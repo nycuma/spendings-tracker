@@ -1,4 +1,5 @@
 import isLeapYear from 'date-fns/is_leap_year';
+import { Settings } from './Constants';
 
 let Utils = {
 
@@ -18,6 +19,45 @@ let Utils = {
                 numDays = 31;
         }
         return numDays;
+    },
+
+
+    /**
+     * Calculates the dates of the days that are in the
+     * same week as currentDay, depending on the propeties
+     * value of the first week day (Monday or Sunday).
+     * @param currentDay 
+     * @returns array with 6 Date objects (excluding current day)
+     */
+    getDaysOfThisWeek(currentDay) {
+
+        let numPastDays = -1, numFutureDays = -1;
+        let diff = currentDay - Settings.FIRST_DAY_WEEK;
+        let weekdays = [];
+
+        if(diff >= 0) {
+            numPastDays = diff;
+            numFutureDays = 6 - diff;
+        } else if( diff === -1) {
+            numPastDays = 6;
+            numFutureDays = 0;
+        }
+
+        while(numPastDays > 0) {
+            let weekday = new Date();
+            weekday.setDate(this.state.selectedDay.getDate() - numPastDays);
+            numPastDays--;
+            weekdays.push(weekday);
+        }
+
+        while(numFutureDays > 0) {
+            let weekday = new Date();
+            weekday.setDate(this.state.selectedDay.getDate() + numFutureDays);
+            numFutureDays--;
+            weekdays.push(weekday);
+        }
+
+        return weekdays;
     }
 };
 
