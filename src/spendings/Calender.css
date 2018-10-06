@@ -4,16 +4,15 @@
     min-width: 150px;
     max-width: 400px;
 }
-#table-spendings td {
-    
-    border: 0;
-    padding: 3px;
-
-}
-
-#table-spendings .tbl-data-day {
+#table-spendings td,
+#table-spendings th {
     text-align: left;
+    background-color: #D2D8DB;
+    border: 2px white solid;
+    padding: 4px;
+
 }
-#table-spendings .tbl-data-amount {
-    text-align: right;
+
+.section-left {
+    margin: auto;
 }

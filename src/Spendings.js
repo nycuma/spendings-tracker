@@ -126,7 +126,7 @@ class Spendings extends React.Component {
     render() {
         return (
             <div id="spendings">
-                <h1 className="menu-item-headline">Spendings</h1>
+                {/*<h1 className="menu-item-headline">Spendings</h1>*/}
                 <Calender 
                     totalAmountDay={this.calculateTotalAmountAnyDay(this.state.selectedDay)}
                     totalAmountWeek={this.calculateTotalAmountWeek()}

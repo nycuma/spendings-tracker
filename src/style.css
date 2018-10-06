@@ -20,6 +20,10 @@ body {
     padding: 0;
 }
 
+h2 {
+    color: #7E6258;
+}
+
 #main-container {
     display: grid;
     grid-gap: 10px;
@@ -27,14 +31,14 @@ body {
 }
 
 .header-box {
-    background-color: lightslategray;
+    background-color: #58747E;
     color: #f1f4f4;   
 }
 
 .header-box button {
     color: #f1f4f4;
     font-family: 'rubik-regular', sans-serif;
-    font-size: 20px;
+    font-size: 18px;
     margin: 13px 10px 10px 10px;
     padding: 0;
     background-color: transparent;
@@ -57,16 +61,16 @@ body {
 }
 
 .menu-item-headline {
-    color: lightslategray;
+    color: #58747E;
     grid-column: 1 / 3;
 }
 
 .box {
+    /*
     border: 1px solid black;
     border-radius: 30px;
-    text-align: center
-
-    /*background-color: lightslategray;*/
+    text-align: center;
+    */
 }
 
 #spendings {

@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import DayPicker from 'react-day-picker';
 import dateFnsFormat from 'date-fns/format';
 import 'react-day-picker/lib/style.css';
-import Utils from '../utils/Utils';
 import TotalAmountDay from './TotalAmountDay';
 import { Constants, Settings } from '../utils/Constants';
+import './Calender.css';
 
 
 class Calender extends React.Component {
@@ -37,14 +37,16 @@ class Calender extends React.Component {
     }
 
     renderTableSums() {
+        // TODO 2
 
         return (
 
             <table id="table-spendings">
                 <thead>
                     <tr>
-                        <th>Total spendings...</th>
+                        <th colSpan="2">Total spendings...</th>
                     </tr>
+
                 </thead>
                 <tbody>
                      <tr>
@@ -71,7 +73,7 @@ class Calender extends React.Component {
     render() {
         return (
             <div className="section-left box">
-                <h2>Calender</h2>
+                {/*<h2>Calender</h2>*/}
                 <DayPicker
                     todayButton="Today"
                     firstDayOfWeek={Settings.FIRST_DAY_WEEK}
