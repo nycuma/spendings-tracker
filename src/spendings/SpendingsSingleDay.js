@@ -10,6 +10,14 @@ class SpendingsSingleDay extends React.Component {
         };
     }
 
+    componentWillReceiveProps(nextProps) {
+        // When selected day changes, only categories are displayed, 
+        // single spending positions are collapsed
+        if (nextProps.spendingsForDay !== this.props.spendingsForDay) {
+            this.setState({ catExpandedView: this.initStateObject() });
+        }
+    }
+
     initStateObject() {
         let stateExpandedView = {};
         Settings.SPENDING_CATEGORIES.forEach((cat) => {
