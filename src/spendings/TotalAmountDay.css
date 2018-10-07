@@ -2,6 +2,8 @@
     position: absolute;
     height: 15px;
     font-size: 12px;
-    background-color: yellow;
+    color: white;
+    background-color: #7E6258;
+    padding: 2px;
     z-index: 100;
 }

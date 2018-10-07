@@ -7,9 +7,10 @@ import { Constants } from '../utils/Constants';
 class SpendingsDayOverview extends React.Component {
     render() {
         return( 
-            <div className="box">
-                <h2>Spendings for {dateFnsFormat(this.props.selectedDay, Constants.DATE_FORMAT)}</h2>
+            <div id="spendings-day-overview" className="box">
+                <h2>Details for {dateFnsFormat(this.props.selectedDay, Constants.DATE_FORMAT)}</h2>
                 <SpendingsSingleDay 
+                    totalAmountDay={this.props.totalAmountDay}
                     spendingsForDay={this.props.spendingsForDay}/>
                 <SpendingsForm 
                     selectedDay={this.props.selectedDay}

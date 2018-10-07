@@ -66,24 +66,18 @@ h2 {
 }
 
 .box {
-    /*
-    border: 1px solid black;
-    border-radius: 30px;
+    justify-self: stretch;
+    /*border: 1px solid black;
+    border-radius: 30px;*/    
     text-align: center;
-    */
 }
 
 #spendings {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 10px;
-    align-items: stretch;
+    /*justify-items: start;
+    align-items: start;*/
     margin: 10px;
 }
 
-.active-day {
-    background: #f1f4f4;
-}
-
-
-/*orange #f2690d*/

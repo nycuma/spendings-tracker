@@ -1,5 +1,6 @@
 import React from 'react';
 import { Constants, Settings } from '../utils/Constants';
+import './SpendingsForm.css';
 
 const MSG_PARSING_ERROR = 'Please enter a correct value';
 
@@ -54,8 +55,8 @@ class SpendingsForm extends React.Component {
         return (
             <div>
                 
-                <p>+ Add a new spendings position</p>
-                <form>
+                <p className="head-add-form">Add a new spendings position</p>
+                <form id="add-form">
                     <table>
                         <tbody>
                             <tr>

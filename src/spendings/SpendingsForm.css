@@ -1,0 +1,17 @@
+.head-add-form {
+    color: #7E6258;
+    background-color: #EFECEB;
+    border-radius: 6px;
+    padding: 2px;
+}
+
+#add-form table {
+    margin: auto;
+}
+
+#add-form table input {
+    height: 1,5em;
+    color: #58747E; 
+    border: 1px solid #EFECEB;
+    padding: 5px;
+}

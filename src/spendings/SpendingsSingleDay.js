@@ -1,5 +1,6 @@
 import React from 'react';
 import { Constants, Settings } from '../utils/Constants';
+import './SpendingsSingleDay.css';
 
 class SpendingsSingleDay extends React.Component {
     constructor(props) {
@@ -55,7 +56,7 @@ class SpendingsSingleDay extends React.Component {
                 <tbody key={cat.value}>
                     <tr>
                         <td>{cat.label}</td>
-                        <td >{amountSpent}</td>
+                        <td className="cell-amount">{amountSpent}</td>
                         <td><span className={arrowClass} onClick={() => this.toggleDisplayAllPositionsForCat(cat.value)}></span></td>
                     </tr>
                     {this.renderSpendingsPositons(cat.value)}
@@ -71,9 +72,9 @@ class SpendingsSingleDay extends React.Component {
         if (spendingPositions) {
             return spendingPositions.map((item, i) => {
                 return (
-                    <tr key={cat+i} style={{display: displayExpanded}}>
+                    <tr key={cat+i} style={{display: displayExpanded}} className="table-row-single-spendings-pos">
                         <td>{item.comment}</td>
-                        <td>{item.amount.toLocaleString(Settings.LOCALE_CURRENCY, Constants.LOCALE_CURRENCY_OPTIONS)}</td>
+                        <td className="cell-amount">{item.amount.toLocaleString(Settings.LOCALE_CURRENCY, Constants.LOCALE_CURRENCY_OPTIONS)}</td>
                     </tr>
                 );
             });
@@ -85,14 +86,14 @@ class SpendingsSingleDay extends React.Component {
          
 
         return( 
-            <table id="tbl-spendings-single-day">
-                <thead>
+            <table className="table-spendings">
+                {this.renderTableBody()}    
+                <tfoot>
                     <tr>
-                        <td>Category</td>
-                        <td>Amount</td>
+                        <td><b>Total</b></td>
+                        <td className="cell-amount"><b>{this.props.totalAmountDay.toLocaleString(Settings.LOCALE_CURRENCY, Constants.LOCALE_CURRENCY_OPTIONS)}</b></td>
                     </tr>
-                </thead>
-                {this.renderTableBody()}          
+                </tfoot>      
             </table>
 
         ); 

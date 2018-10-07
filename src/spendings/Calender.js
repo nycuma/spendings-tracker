@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import DayPicker from 'react-day-picker';
-import dateFnsFormat from 'date-fns/format';
 import 'react-day-picker/lib/style.css';
 import TotalAmountDay from './TotalAmountDay';
 import { Constants, Settings } from '../utils/Constants';
 import './Calender.css';
+import 'react-day-picker/lib/style.css';
 
 
 class Calender extends React.Component {
@@ -32,38 +32,36 @@ class Calender extends React.Component {
     }
 
     hideAmountSpent(day, modifiers, evt) {
-        // TODO remove component when mouse leaves day-picker
+        // remove component when mouse leaves day-picker
         ReactDOM.unmountComponentAtNode(document.getElementById('total-amount-day'));
     }
 
     renderTableSums() {
-        // TODO 2
-
         return (
 
-            <table id="table-spendings">
+            <table className="table-spendings">
                 <thead>
                     <tr>
-                        <th colSpan="2">Total spendings...</th>
+                        <th colSpan="2">Total spendings</th>
                     </tr>
 
                 </thead>
                 <tbody>
                      <tr>
                         <td>...this day:</td>
-                        <td>{this.props.totalAmountDay.toLocaleString(Settings.LOCALE_CURRENCY, Constants.LOCALE_CURRENCY_OPTIONS)}</td>
+                        <td className="cell-amount">{this.props.totalAmountDay.toLocaleString(Settings.LOCALE_CURRENCY, Constants.LOCALE_CURRENCY_OPTIONS)}</td>
                     </tr>
                     <tr>
                         <td>...this week:</td>
-                        <td>{this.props.totalAmountWeek.toLocaleString(Settings.LOCALE_CURRENCY, Constants.LOCALE_CURRENCY_OPTIONS)}</td>
+                        <td className="cell-amount">{this.props.totalAmountWeek.toLocaleString(Settings.LOCALE_CURRENCY, Constants.LOCALE_CURRENCY_OPTIONS)}</td>
                     </tr>
                     <tr>
                         <td>...this month:</td>
-                        <td>{this.props.totalAmountMonth.toLocaleString(Settings.LOCALE_CURRENCY, Constants.LOCALE_CURRENCY_OPTIONS)}</td>
+                        <td className="cell-amount">{this.props.totalAmountMonth.toLocaleString(Settings.LOCALE_CURRENCY, Constants.LOCALE_CURRENCY_OPTIONS)}</td>
                     </tr>
                     <tr>
                         <td>...this year:</td>
-                        <td>{this.props.totalAmountYear.toLocaleString(Settings.LOCALE_CURRENCY, Constants.LOCALE_CURRENCY_OPTIONS)}</td>
+                        <td className="cell-amount">{this.props.totalAmountYear.toLocaleString(Settings.LOCALE_CURRENCY, Constants.LOCALE_CURRENCY_OPTIONS)}</td>
                     </tr>
                 </tbody>
             </table>
@@ -71,16 +69,36 @@ class Calender extends React.Component {
     }
 
     render() {
+        const modifiers = {
+            weekend: { daysOfWeek: [6, 0] },
+            today: new Date(),
+            selectedDay: this.props.selectedDay,
+          };
+          const modifiersStyles = {
+            today : {
+                color: '#58747E'
+            },
+            weekend: {
+              color: '#7E6258'
+            },
+            selectedDay: {
+                color: 'white',
+                backgroundColor: '#7E6258',
+            }
+          };
+
         return (
-            <div className="section-left box">
+            <div id="calender" className="box">
                 {/*<h2>Calender</h2>*/}
                 <DayPicker
                     todayButton="Today"
                     firstDayOfWeek={Settings.FIRST_DAY_WEEK}
+                    modifiers={modifiers}
+                    modifiersStyles={modifiersStyles}
                     onDayClick={this.props.updateSelectedDay}
                     onDayMouseEnter={this.displayAmountSpent}
                     onDayMouseLeave={this.hideAmountSpent} />
-                <p>Selected day: {dateFnsFormat(this.props.selectedDay, Constants.DATE_FORMAT)}</p>
+                {/*<p>You selected {dateFnsFormat(this.props.selectedDay, Constants.DATE_FORMAT)}</p>*/}
                 {this.renderTableSums()}
             </div>
             

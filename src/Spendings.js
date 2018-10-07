@@ -4,6 +4,7 @@ import Calender from './spendings/Calender';
 import Utils from './utils/Utils';
 import exampleData from './utils/ExampleData';
 import SpendingsDayOverview from './spendings/SpendingsDayOverview';
+import './spendings/Spendings.css';
 
 
 class Spendings extends React.Component {
@@ -124,11 +125,13 @@ class Spendings extends React.Component {
     }
 
     render() {
+
+        let totalAmountSelectedDay = this.calculateTotalAmountAnyDay(this.state.selectedDay);
         return (
             <div id="spendings">
                 {/*<h1 className="menu-item-headline">Spendings</h1>*/}
                 <Calender 
-                    totalAmountDay={this.calculateTotalAmountAnyDay(this.state.selectedDay)}
+                    totalAmountDay={totalAmountSelectedDay}
                     totalAmountWeek={this.calculateTotalAmountWeek()}
                     totalAmountMonth={this.calculateTotalAmountMonth()}
                     totalAmountYear={this.calculateTotalAmountYear()}
@@ -137,6 +140,7 @@ class Spendings extends React.Component {
                     calculateTotalAmountAnyDay={this.calculateTotalAmountAnyDay} />
 
                 <SpendingsDayOverview
+                    totalAmountDay={totalAmountSelectedDay}
                     spendingsForDay={this.getSpendingPositionsForSelectedDay()}
                     selectedDay={this.state.selectedDay}
                     addSpendingsPosition={this.addSpendingsPosition} /> 
