@@ -9,7 +9,7 @@ class SpendingsForm extends React.Component {
         super(props);
         this.state = {
             valCategory: 'food',
-            valAmount: 2.00,
+            valAmount: '',
             valComment: '',
             showParsingError: false
         };
@@ -36,7 +36,7 @@ class SpendingsForm extends React.Component {
             this.setState({ showParsingError: false });
             this.props.addSpendingsPosition(this.state.valCategory, amount, this.state.valComment);
         }
-        this.setState({ valComment: '' });
+        this.setState({ valComment: '', valAmount: '' });
     }
 
 
@@ -47,6 +47,7 @@ class SpendingsForm extends React.Component {
             );
         });
 
+        // TODO how show error message?
         let styleErrorMsg = {
             display: this.state.showParsingError ? 'inline' : 'none', 
             color: 'red'
@@ -71,10 +72,10 @@ class SpendingsForm extends React.Component {
                                            onChange={(e) => this.handleAmount(e)} />
                                 </td>
                             </tr>
-                            <tr>
+                            {/*<tr>
                                 <td></td>
                                 <td style={styleErrorMsg}>{MSG_PARSING_ERROR}</td>
-                            </tr>
+                            </tr>*/}
                             <tr>
                                 <td>Comment: </td>
                                 <td>
@@ -85,7 +86,7 @@ class SpendingsForm extends React.Component {
                                 </td>
                             </tr>
                             <tr>
-                                <td><button type="submit" onClick={(e) => this.handleFormInput(e)}>Submit</button></td>
+                                <td colSpan="2"><input type="submit" onClick={(e) => this.handleFormInput(e)} value="Add"/></td>
                             </tr>
                         </tbody>
                     </table>
