@@ -4,6 +4,7 @@ import Calender from './spendings/Calender';
 import Utils from './utils/Utils';
 import exampleData from './utils/ExampleData';
 import SpendingsDayOverview from './spendings/SpendingsDayOverview';
+import AddForm from './spendings/AddForm';
 import './spendings/Spendings.css';
 
 
@@ -15,7 +16,9 @@ class Spendings extends React.Component {
         this.calculateTotalAmountAnyDay = this.calculateTotalAmountAnyDay.bind(this);
         this.state = {
             selectedDay: new Date(),
-            spendingPositions: exampleData
+            spendingPositions: exampleData,
+            addFormIsVisible: false,
+            importJSONIsVisible: false
         };
     }
 
@@ -23,10 +26,10 @@ class Spendings extends React.Component {
         this.setState({ selectedDay: day });
     }
 
-    addSpendingsPosition(cat, amount, comment) {
+    addSpendingsPosition(cat, amount, comment, day) {
         this.setState( {
             spendingPositions: this.state.spendingPositions.concat({
-                day: this.state.selectedDay,
+                day: day ? day : this.state.selectedDay,
                 cat: cat,
                 amount: amount,
                 comment: comment
@@ -124,26 +127,45 @@ class Spendings extends React.Component {
         });
     }
 
+    handleAdd(e) {
+
+    }
+
+    handleJSONImport(e) {
+
+    }
+
     render() {
 
         let totalAmountSelectedDay = this.calculateTotalAmountAnyDay(this.state.selectedDay);
         return (
             <div id="spendings">
                 {/*<h1 className="menu-item-headline">Spendings</h1>*/}
-                <Calender 
-                    totalAmountDay={totalAmountSelectedDay}
-                    totalAmountWeek={this.calculateTotalAmountWeek()}
-                    totalAmountMonth={this.calculateTotalAmountMonth()}
-                    totalAmountYear={this.calculateTotalAmountYear()}
-                    selectedDay={this.state.selectedDay}
-                    updateSelectedDay={this.updateSelectedDay} 
-                    calculateTotalAmountAnyDay={this.calculateTotalAmountAnyDay} />
+                <div className="box menu-actions">
+                    <span className="menu-action"><button className="add-pos-btn" onClick={(e) => this.handleAdd(e)}>+</button> Add new spendings position</span>
+                    <span className="menu-action"><button className="add-pos-btn" onClick={(e) => this.handleJSONImport(e)}>+</button> Import from JSON</span>
+                </div>
+                <div className="content">
+                    <Calender
+                        totalAmountDay={totalAmountSelectedDay}
+                        totalAmountWeek={this.calculateTotalAmountWeek()}
+                        totalAmountMonth={this.calculateTotalAmountMonth()}
+                        totalAmountYear={this.calculateTotalAmountYear()}
+                        selectedDay={this.state.selectedDay}
+                        updateSelectedDay={this.updateSelectedDay}
+                        calculateTotalAmountAnyDay={this.calculateTotalAmountAnyDay} />
 
-                <SpendingsDayOverview
-                    totalAmountDay={totalAmountSelectedDay}
-                    spendingsForDay={this.getSpendingPositionsForSelectedDay()}
-                    selectedDay={this.state.selectedDay}
-                    addSpendingsPosition={this.addSpendingsPosition} /> 
+                    <SpendingsDayOverview
+                        totalAmountDay={totalAmountSelectedDay}
+                        spendingsForDay={this.getSpendingPositionsForSelectedDay()}
+                        selectedDay={this.state.selectedDay}
+                        addSpendingsPosition={this.addSpendingsPosition} />
+
+                    <AddForm 
+                        isVisible={true}
+                        selectedDay={this.props.selectedDay}
+                        addSpendingsPosition={this.props.addSpendingsPosition} /> 
+                </div>
             </div>
         );
     }

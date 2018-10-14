@@ -1,11 +1,4 @@
-.head-add-form {
-    color: #7E6258;
-    font-weight: bold;
-    /*background-color: #EFECEB;*/
-    width: 70%;
-    border-radius: 6px;
-    padding: 2px;
-}
+
 
 #add-form table {
     margin: auto;
@@ -48,4 +41,6 @@
     margin: 5px;
     padding: 3px;
 }
+
+
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Constants, Settings } from '../utils/Constants';
-import './SpendingsForm.css';
+import './AddForm.css';
 
 const MSG_PARSING_ERROR = 'Please enter a correct value';
 
@@ -39,6 +39,31 @@ class SpendingsForm extends React.Component {
         this.setState({ valComment: '', valAmount: '' });
     }
 
+    handleFileUpload(e) {
+        let files = e.target.files;
+        if(!files) return;
+
+        for(let i = 0; i < files.length; i++) {
+             if(files[i].type === 'application/json') {
+                 let reader = new FileReader();
+
+                 reader.onload = () => {
+                    let json = JSON.parse(reader.result);
+                    if(json && json.data) {
+                        json.data.forEach((item) => {
+                            this.props.addSpendingsPosition(item.cat, item.amount, item.comment, new Date(item.day));
+                        });
+                    }
+                 };
+
+                 reader.onerror = (err) => {
+                    console.log('error while reading file: ' + err);
+                 };
+                 reader.readAsText(files[i]);
+             }
+        }
+    }
+
 
     render() {
         let categories = Settings.SPENDING_CATEGORIES.map((cat) => {
@@ -56,7 +81,9 @@ class SpendingsForm extends React.Component {
         return (
             <div>
                 
-                <p className="head-add-form">Add a new spendings position</p>
+                
+                <input type="file" id="input-json-files" multiple onChange={(e) => this.handleFileUpload(e)} />
+
                 <form id="add-form">
                     <table>
                         <tbody>

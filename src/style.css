@@ -27,7 +27,7 @@ h2 {
 #main-container {
     display: grid;
     grid-gap: 10px;
-    grid-template-rows: 50px auto;
+    grid-template-rows: 50px 50px auto;
 }
 
 .header-box {
@@ -68,16 +68,20 @@ h2 {
 .box {
     justify-self: stretch;
     /*border: 1px solid black;
-    border-radius: 30px;*/    
+    border-radius: 30px;*/
     text-align: center;
 }
 
-#spendings {
+.content {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 10px;
     /*justify-items: start;
     align-items: start;*/
     margin: 10px;
+}
+
+.menu-actions {
+    text-align: left;
 }
 

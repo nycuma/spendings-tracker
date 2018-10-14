@@ -1,7 +1,6 @@
 import React from 'react';
 import dateFnsFormat from 'date-fns/format';
 import SpendingsSingleDay from './SpendingsSingleDay';
-import SpendingsForm from './SpendingsForm';
 import { Constants } from '../utils/Constants';
 
 class SpendingsDayOverview extends React.Component {
@@ -12,9 +11,9 @@ class SpendingsDayOverview extends React.Component {
                 <SpendingsSingleDay 
                     totalAmountDay={this.props.totalAmountDay}
                     spendingsForDay={this.props.spendingsForDay}/>
-                <SpendingsForm 
+                {/* <SpendingsForm 
                     selectedDay={this.props.selectedDay}
-                    addSpendingsPosition={this.props.addSpendingsPosition} /> 
+                    addSpendingsPosition={this.props.addSpendingsPosition} />  */}
             </div>
 
         ); 
