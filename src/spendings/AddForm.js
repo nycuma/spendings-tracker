@@ -1,4 +1,5 @@
 import React from 'react';
+import dateFnsFormat from 'date-fns/format';
 import { Constants, Settings } from '../utils/Constants';
 import './AddForm.css';
 
@@ -8,11 +9,24 @@ class SpendingsForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            valDay: this.initDay(),
             valCategory: 'food',
             valAmount: '',
             valComment: '',
             showParsingError: false
         };
+    }
+
+    initDay() { // TODO Does not update when selected day changes
+        if (this.props.selectedDay) {
+            return dateFnsFormat(this.props.selectedDay, Constants.DATE_FORMAT_INPUT);
+        }
+        return null;
+    }
+
+    handleDay(e) {
+        console.log('day input: ' + e.target.value);
+        this.setState({ valDay: e.target.value });
     }
 
     handleCategory(e) {
@@ -34,9 +48,9 @@ class SpendingsForm extends React.Component {
             this.setState({ showParsingError: true });
         } else {
             this.setState({ showParsingError: false });
-            this.props.addSpendingsPosition(this.state.valCategory, amount, this.state.valComment);
+            this.props.addSpendingsPosition(this.state.valCategory, amount, this.state.valComment, this.state.valDay);
         }
-        this.setState({ valComment: '', valAmount: '' });
+        this.setState({ valComment: '', valAmount: '', valCategory: 'food' });
     }
 
     handleFileUpload(e) {
@@ -66,6 +80,10 @@ class SpendingsForm extends React.Component {
 
 
     render() {
+        if(!this.props.isVisible) {
+            return null;
+        }
+
         let categories = Settings.SPENDING_CATEGORIES.map((cat) => {
             return (
                 <option key={cat.value} value={cat.value}>{cat.label}</option>
@@ -78,15 +96,22 @@ class SpendingsForm extends React.Component {
             color: 'red'
         };
 
+
         return (
-            <div>
-                
-                
-                <input type="file" id="input-json-files" multiple onChange={(e) => this.handleFileUpload(e)} />
+            <div id="add-modal">
+                <button className="close-X" onClick={this.props.onClose}>x</button>
+                {/* <input type="file" id="input-json-files" multiple onChange={(e) => this.handleFileUpload(e)} /> */}
 
                 <form id="add-form">
                     <table>
                         <tbody>
+                            <tr>
+                                <td>Date: </td>
+                                <td><input type="date" 
+                                           value={this.state.valDay} 
+                                           onChange={(e) => this.handleDay(e)} 
+                                           placeholder={this.props.selectedDay}/></td>
+                            </tr>
                             <tr>
                                 <td>Category: </td>
                                 <td><select value={this.valCategory} onChange={(e) => this.handleCategory(e)}>{categories}</select></td>

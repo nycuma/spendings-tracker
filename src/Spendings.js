@@ -14,6 +14,7 @@ class Spendings extends React.Component {
         this.updateSelectedDay = this.updateSelectedDay.bind(this);
         this.addSpendingsPosition = this.addSpendingsPosition.bind(this);
         this.calculateTotalAmountAnyDay = this.calculateTotalAmountAnyDay.bind(this);
+        this.onClose = this.onClose.bind(this);
         this.state = {
             selectedDay: new Date(),
             spendingPositions: exampleData,
@@ -29,11 +30,13 @@ class Spendings extends React.Component {
     addSpendingsPosition(cat, amount, comment, day) {
         this.setState( {
             spendingPositions: this.state.spendingPositions.concat({
-                day: day ? day : this.state.selectedDay,
+                day: day ? new Date(day) : this.state.selectedDay,
                 cat: cat,
                 amount: amount,
                 comment: comment
-            })
+            }),
+            addFormIsVisible: false,
+            importJSONIsVisible: false
         });
     }
 
@@ -128,11 +131,18 @@ class Spendings extends React.Component {
     }
 
     handleAdd(e) {
-
+        this.setState({ addFormIsVisible: true });
     }
 
     handleJSONImport(e) {
+        this.setState({ importJSONIsVisible: true });
+    }
 
+    onClose() {
+        this.setState({
+            addFormIsVisible: false,
+            importJSONIsVisible: false
+        });
     }
 
     render() {
@@ -162,9 +172,10 @@ class Spendings extends React.Component {
                         addSpendingsPosition={this.addSpendingsPosition} />
 
                     <AddForm 
-                        isVisible={true}
-                        selectedDay={this.props.selectedDay}
-                        addSpendingsPosition={this.props.addSpendingsPosition} /> 
+                        isVisible={this.state.addFormIsVisible}
+                        selectedDay={this.state.selectedDay}
+                        addSpendingsPosition={this.addSpendingsPosition} 
+                        onClose={this.onClose}/> 
                 </div>
             </div>
         );

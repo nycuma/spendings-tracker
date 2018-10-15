@@ -31,6 +31,7 @@ const Constants = {
         maximumFractionDigits: 2 
     },
     DATE_FORMAT: 'DD MMM YYYY',
+    DATE_FORMAT_INPUT: 'YYYY-MM-DD',
     
 };
 
