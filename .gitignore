@@ -8,6 +8,7 @@ README_REACT.md
 /.vscode
 /src/fonts
 /test
+/playground
 
 # dependencies
 /node_modules
