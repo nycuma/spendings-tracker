@@ -50,7 +50,12 @@ class SpendingsForm extends React.Component {
             this.setState({ showParsingError: false });
             this.props.addSpendingsPosition(this.state.valCategory, amount, this.state.valComment, this.state.valDay);
         }
-        this.setState({ valComment: '', valAmount: '', valCategory: 'food' });
+        this.setState({ valComment: '', valAmount: '' });
+    }
+
+    handleFormInputAndClose(e) {
+        this.handleFormInput(e);
+        this.props.onClose();
     }
 
 
@@ -115,7 +120,7 @@ class SpendingsForm extends React.Component {
                                 <td></td>
                                 <td>
                                     <input type="submit" onClick={(e) => this.handleFormInput(e)} value="Submit + Add next"/>
-                                    <input type="submit" onClick={(e) => this.handleFormInput(e)} value="Submit + Close"/>
+                                    <input type="submit" onClick={(e) => this.handleFormInputAndClose(e)} value="Submit + Close"/>
                                 </td>
                             </tr>
                         </tbody>
