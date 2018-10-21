@@ -46,8 +46,7 @@ class Spendings extends React.Component {
                 cat: cat,
                 amount: amount,
                 comment: comment
-            }),
-            addFormIsVisible: false
+            })
         });
     }
 
