@@ -11,9 +11,6 @@ class SpendingsDayOverview extends React.Component {
                 <SpendingsSingleDay 
                     totalAmountDay={this.props.totalAmountDay}
                     spendingsForDay={this.props.spendingsForDay}/>
-                {/* <SpendingsForm 
-                    selectedDay={this.props.selectedDay}
-                    addSpendingsPosition={this.props.addSpendingsPosition} />  */}
             </div>
 
         ); 

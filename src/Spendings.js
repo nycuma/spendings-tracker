@@ -14,13 +14,25 @@ class Spendings extends React.Component {
         this.updateSelectedDay = this.updateSelectedDay.bind(this);
         this.addSpendingsPosition = this.addSpendingsPosition.bind(this);
         this.calculateTotalAmountAnyDay = this.calculateTotalAmountAnyDay.bind(this);
+        this.handleFileUpload = this.handleFileUpload.bind(this);
         this.onClose = this.onClose.bind(this);
         this.state = {
             selectedDay: new Date(),
             spendingPositions: exampleData,
-            addFormIsVisible: false,
-            importJSONIsVisible: false
+            addFormIsVisible: false
         };
+    }
+
+    componentDidMount() {
+        this.fileSelector = this.initFileSelector();
+    }
+
+    initFileSelector() {
+        const fileSelector = document.createElement('input');
+        fileSelector.setAttribute('type', 'file');
+        fileSelector.setAttribute('multiple', true);
+        fileSelector.onchange = this.handleFileUpload;
+        return fileSelector;
     }
 
     updateSelectedDay(day) {
@@ -35,8 +47,7 @@ class Spendings extends React.Component {
                 amount: amount,
                 comment: comment
             }),
-            addFormIsVisible: false,
-            importJSONIsVisible: false
+            addFormIsVisible: false
         });
     }
 
@@ -130,18 +141,50 @@ class Spendings extends React.Component {
         });
     }
 
-    handleAdd(e) {
+    openAddModal() {
         this.setState({ addFormIsVisible: true });
     }
 
-    handleJSONImport(e) {
-        this.setState({ importJSONIsVisible: true });
+    openImportModal(e) {
+        e.preventDefault();
+        this.fileSelector.click();
+    }
+
+    handleFileUpload(e) {
+        e.preventDefault();
+        let files = e.target.files;
+        if(!files) {
+            console.log('No files to upload found');
+            return;
+        }
+
+        for(let i = 0; i < files.length; i++) {
+             if(files[i].type === 'application/json') {
+                 let reader = new FileReader();
+
+                 reader.onload = () => {
+                    let json = JSON.parse(reader.result);
+                    if(json && json.data) {
+                        json.data.forEach((item) => {
+                            this.addSpendingsPosition(item.cat, item.amount, item.comment, new Date(item.day));
+                        });
+                    } 
+                 };
+
+                 reader.onerror = (err) => {
+                    console.log('error while reading file: ' + err); // TODO Display error msg
+                 };
+                 reader.readAsText(files[i]);
+             } else {
+                console.log('Error: File is not a JSON document...');
+                // TODO Display error msg
+            }
+        }
     }
 
     onClose() {
         this.setState({
-            addFormIsVisible: false,
-            importJSONIsVisible: false
+            addFormIsVisible: false
         });
     }
 
@@ -152,8 +195,8 @@ class Spendings extends React.Component {
             <div id="spendings">
                 {/*<h1 className="menu-item-headline">Spendings</h1>*/}
                 <div className="box menu-actions">
-                    <span className="menu-action"><button className="add-pos-btn" onClick={(e) => this.handleAdd(e)}>+</button> Add new spendings position</span>
-                    <span className="menu-action"><button className="add-pos-btn" onClick={(e) => this.handleJSONImport(e)}>+</button> Import from JSON</span>
+                    <span className="menu-action"><button className="add-pos-btn" onClick={(e) => this.openAddModal(e)}>+</button> Add new spendings position</span>
+                    <span className="menu-action"><button className="add-pos-btn" onClick={(e) => this.openImportModal(e)}>+</button> Import from JSON</span>
                 </div>
                 <div className="content">
                     <Calender
@@ -168,14 +211,14 @@ class Spendings extends React.Component {
                     <SpendingsDayOverview
                         totalAmountDay={totalAmountSelectedDay}
                         spendingsForDay={this.getSpendingPositionsForSelectedDay()}
-                        selectedDay={this.state.selectedDay}
-                        addSpendingsPosition={this.addSpendingsPosition} />
+                        selectedDay={this.state.selectedDay}/>
 
                     <AddForm 
                         isVisible={this.state.addFormIsVisible}
                         selectedDay={this.state.selectedDay}
                         addSpendingsPosition={this.addSpendingsPosition} 
                         onClose={this.onClose}/> 
+
                 </div>
             </div>
         );
