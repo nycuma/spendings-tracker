@@ -52,6 +52,15 @@
     padding: 5px;
 }
 
+#tooltip-error {
+    display: none;
+    font-size: small;
+    color: red;
+    border: none;
+    padding: 1px;
+    background-color: #ffe6e6;
+}
+
 .close-X {
     position: absolute;
     top: 0px;

@@ -3,8 +3,6 @@ import dateFnsFormat from 'date-fns/format';
 import { Constants, Settings } from '../utils/Constants';
 import './AddForm.css';
 
-const MSG_PARSING_ERROR = 'Please enter a correct value';
-
 class SpendingsForm extends React.Component {
     constructor(props) {
         super(props);
@@ -58,7 +56,6 @@ class SpendingsForm extends React.Component {
         this.props.onClose();
     }
 
-
     render() {
         if(!this.props.isVisible) {
             return null;
@@ -70,15 +67,19 @@ class SpendingsForm extends React.Component {
             );
         });
 
-        // TODO how show error message?
-        let styleErrorMsg = {
-            display: this.state.showParsingError ? 'inline' : 'none', 
-            color: 'red'
+        // TODO why does CSS class not work?
+        const styleErrorInput = { 
+            border: 'solid 1px red',
+            backgroundColor: '#ffe6e6' 
         };
-
+        const styleErrorTooltip = { 
+            display: this.state.showParsingError ? 'inline' : 'none'
+        };
+        const msgError = 'Please enter a correct value';
 
         return (
             <div id="add-modal">
+                <div id="tooltip-error" style={styleErrorTooltip}>{msgError}</div>
                 <button className="close-X" onClick={this.props.onClose}>x</button>
 
                 <form id="add-form">
@@ -99,14 +100,12 @@ class SpendingsForm extends React.Component {
                                 <td>Amount spent: </td>
                                 <td>
                                     <input type="text" 
+                                           style={this.state.showParsingError ? styleErrorInput : {}}
                                            value={this.state.valAmount.toLocaleString(Settings.LOCALE_CURRENCY, Constants.LOCALE_DECIMAL_OPTIONS)} 
-                                           onChange={(e) => this.handleAmount(e)} />
+                                           onChange={(e) => this.handleAmount(e)} 
+                                           />
                                 </td>
                             </tr>
-                            {/*<tr>
-                                <td></td>
-                                <td style={styleErrorMsg}>{MSG_PARSING_ERROR}</td>
-                            </tr>*/}
                             <tr>
                                 <td>Comment: </td>
                                 <td>
