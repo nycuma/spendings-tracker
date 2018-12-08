@@ -25,17 +25,26 @@ h2 {
 }
 
 #main-container {
-    display: grid;
+   display: grid;
     grid-gap: 10px;
-    grid-template-rows: 50px 50px auto;
+    grid-template-columns: 50px auto;
 }
 
-.header-box {
+/*****************/
+/**** Header *****/
+/*****************/
+
+header {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
     background-color: #58747E;
     color: #f1f4f4;   
 }
 
-.header-box button {
+header button {
     color: #f1f4f4;
     font-family: 'rubik-regular', sans-serif;
     font-size: 18px;
@@ -46,18 +55,13 @@ h2 {
     font-weight: normal;
 }
 
-.header-box button:hover,
-.header-box button:focus,
-.header-box button:active {
+header button:hover,
+header button:focus,
+header button:active {
     color: white;
     margin: 13px 10px 10px 10px;
     padding: 0;
 
-}
-
-.header-box button.active-item {
-    color: white;
-    font-weight: bolder;
 }
 
 .menu-item-headline {
@@ -66,22 +70,54 @@ h2 {
 }
 
 .box {
-    justify-self: stretch;
-    /*border: 1px solid black;
-    border-radius: 30px;*/
+    /*justify-self: stretch;*/
+    border: 1px solid black;
     text-align: center;
-}
-
-.content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 10px;
-    /*justify-items: start;
-    align-items: start;*/
-    margin: 10px;
 }
 
 .menu-actions {
     text-align: left;
 }
+
+/*****************/
+/**** Sidebar ****/
+/*****************/
+
+#sidebar {
+    position: fixed;
+    width: 50px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    /*background-color: greenyellow; */
+}
+
+.nav-icon {
+    cursor: pointer;
+}
+
+.nav-icon-side {
+    margin: 15px;
+}
+
+.nav-icon-top {
+    margin: 15px 15px 15px 0;
+}
+
+
+/*****************/
+/*** Dashboard ***/
+/*****************/
+
+#dashboard {
+    display: grid;
+    grid-template-columns: auto 270px;
+    grid-gap: 10px;
+    justify-items: stretch;
+    align-items: start;
+    align-content: stretch;
+}
+
 

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import Menu from './Menu';
-import Spendings from './Spendings';
-import Statistics from './Statistics';
+import Header from './Header';
+import Dashboard from './Dashboard';
+import Analytics from './Analytics';
 import Settings from './Settings';
+import Sidebar from './Sidebar';
 import Login from './Login';
 import './style.css';
 
@@ -11,32 +12,39 @@ class Main extends Component {
         super(props);
         this.switchMenuItem = this.switchMenuItem.bind(this);
         this.state = {
-            activeMenuItem: 'Spendings'
+            activeMenuItem: 'Dashboard'
         };
     }
 
     switchMenuItem(evt) {
-        this.setState({ activeMenuItem : evt.target.innerHTML });
+        console.log('switch menu item: ' + JSON.stringify(evt.target.value));
+        //this.setState({ activeMenuItem : evt.target.innerHTML });
     }
 
     render() {
         
         let menuItem;
         switch(this.state.activeMenuItem) {
-            case 'Spendings' : menuItem = <Spendings />; break;
-            case 'Statistics' : menuItem = <Statistics />; break;
+            case 'Dashboard' : menuItem = <Dashboard />; break;
+            case 'Analytics' : menuItem = <Analytics />; break;
             case 'Settings' : menuItem = <Settings />; break;
-            case 'Login' : menuItem = <Login />; break;
-            default : menuItem = <Spendings />; break;
+            //case 'Login' : menuItem = <Login />; break;
+            default : menuItem = <Dashboard />; break;
         }
 
         return (
             <div id="main-container">
-                <Menu 
-                    activeMenuItem={this.state.activeMenuItem} 
-                    onClick={(evt) => this.switchMenuItem(evt)}
-                />
+                
+                <Header />
+
+                <nav className="box">
+                    <Sidebar 
+                        activeMenuItem={this.state.activeMenuItem} 
+                        onClick={(e) => this.switchMenuItem(e)}
+                    />
+                </nav> 
                 {menuItem}
+                 
             </div>
         );
     }

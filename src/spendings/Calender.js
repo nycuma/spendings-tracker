@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 import TotalAmountDay from './TotalAmountDay';
-import { Constants, Settings } from '../utils/Constants';
+import { Settings } from '../utils/Constants';
 import './Calender.css';
 import 'react-day-picker/lib/style.css';
 
@@ -36,37 +36,7 @@ class Calender extends React.Component {
         ReactDOM.unmountComponentAtNode(document.getElementById('total-amount-day'));
     }
 
-    renderTableSums() {
-        return (
 
-            <table className="table-spendings">
-                <thead>
-                    <tr>
-                        <th colSpan="2">Total spendings</th>
-                    </tr>
-
-                </thead>
-                <tbody>
-                     <tr>
-                        <td>...this day:</td>
-                        <td className="cell-amount">{this.props.totalAmountDay.toLocaleString(Settings.LOCALE_CURRENCY, Constants.LOCALE_CURRENCY_OPTIONS)}</td>
-                    </tr>
-                    <tr>
-                        <td>...this week:</td>
-                        <td className="cell-amount">{this.props.totalAmountWeek.toLocaleString(Settings.LOCALE_CURRENCY, Constants.LOCALE_CURRENCY_OPTIONS)}</td>
-                    </tr>
-                    <tr>
-                        <td>...this month:</td>
-                        <td className="cell-amount">{this.props.totalAmountMonth.toLocaleString(Settings.LOCALE_CURRENCY, Constants.LOCALE_CURRENCY_OPTIONS)}</td>
-                    </tr>
-                    <tr>
-                        <td>...this year:</td>
-                        <td className="cell-amount">{this.props.totalAmountYear.toLocaleString(Settings.LOCALE_CURRENCY, Constants.LOCALE_CURRENCY_OPTIONS)}</td>
-                    </tr>
-                </tbody>
-            </table>
-        );
-    }
 
     render() {
         const modifiers = {
@@ -99,12 +69,9 @@ class Calender extends React.Component {
                     onDayMouseEnter={this.displayAmountSpent}
                     onDayMouseLeave={this.hideAmountSpent} />
                 {/*<p>You selected {dateFnsFormat(this.props.selectedDay, Constants.DATE_FORMAT)}</p>*/}
-                {this.renderTableSums()}
-            </div>
-            
+            </div>  
         );
     }
-
 }
 
 export default Calender;

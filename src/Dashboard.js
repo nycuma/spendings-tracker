@@ -8,7 +8,7 @@ import AddForm from './spendings/AddForm';
 import './spendings/Spendings.css';
 
 
-class Spendings extends React.Component {
+class Dashboard extends React.Component {
     constructor(props) {
         super(props);
         this.updateSelectedDay = this.updateSelectedDay.bind(this);
@@ -191,13 +191,18 @@ class Spendings extends React.Component {
 
         let totalAmountSelectedDay = this.calculateTotalAmountAnyDay(this.state.selectedDay);
         return (
-            <div id="spendings">
-                {/*<h1 className="menu-item-headline">Spendings</h1>*/}
+            <div id="dashboard" className="box">
+                {/*<h1 className="menu-item-headline">Spendings</h1>
                 <div className="box menu-actions">
                     <span className="menu-action"><button className="add-pos-btn" onClick={(e) => this.openAddModal(e)}>+</button> Add new spendings position</span>
                     <span className="menu-action"><button className="add-pos-btn" onClick={(e) => this.openImportModal(e)}>+</button> Import from JSON</span>
-                </div>
-                <div className="content">
+                </div>*/}   
+
+                    <SpendingsDayOverview
+                        totalAmountDay={totalAmountSelectedDay}
+                        spendingsForDay={this.getSpendingPositionsForSelectedDay()}
+                        selectedDay={this.state.selectedDay}/>
+
                     <Calender
                         totalAmountDay={totalAmountSelectedDay}
                         totalAmountWeek={this.calculateTotalAmountWeek()}
@@ -207,21 +212,16 @@ class Spendings extends React.Component {
                         updateSelectedDay={this.updateSelectedDay}
                         calculateTotalAmountAnyDay={this.calculateTotalAmountAnyDay} />
 
-                    <SpendingsDayOverview
-                        totalAmountDay={totalAmountSelectedDay}
-                        spendingsForDay={this.getSpendingPositionsForSelectedDay()}
-                        selectedDay={this.state.selectedDay}/>
-
                     <AddForm 
                         isVisible={this.state.addFormIsVisible}
                         selectedDay={this.state.selectedDay}
                         addSpendingsPosition={this.addSpendingsPosition} 
                         onClose={this.onClose}/> 
 
-                </div>
+                
             </div>
         );
     }
 }
 
-export default Spendings;
+export default Dashboard;
