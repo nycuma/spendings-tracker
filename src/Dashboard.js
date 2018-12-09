@@ -1,11 +1,11 @@
 import React from 'react';
 import { DateUtils } from "react-day-picker";
-import Calender from './spendings/Calender';
 import Utils from './utils/Utils';
 import exampleData from './utils/ExampleData';
-import SpendingsDayOverview from './spendings/SpendingsDayOverview';
-import AddForm from './spendings/AddForm';
-import './spendings/Spendings.css';
+import Calender from './dashboard/Calender';
+import SpendingsDayOverview from './dashboard/tiles/SpendingsDayOverview';
+import AddForm from './dashboard/AddForm';
+import './dashboard/Dashboard.css';
 
 
 class Dashboard extends React.Component {

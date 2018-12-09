@@ -1,5 +1,5 @@
 import React from 'react';
-import { Constants, Settings } from '../utils/Constants';
+import { Constants, Settings } from '../../utils/Constants';
 import './SpendingsSingleDay.css';
 
 class SpendingsSingleDay extends React.Component {

@@ -1,7 +1,7 @@
 import React from 'react';
 import dateFnsFormat from 'date-fns/format';
 import SpendingsSingleDay from './SpendingsSingleDay';
-import { Constants } from '../utils/Constants';
+import { Constants } from '../../utils/Constants';
 
 class SpendingsDayOverview extends React.Component {
     render() {
