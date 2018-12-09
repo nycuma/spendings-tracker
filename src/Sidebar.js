@@ -23,16 +23,22 @@ function Sidebar(props) {
     return(
         <div id="sidebar">
             <Box 
+                width="27"
+                height="27"
                 className="nav-icon nav-icon-side"
                 value="Dashboard"
                 onClick={(e) => props.onClick(e)}
             />
             <BarChart2 
+                width="27"
+                height="27"
                 className="nav-icon nav-icon-side"
                 value="Analytics"
                 onClick={(e) => props.onClick(e)}
             />
             <Settings 
+                width="27"
+                height="27"
                 className="nav-icon nav-icon-side"
                 value="Settings"
                 onClick={(e) => props.onClick(e)}

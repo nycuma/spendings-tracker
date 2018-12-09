@@ -1,6 +1,7 @@
 import React from 'react';
+import dateFnsFormat from 'date-fns/format';
 import { Constants, Settings } from '../../utils/Constants';
-import './SpendingsSingleDay.css';
+import './Tiles.css';
 
 class SpendingsSingleDay extends React.Component {
     constructor(props) {
@@ -91,19 +92,19 @@ class SpendingsSingleDay extends React.Component {
     }
 
     render() {
-         
-
         return( 
-            <table className="table-spendings">
-                {this.renderTableBody()}    
-                <tfoot>
-                    <tr>
-                        <td><b>Total</b></td>
-                        <td className="cell-amount"><b>{this.props.totalAmountDay.toLocaleString(Settings.LOCALE_CURRENCY, Constants.LOCALE_CURRENCY_OPTIONS)}</b></td>
-                    </tr>
-                </tfoot>      
-            </table>
-
+            <div className="tile">
+                <h3>Spendings on {dateFnsFormat(this.props.selectedDay, Constants.DATE_FORMAT)}</h3>
+                <table className="table-spendings">  
+                    {this.renderTableBody()}    
+                    <tfoot>
+                        <tr>
+                            <td><b>Total</b></td>
+                            <td className="cell-amount"><b>{this.props.totalAmountDay.toLocaleString(Settings.LOCALE_CURRENCY, Constants.LOCALE_CURRENCY_OPTIONS)}</b></td>
+                        </tr>
+                    </tfoot>      
+                </table>
+            </div>
         ); 
     }
 }

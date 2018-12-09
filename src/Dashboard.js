@@ -3,9 +3,10 @@ import { DateUtils } from "react-day-picker";
 import Utils from './utils/Utils';
 import exampleData from './utils/ExampleData';
 import Calender from './dashboard/Calender';
-import SpendingsDayOverview from './dashboard/tiles/SpendingsDayOverview';
 import AddForm from './dashboard/AddForm';
+import Tiles from './dashboard/Tiles';
 import './dashboard/Dashboard.css';
+
 
 
 class Dashboard extends React.Component {
@@ -196,12 +197,19 @@ class Dashboard extends React.Component {
                 <div className="box menu-actions">
                     <span className="menu-action"><button className="add-pos-btn" onClick={(e) => this.openAddModal(e)}>+</button> Add new spendings position</span>
                     <span className="menu-action"><button className="add-pos-btn" onClick={(e) => this.openImportModal(e)}>+</button> Import from JSON</span>
-                </div>*/}   
+                </div>   
 
-                    <SpendingsDayOverview
+                    
+                    */}
+
+                    <Tiles 
                         totalAmountDay={totalAmountSelectedDay}
+                        totalAmountWeek={this.calculateTotalAmountWeek()}
+                        totalAmountMonth={this.calculateTotalAmountMonth()}
+                        totalAmountYear={this.calculateTotalAmountYear()}
                         spendingsForDay={this.getSpendingPositionsForSelectedDay()}
-                        selectedDay={this.state.selectedDay}/>
+                        selectedDay={this.state.selectedDay}
+                    />
 
                     <Calender
                         totalAmountDay={totalAmountSelectedDay}

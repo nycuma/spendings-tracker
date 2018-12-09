@@ -20,10 +20,6 @@ body {
     padding: 0;
 }
 
-h2 {
-    color: #7E6258;
-}
-
 #main-container {
    display: grid;
     grid-gap: 10px;
@@ -84,7 +80,6 @@ header button:active {
 /*****************/
 
 #sidebar {
-    position: fixed;
     width: 50px;
     height: 100%;
     display: flex;
@@ -113,11 +108,18 @@ header button:active {
 
 #dashboard {
     display: grid;
-    grid-template-columns: auto 270px;
     grid-gap: 10px;
     justify-items: stretch;
     align-items: start;
     align-content: stretch;
 }
+
+/* Display calender as additional column on wide screens */
+@media all and (min-width: 750px) {
+    #dashboard {
+        grid-template-columns: auto 270px;
+    }
+}
+
 
 

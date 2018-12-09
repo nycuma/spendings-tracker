@@ -59,7 +59,6 @@ class Calender extends React.Component {
 
         return (
             <div id="calender" className="box">
-                {/*<h2>Calender</h2>*/}
                 <DayPicker
                     todayButton="Today"
                     firstDayOfWeek={Settings.FIRST_DAY_WEEK}
@@ -68,7 +67,6 @@ class Calender extends React.Component {
                     onDayClick={this.props.updateSelectedDay}
                     onDayMouseEnter={this.displayAmountSpent}
                     onDayMouseLeave={this.hideAmountSpent} />
-                {/*<p>You selected {dateFnsFormat(this.props.selectedDay, Constants.DATE_FORMAT)}</p>*/}
             </div>  
         );
     }
