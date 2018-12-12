@@ -17,6 +17,8 @@ class Dashboard extends React.Component {
         this.calculateTotalAmountAnyDay = this.calculateTotalAmountAnyDay.bind(this);
         this.handleFileUpload = this.handleFileUpload.bind(this);
         this.onClose = this.onClose.bind(this);
+        this.openAddModal = this.openAddModal.bind(this);
+        this.openImportModal = this.openImportModal.bind(this);
         this.state = {
             selectedDay: new Date(),
             spendingPositions: exampleData,
@@ -193,15 +195,6 @@ class Dashboard extends React.Component {
         let totalAmountSelectedDay = this.calculateTotalAmountAnyDay(this.state.selectedDay);
         return (
             <div id="dashboard" className="box">
-                {/*<h1 className="menu-item-headline">Spendings</h1>
-                <div className="box menu-actions">
-                    <span className="menu-action"><button className="add-pos-btn" onClick={(e) => this.openAddModal(e)}>+</button> Add new spendings position</span>
-                    <span className="menu-action"><button className="add-pos-btn" onClick={(e) => this.openImportModal(e)}>+</button> Import from JSON</span>
-                </div>   
-
-                    
-                    */}
-
                     <Tiles 
                         totalAmountDay={totalAmountSelectedDay}
                         totalAmountWeek={this.calculateTotalAmountWeek()}
@@ -218,14 +211,18 @@ class Dashboard extends React.Component {
                         totalAmountYear={this.calculateTotalAmountYear()}
                         selectedDay={this.state.selectedDay}
                         updateSelectedDay={this.updateSelectedDay}
-                        calculateTotalAmountAnyDay={this.calculateTotalAmountAnyDay} />
+                        calculateTotalAmountAnyDay={this.calculateTotalAmountAnyDay} 
+                        openAddModal={this.openAddModal}  
+                        openImportModal={this.openImportModal}  
+                    />
 
-                    <AddForm 
-                        isVisible={this.state.addFormIsVisible}
-                        selectedDay={this.state.selectedDay}
-                        addSpendingsPosition={this.addSpendingsPosition} 
-                        onClose={this.onClose}/> 
-
+                    {this.state.addFormIsVisible &&
+                        <AddForm 
+                            selectedDay={this.state.selectedDay}
+                            addSpendingsPosition={this.addSpendingsPosition} 
+                            onClose={this.onClose}
+                        /> 
+                    }
                 
             </div>
         );

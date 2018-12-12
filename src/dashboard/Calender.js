@@ -67,6 +67,17 @@ class Calender extends React.Component {
                     onDayClick={this.props.updateSelectedDay}
                     onDayMouseEnter={this.displayAmountSpent}
                     onDayMouseLeave={this.hideAmountSpent} />
+
+                <div className="box add-actions">
+                    <span className="add-action" onClick={this.props.openAddModal}>
+                        <button className="add-pos-btn">+</button> 
+                        Add new spendings position
+                    </span>
+                    <span className="add-action" onClick={this.props.openImportModal}>
+                        <button className="add-pos-btn" >+</button>
+                        Import from JSON
+                    </span>
+                </div> 
             </div>  
         );
     }

@@ -57,10 +57,6 @@ class SpendingsForm extends React.Component {
     }
 
     render() {
-        if(!this.props.isVisible) {
-            return null;
-        }
-
         let categories = Settings.SPENDING_CATEGORIES.map((cat) => {
             return (
                 <option key={cat.value} value={cat.value}>{cat.label}</option>
