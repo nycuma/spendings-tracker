@@ -12,7 +12,7 @@ class CategoriesPieChart extends React.Component {
     render() {
         return (
             <div className="tile">
-                <h3>Spendings on Categories</h3>
+                <h4>Spendings on Categories</h4>
             </div>
         );
     }

@@ -5,7 +5,7 @@ function RecentHistory(props) {
 
     return (
         <div className="tile">
-            <h3>Spendings History</h3>
+            <h4>Spendings History</h4>
         </div>
 
     );

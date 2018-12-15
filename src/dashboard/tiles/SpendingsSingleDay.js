@@ -94,7 +94,7 @@ class SpendingsSingleDay extends React.Component {
     render() {
         return( 
             <div className="tile">
-                <h3>Spendings on {dateFnsFormat(this.props.selectedDay, Constants.DATE_FORMAT)}</h3>
+                <h4>Spendings on {dateFnsFormat(this.props.selectedDay, Constants.DATE_FORMAT)}</h4>
                 <table className="table-spendings">  
                     {this.renderTableBody()}    
                     <tfoot>

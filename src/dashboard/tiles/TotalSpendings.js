@@ -6,7 +6,7 @@ function TotalSpendings(props) {
 
     return (
         <div className="tile">
-            <h3>Total Spendings</h3>
+            <h4>Total Spendings</h4>
             <table className="table-spendings">
                 <tbody>
                         <tr>

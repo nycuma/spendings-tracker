@@ -28,7 +28,3 @@ button.add-pos-btn:active {
     padding: 2px 7px 2px 7px;
     
 }
-
-button.add-pos-btn:hover {
-    cursor: pointer;
-}
