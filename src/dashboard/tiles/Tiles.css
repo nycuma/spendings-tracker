@@ -45,10 +45,30 @@
     border-top: 5px solid black;
   }
 
+
+.table-spendings {
+    text-align: left;
+    margin: auto;
+    width: 100%;
+    min-width: 200px;
+    max-width: 400px;
+
+}
+
+.table-spendings td,
+.table-spendings th {
+    border-bottom: 1px solid black;
+    padding: 4px;
+
+}
+
+.table-spendings .cell-amount {
+    text-align: right;
+    min-width: 5em;
+}
+
   .table-row-single-spendings-pos td {
     color: #7E6258;
-    background-color: white;
-    border: 2px solid black;
     font-size: smaller;
     text-indent: 1em;
   }
