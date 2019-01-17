@@ -67,8 +67,18 @@
     min-width: 5em;
 }
 
-  .table-row-single-spendings-pos td {
+.table-row-single-spendings-pos td {
     color: #7E6258;
     font-size: smaller;
     text-indent: 1em;
-  }
+}
+
+#piechart {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 10px;
+    width: 800px;
+    height: 800px;
+    background-color: #fff;
+}
