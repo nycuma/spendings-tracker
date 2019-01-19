@@ -12,25 +12,18 @@ class CategoriesPieChart extends React.Component {
     }
 
     render() {
-
-        const chartData = Settings.SPENDING_CATEGORIES.map((cat) => {
-            // TODO
+        const randomData = [35,20,30,15,10,5,5]; // TODO get data
+        const chartData = Settings.SPENDING_CATEGORIES.map((cat, i) => {
+            return { name: cat.label, value: randomData[i] }; // TODO add colors
         });
-
-        const chartLegend = Settings.SPENDING_CATEGORIES.map((cat) => {
-            // TODO
-        });
-        const data01 = [{name: 'Group A', value: 400}, {name: 'Group B', value: 300},
-                        {name: 'Group C', value: 300}, {name: 'Group D', value: 200},
-                        {name: 'Group E', value: 278}, {name: 'Group F', value: 189}];
         
         return (
             <div className="tile">
                 <h4>Spendings on Categories</h4>
-
-                <PieChart width={200} height={170}>
-                    <Pie isAnimationActive={false} data={data01} outerRadius={40} fill="#58747E" label/>
-                    <Tooltip/>
+                <PieChart width={450} height={150}>
+                    <Pie isAnimationActive={true} data={chartData} outerRadius={40} fill="#58747E" 
+                        labelLine={true} label dataKey="value" nameKey="name"/>
+                    <Legend layout="vertical" align="right" width="100" iconType="square" iconSize="12"/>
                 </PieChart>  
             </div>
         );
