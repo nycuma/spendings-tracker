@@ -1,7 +1,7 @@
 import isLeapYear from 'date-fns/is_leap_year';
 import { Settings } from './Constants';
 
-let Utils = {
+let utils = {
 
     getNumDaysOfMonth(date) {
         let numDays;
@@ -58,7 +58,21 @@ let Utils = {
         }
 
         return weekdays;
+    },
+
+    /**
+     * Filters array of spending positions by their category.
+     * @param {Array} spendings 
+     * @param {String} category 
+     */
+    filterSpendingsByCategory(spendings, category) {
+        if(!spendings || spendings.length === 0) {
+            return [];
+        }
+        return spendings.filter((item) => {
+            return item.cat === category;
+        }); 
     }
 };
 
-export default Utils;
+export default utils;
