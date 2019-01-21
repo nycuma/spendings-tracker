@@ -41,7 +41,9 @@ class Tiles extends React.Component {
                 }
 
                 {this.state.displayRecentHistory &&
-                    <RecentHistory />
+                    <RecentHistory 
+                        recentSpendings={this.props.recentSpendings}
+                    />
                 }
                 
             </div>

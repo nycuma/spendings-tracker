@@ -1,10 +1,11 @@
 import React from 'react';
-import { DateUtils } from "react-day-picker";
-import Utils from './utils/Utils';
-import exampleData from './utils/ExampleData';
+import { DateUtils } from 'react-day-picker';
 import Calender from './dashboard/Calender';
 import AddForm from './dashboard/AddForm';
 import Tiles from './dashboard/Tiles';
+import * as localStore from './utils/LocalStore';
+import utils from './utils/Utils';
+import exampleData from './utils/ExampleData';
 import './dashboard/Dashboard.css';
 
 
@@ -21,13 +22,25 @@ class Dashboard extends React.Component {
         this.openImportModal = this.openImportModal.bind(this);
         this.state = {
             selectedDay: new Date(),
-            spendingPositions: exampleData,
+            spendingPositions: [], // TODO replace by arrays below
+            spendingSelectedDay: [], //exampleData,
+            totalSpendingsByCat: [],
+            recentSpendings: [],
+
             addFormIsVisible: false
         };
     }
 
     componentDidMount() {
         this.fileSelector = this.initFileSelector();
+        this.setState({
+            // load spendings for today
+            spendingsSelectedDay: localStore.getSpendings(this.state.selectedDay),
+            // load total amount spent per category
+            totalSpendingsByCat: localStore.getAmountSpentByCategory(),
+            // load recent spendings
+            recentSpendings: localStore.getSpendingsRecentlyAdded()
+        });
     }
 
     initFileSelector() {
@@ -43,14 +56,26 @@ class Dashboard extends React.Component {
     }
 
     addSpendingsPosition(cat, amount, comment, day) {
-        this.setState( {
-            spendingPositions: this.state.spendingPositions.concat({
-                day: day ? new Date(day) : this.state.selectedDay,
-                cat: cat,
-                amount: amount,
-                comment: comment
-            })
+        const date = day ? new Date(day) : this.state.selectedDay;
+        const newSpending = {
+            day: date,
+            cat: cat,
+            amount: amount,
+            comment: comment,
+            dateAdded: new Date()
+        };
+
+        this.setState({
+            recentSpendings: [newSpending].concat(this.state.recentSpendings)
         });
+
+        if(DateUtils.isSameDay(date, this.selectedDay)) {
+            this.setState({
+                spendingsSelectedDay: this.state.spendingsSelectedDay.concat(newSpending)
+            });
+        }
+
+        localStore.postSpendingPosition(newSpending);
     }
 
     /**
@@ -62,7 +87,7 @@ class Dashboard extends React.Component {
      */
     calculateTotalAmoutsPerDay(month) {
         // init array with 0.00 as default value
-        let totalAmounts = new Array(Utils.getNumDaysOfMonth(this.state.selectedDay)).fill(0);
+        let totalAmounts = new Array(utils.getNumDaysOfMonth(this.state.selectedDay)).fill(0);
         this.state.spendingPositions.filter((item) => {
             return item.day.getMonth() === month;
         }).forEach((item) => {
@@ -118,7 +143,7 @@ class Dashboard extends React.Component {
     }
 
     getSpendingPositionsForSelectedWeek() {
-        let weekdays = Utils.getDaysOfThisWeek(this.state.selectedDay);
+        let weekdays = utils.getDaysOfThisWeek(this.state.selectedDay);
 
         return this.state.spendingPositions.filter((pos) => {
             return DateUtils.isSameDay(pos.day, this.state.selectedDay)
@@ -139,7 +164,7 @@ class Dashboard extends React.Component {
 
     getSpendingPositionsForSelectedYear() {
         return this.state.spendingPositions.filter((pos) => {
-            return pos.day.getFullYear === this.state.selectedDay.getFullYear;
+            return pos.day.getFullYear() === this.state.selectedDay.getFullYear();
         });
     }
 
@@ -202,6 +227,8 @@ class Dashboard extends React.Component {
                         totalAmountYear={this.calculateTotalAmountYear()}
                         spendingsForDay={this.getSpendingPositionsForSelectedDay()}
                         selectedDay={this.state.selectedDay}
+
+                        recentSpendings={this.state.recentSpendings}
                     />
 
                     <Calender
