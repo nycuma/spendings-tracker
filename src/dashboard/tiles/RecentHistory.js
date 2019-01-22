@@ -7,11 +7,10 @@ function RecentHistory(props) {
     const entries = props.recentSpendings.map(pos => {
         return (
             <tr>
-                <td> {pos.dateAdded}:</td>
-                <td> {pos.comment} </td>
-                <td className="table-row-single-spendings-pos">
-                    ({pos.amount.toLocaleString(Settings.LOCALE_CURRENCY, Constants.LOCALE_CURRENCY_OPTIONS)} 
-                        spent on {dateFnsFormat(pos.day, Constants.DATE_FORMAT)})
+                <td className="align-left">{dateFnsFormat(pos.day, Constants.DATE_FORMAT_SHORT)}</td>
+                <td>{pos.comment.length < 28 ? pos.comment : pos.comment.substring(0, 25) + '...'}</td>
+                <td className="font-small-colored align-right">
+                    {pos.amount.toLocaleString(Settings.LOCALE_CURRENCY, Constants.LOCALE_CURRENCY_OPTIONS)}
                 </td>
             </tr>
         );
@@ -19,7 +18,7 @@ function RecentHistory(props) {
 
     return (
         <div className="tile">
-            <h4>Spendings History2</h4>
+            <h4>Recent Spendings</h4>
             <table className="table-spendings-history">
                 <tbody>
                     {entries}
