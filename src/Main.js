@@ -4,7 +4,6 @@ import Dashboard from './Dashboard';
 import Analytics from './Analytics';
 import Settings from './Settings';
 import Sidebar from './Sidebar';
-import Login from './Login';
 import './style.css';
 
 class Main extends Component {
