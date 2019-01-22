@@ -16,15 +16,17 @@ function CategoriesPieChart(props) {
     return (
         <div className="tile">
             <h4>Spendings on Categories</h4>
-            <PieChart width={400} height={150}>
-                <Pie isAnimationActive={true} data={chartData} outerRadius={50} fill="#58747E" 
-                    labelLine={true} label dataKey="value" nameKey="name">
-                    {
-                        chartData.map((entry, i) => <Cell fill={pieColors[i]}/>)
-                    }
-                </Pie>   
-                <Legend layout="vertical" align="right" width="100" iconType="square" iconSize="12"/>
-            </PieChart>  
+            <div id="piechart"> {/* TODO: Animation and labal line not working */}
+                <PieChart width={400} height={150}>
+                    <Pie cx={100} cy={70} isAnimationActive={true} data={chartData} outerRadius={50} fill="#58747E" 
+                        labelLine={true} label={true} dataKey="value" nameKey="name">
+                        {
+                            chartData.map((entry, i) => <Cell fill={pieColors[i]} key={i}/>)
+                        }
+                    </Pie>   
+                    <Legend layout="vertical" align="right" width={190} iconType="square" iconSize={12}/>
+                </PieChart>  
+            </div>
         </div>
     );
 }

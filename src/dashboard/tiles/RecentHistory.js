@@ -4,9 +4,9 @@ import { Constants, Settings } from '../../utils/Constants';
 import './Tiles.css';
 
 function RecentHistory(props) {
-    const entries = props.recentSpendings.map(pos => {
+    const entries = props.recentSpendings.map((pos, i) => {
         return (
-            <tr>
+            <tr key={i}> 
                 <td className="align-left">{dateFnsFormat(pos.day, Constants.DATE_FORMAT_SHORT)}</td>
                 <td>{pos.comment.length < 28 ? pos.comment : pos.comment.substring(0, 25) + '...'}</td>
                 <td className="font-small-colored align-right">
