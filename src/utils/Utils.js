@@ -1,7 +1,6 @@
 import isLeapYear from 'date-fns/is_leap_year';
-import { Settings } from './Constants';
 
-let utils = {
+let Utils = {
 
     getNumDaysOfMonth(date) {
         let numDays;
@@ -21,45 +20,6 @@ let utils = {
         return numDays;
     },
 
-
-    /**
-     * Calculates the dates of the days that are in the
-     * same week as currentDay, depending on the propeties
-     * value of the first week day (Monday or Sunday).
-     * @param currentDay 
-     * @returns array with 6 Date objects (excluding current day)
-     */
-    getDaysOfThisWeek(currentDay) {
-
-        let numPastDays = -1, numFutureDays = -1;
-        let diff = currentDay.getDay()- Settings.FIRST_DAY_WEEK;
-        let weekdays = [];
-
-        if(diff >= 0) {
-            numPastDays = diff;
-            numFutureDays = 6 - diff;
-        } else if( diff === -1) {
-            numPastDays = 6;
-            numFutureDays = 0;
-        }
-
-        while(numPastDays > 0) {
-            let weekday = new Date();
-            weekday.setDate(currentDay.getDate() - numPastDays);
-            numPastDays--;
-            weekdays.push(weekday);
-        }
-
-        while(numFutureDays > 0) {
-            let weekday = new Date();
-            weekday.setDate(currentDay.getDate() + numFutureDays);
-            numFutureDays--;
-            weekdays.push(weekday);
-        }
-
-        return weekdays;
-    },
-
     /**
      * Filters array of spending positions by their category.
      * @param {Array} spendings 
@@ -69,10 +29,21 @@ let utils = {
         if(!spendings || spendings.length === 0) {
             return [];
         }
-        return spendings.filter((item) => {
-            return item.cat === category;
-        }); 
+        return spendings.filter(item => item.cat === category); 
+    },
+
+    calculateSumOfSpendings(spendings) {
+        if(!spendings || spendings.length === 0) {
+            return 0;
+        }
+        return spendings.map(item => item.amount).reduce((prev, next) => prev + next, 0);
+    },
+
+    isSameDay(date1, date2) {
+        return date1.getFullYear() === date2.getFullYear() 
+                && date1.getMonth() === date2.getMonth()
+                && date1.getDate() === date2.getDate();
     }
 };
 
-export default utils;
+export default Utils;
