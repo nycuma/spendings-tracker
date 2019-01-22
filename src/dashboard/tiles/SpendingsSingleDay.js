@@ -7,6 +7,7 @@ class SpendingsSingleDay extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            //spendingThisDay: 
             catExpandedView: this.initStateObject()
         };
     }
@@ -58,14 +59,13 @@ class SpendingsSingleDay extends React.Component {
     renderTableBody() {
 
         return Settings.SPENDING_CATEGORIES.map((cat) => {
-            let amountSpent = this.calculateTotalAmountPerCategory(cat.value)
-                                  .toLocaleString(Settings.LOCALE_CURRENCY, Constants.LOCALE_CURRENCY_OPTIONS);
-            let arrowClass = this.state.catExpandedView[cat.value] ? 'arrow-up' : 'arrow-down';
+            let amountSpent = this.calculateTotalAmountPerCategory(cat.value);
+            let arrowClass = amountSpent > 0 ? (this.state.catExpandedView[cat.value] ? 'arrow-up' : 'arrow-down') : '';
             return (
                 <tbody key={cat.value}>
                     <tr>
                         <td>{cat.label}</td>
-                        <td className="cell-amount">{amountSpent}</td>
+                        <td className="cell-amount">{amountSpent.toLocaleString(Settings.LOCALE_CURRENCY, Constants.LOCALE_CURRENCY_OPTIONS)}</td>
                         <td><span className={arrowClass} onClick={() => this.toggleDisplayAllPositionsForCat(cat.value)}></span></td>
                     </tr>
                     {this.renderSpendingsPositons(cat.value)}
@@ -81,7 +81,7 @@ class SpendingsSingleDay extends React.Component {
         if (spendingPositions) {
             return spendingPositions.map((item, i) => {
                 return (
-                    <tr key={cat+i} style={{display: displayExpanded}} className="table-row-single-spendings-pos">
+                    <tr key={cat+i} style={{display: displayExpanded}} className="font-small-colored">
                         <td>{item.comment}</td>
                         <td className="cell-amount">{item.amount.toLocaleString(Settings.LOCALE_CURRENCY, Constants.LOCALE_CURRENCY_OPTIONS)}</td>
                     </tr>
