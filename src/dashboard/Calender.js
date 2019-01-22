@@ -4,6 +4,8 @@ import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 import TotalAmountDay from './TotalAmountDay';
 import { Settings } from '../utils/Constants';
+import { getSpendings } from './../utils/LocalStore';
+import Utils from './../utils/Utils';
 import './Calender.css';
 import 'react-day-picker/lib/style.css';
 
@@ -19,10 +21,15 @@ class Calender extends React.Component {
         */
     }
 
+    getTotalAmountForDay(date) {
+        let spendings = getSpendings(date);
+        return Utils.calculateSumOfSpendings(spendings);
+    }
+
     displayAmountSpent(day, modifiers, evt) {
         //this.setState({ dateDisplayingAmount: day });
 
-        let amountSpent = this.props.calculateTotalAmountAnyDay(day);
+        let amountSpent = this.getTotalAmountForDay(day);
         if(amountSpent && amountSpent > 0) {
             let position = {top: evt.pageY, left: evt.pageX};
             ReactDOM.render(<TotalAmountDay position={position} totalAmountDay={amountSpent} />, 
