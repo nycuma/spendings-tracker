@@ -1,32 +1,27 @@
 import React from 'react';
-import { DateUtils } from 'react-day-picker';
+import uuidv4 from 'uuid/v4';
 import Calender from './dashboard/Calender';
 import AddForm from './dashboard/AddForm';
 import Tiles from './dashboard/Tiles';
+import Utils from './utils/Utils';
 import * as localStore from './utils/LocalStore';
-import utils from './utils/Utils';
-import exampleData from './utils/ExampleData';
 import './dashboard/Dashboard.css';
-
-
+//import exampleData from './utils/ExampleData';
 
 class Dashboard extends React.Component {
     constructor(props) {
         super(props);
         this.updateSelectedDay = this.updateSelectedDay.bind(this);
         this.addSpendingsPosition = this.addSpendingsPosition.bind(this);
-        this.calculateTotalAmountAnyDay = this.calculateTotalAmountAnyDay.bind(this);
         this.handleFileUpload = this.handleFileUpload.bind(this);
         this.onClose = this.onClose.bind(this);
         this.openAddModal = this.openAddModal.bind(this);
         this.openImportModal = this.openImportModal.bind(this);
         this.state = {
             selectedDay: new Date(),
-            spendingPositions: [], // TODO replace by arrays below
-            spendingSelectedDay: [], //exampleData,
+            //spendingsSelectedDay: [],
             totalSpendingsByCat: [],
             recentSpendings: [],
-
             addFormIsVisible: false
         };
     }
@@ -34,8 +29,6 @@ class Dashboard extends React.Component {
     componentDidMount() {
         this.fileSelector = this.initFileSelector();
         this.setState({
-            // load spendings for today
-            spendingsSelectedDay: localStore.getSpendings(this.state.selectedDay),
             // load total amount spent per category
             totalSpendingsByCat: localStore.getAmountSpentByCategory(),
             // load recent spendings
@@ -58,36 +51,53 @@ class Dashboard extends React.Component {
     addSpendingsPosition(cat, amount, comment, day) {
         const date = day ? new Date(day) : this.state.selectedDay;
         const newSpending = {
+            id: uuidv4(),
             day: date,
             cat: cat,
             amount: amount,
-            comment: comment,
-            dateAdded: new Date()
+            comment: comment
         };
 
         this.setState({
             recentSpendings: [newSpending].concat(this.state.recentSpendings)
         });
-
-        if(DateUtils.isSameDay(date, this.selectedDay)) {
-            this.setState({
-                spendingsSelectedDay: this.state.spendingsSelectedDay.concat(newSpending)
-            });
-        }
-
         localStore.postSpendingPosition(newSpending);
     }
 
-    /**
+    getTotalAmountDay() {
+        let spendings = localStore.getSpendings(this.state.selectedDay);
+        return Utils.calculateSumOfSpendings(spendings);
+    }
+
+    getTotalAmountWeek() {
+        let spendings = localStore.getSpendings(this.state.selectedDay, true);
+        return Utils.calculateSumOfSpendings(spendings);
+    }
+
+    getTotalAmountMonth() {
+        let spendings = localStore.getSpendings(this.state.selectedDay, false, true);
+        return Utils.calculateSumOfSpendings(spendings);
+    }
+
+    getTotalAmountYear() {
+        let spendings = localStore.getSpendings(this.state.selectedDay, false, false, true);
+        return Utils.calculateSumOfSpendings(spendings);
+    }
+
+    getSpendingsForSelectedDay() {
+        return localStore.getSpendings(this.state.selectedDay);
+    }
+
+    /** TODO still needed?
      * Returns an array that contains the total amount of
      * money spent on each day for an entire month.
      * Position i contains amount for (i+1)th day of the month.
      * 
-     * @param month integer indicating the month (Jan=0, Dec=11)
+     * @param {Number} month (Jan=0, Dec=11)
      */
     calculateTotalAmoutsPerDay(month) {
         // init array with 0.00 as default value
-        let totalAmounts = new Array(utils.getNumDaysOfMonth(this.state.selectedDay)).fill(0);
+        let totalAmounts = new Array(Utils.getNumDaysOfMonth(this.state.selectedDay)).fill(0);
         this.state.spendingPositions.filter((item) => {
             return item.day.getMonth() === month;
         }).forEach((item) => {
@@ -95,77 +105,6 @@ class Dashboard extends React.Component {
         });
 
         return totalAmounts;
-    }
-
-    calculateTotalAmountWeek() {
-        let spendingsWeek = this.getSpendingPositionsForSelectedWeek();
-        return this.calculateSumSpendingPositions(spendingsWeek);
-    }
-
-    calculateTotalAmountMonth() {
-        let spendingsMonth = this.getSpendingPositionsForSelectedMonth();
-        return this.calculateSumSpendingPositions(spendingsMonth);
-    }
-
-    calculateTotalAmountYear() {
-        let spendingsYear = this.getSpendingPositionsForSelectedYear();
-        return this.calculateSumSpendingPositions(spendingsYear);
-    }
-
-    calculateTotalAmountAnyDay(date) {
-        let spendings = this.getSpendingPositionsForDay(date);
-        return this.calculateSumSpendingPositions(spendings);
-    }
-
-    calculateSumSpendingPositions(positions) {
-        if (positions) {
-            return positions.map((item) => {
-                return item.amount;
-            }).reduce((prevAmount, nextAmount) => {
-                return prevAmount + nextAmount;
-            }, 0);
-        }
-        return 0;
-    }
-
-    /**
-     * Returns all spending positions for the currently
-     * selected calender day
-     */
-    getSpendingPositionsForSelectedDay() {
-        return this.getSpendingPositionsForDay(this.state.selectedDay);
-    }
-
-    getSpendingPositionsForDay(date) {
-        return this.state.spendingPositions.filter((pos) => {
-            return DateUtils.isSameDay(pos.day, date);
-        });
-    }
-
-    getSpendingPositionsForSelectedWeek() {
-        let weekdays = utils.getDaysOfThisWeek(this.state.selectedDay);
-
-        return this.state.spendingPositions.filter((pos) => {
-            return DateUtils.isSameDay(pos.day, this.state.selectedDay)
-                || DateUtils.isSameDay(pos.day, weekdays[0])
-                || DateUtils.isSameDay(pos.day, weekdays[1])
-                || DateUtils.isSameDay(pos.day, weekdays[2])
-                || DateUtils.isSameDay(pos.day, weekdays[3])
-                || DateUtils.isSameDay(pos.day, weekdays[4])
-                || DateUtils.isSameDay(pos.day, weekdays[5]);
-        });
-    }
-
-    getSpendingPositionsForSelectedMonth() {
-        return this.state.spendingPositions.filter((pos) => {
-            return DateUtils.isSameMonth(pos.day, this.state.selectedDay);
-        });
-    }
-
-    getSpendingPositionsForSelectedYear() {
-        return this.state.spendingPositions.filter((pos) => {
-            return pos.day.getFullYear() === this.state.selectedDay.getFullYear();
-        });
     }
 
     openAddModal() {
@@ -216,29 +155,22 @@ class Dashboard extends React.Component {
     }
 
     render() {
-
-        let totalAmountSelectedDay = this.calculateTotalAmountAnyDay(this.state.selectedDay);
         return (
             <div id="dashboard" className="box">
                     <Tiles 
-                        totalAmountDay={totalAmountSelectedDay}
-                        totalAmountWeek={this.calculateTotalAmountWeek()}
-                        totalAmountMonth={this.calculateTotalAmountMonth()}
-                        totalAmountYear={this.calculateTotalAmountYear()}
-                        spendingsForDay={this.getSpendingPositionsForSelectedDay()}
-                        selectedDay={this.state.selectedDay}
+                        totalAmountDay={this.getTotalAmountDay()}
+                        totalAmountWeek={this.getTotalAmountWeek()}
+                        totalAmountMonth={this.getTotalAmountMonth()}
+                        totalAmountYear={this.getTotalAmountYear()}
 
+                        selectedDay={this.state.selectedDay}
+                        spendingsForDay={this.getSpendingsForSelectedDay()}
                         recentSpendings={this.state.recentSpendings}
                     />
 
                     <Calender
-                        totalAmountDay={totalAmountSelectedDay}
-                        totalAmountWeek={this.calculateTotalAmountWeek()}
-                        totalAmountMonth={this.calculateTotalAmountMonth()}
-                        totalAmountYear={this.calculateTotalAmountYear()}
                         selectedDay={this.state.selectedDay}
                         updateSelectedDay={this.updateSelectedDay}
-                        calculateTotalAmountAnyDay={this.calculateTotalAmountAnyDay} 
                         openAddModal={this.openAddModal}  
                         openImportModal={this.openImportModal}  
                     />

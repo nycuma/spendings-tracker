@@ -3,44 +3,51 @@
  */
 
 import store from 'store';
-import uuidv4 from 'uuid/v4';
-import { DateUtils } from 'react-day-picker';
+import Utils from './Utils';
+import { isSameWeek, isSameMonth } from 'date-fns';
 import { Settings } from './Constants';
 
 const LOCAL_STORAGE_KEY = 'spendings';
 
-/**
- * Return spendings positons, optionally filtered by specific date or year/month/week.
- * If date is given, other parameters will be ignored.
- * 
- * @param {Date} date specific date
- * @param {Number} year 
- * @param {Number} month month of the year (value 0 to 11), requires value for year
- * @param {Number} week week of the year (values 1 to 52), requires value for year
- */
-const getSpendings = (date, year, month, week) => {
+ /**
+  * Returns spending positons that were spent on the same day / in the same year, month,
+  * or week as the reference date.
+  * If no parameter is given, all spendings will be returned.
+  * If only date is given, all spendings from the same day will be returned.
+  * 
+  * @param {Date} date reference date
+  * @param {Boolean} onlySameWeek 
+  * @param {Boolean} onlySameMonth 
+  * @param {Boolean} onlySameYear 
+  */
+function getSpendings(date, onlySameWeek, onlySameMonth, onlySameYear) {
     let data = store.get(LOCAL_STORAGE_KEY);
-    console.log('getSpendings data: ' + JSON.stringify(data));
     if(!data) { 
         return []; 
     }
 
-    if(date) {
-        return data.filter(item => DateUtils.isSameDay(new Date(item.day), date));
+    if(arguments.length === 0) {
+        return data;
     }
 
-    if(year) {
-        data = data.filter(item => new Date(item.day).getFullYear() === year);
-
-        if(month) {
-            data = data.filter(item => new Date(item.day).getMonth() === month);
-        }
-        if(week) {
-            // TODO filter by week
-        }
+    if(arguments.length === 1) {
+        return data.filter(item => Utils.isSameDay(new Date(item.day), date));
     }
+
+    if(onlySameWeek && onlySameWeek === true) {
+        return data.filter(item => new Date(item.day).getFullYear() === date.getFullYear());
+    }
+
+    if(onlySameMonth && onlySameMonth === true) {
+        return data.filter(item => isSameMonth(new Date(item.day), date));
+    }
+
+    if(onlySameYear && onlySameYear === true) {
+        return data.filter(item => isSameWeek(new Date(item.day), date));
+    }
+
     return data;
-};
+}
 
 /**
  * Returns spendings postions after and/or before a certain date.
@@ -110,7 +117,7 @@ const postSpendingPosition = (pos) => {
         data = []; 
     }
     data.push({
-        id: uuidv4(),
+        id: pos.id,
         day: pos.day,
         cat: pos.cat,
         amount: pos.amount,
