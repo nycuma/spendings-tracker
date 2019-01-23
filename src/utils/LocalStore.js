@@ -106,7 +106,7 @@ const getAmountSpentByCategory = () => {
                               .reduce((prev, next) => prev + next, 0);
         return {
             cat: cat.value,
-            amount: amountByCat
+            amount: Math.round(amountByCat)
         };
     });
 };
