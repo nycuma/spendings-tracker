@@ -1,11 +1,11 @@
 import React from 'react';
-import { LogIn } from 'react-feather';
+import { Box } from 'react-feather';
 
 function Header(props) {
     return (
-        <header>
-            <button id="login-btn">Login</button>
-            <LogIn className="nav-icon nav-icon-top" /> 
+        <header>   
+            <button id="generate-btn" title="TODO">Generate random data</button>
+            <Box className="nav-icon nav-icon-top" /> 
         </header>
     );
 }
