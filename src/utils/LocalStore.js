@@ -101,8 +101,9 @@ const getAmountSpentByCategory = () => {
     }
 
     return Settings.SPENDING_CATEGORIES.map(cat => {
-        let amountByCat = data.filter(item => item.cat == cat.value)
-                              .reduce((prev, next) => prev.amount + next.amount, 0);
+        let amountByCat = data.filter(item => item.cat === cat.value)
+                              .map(item => item.amount)
+                              .reduce((prev, next) => prev + next, 0);
         return {
             cat: cat.value,
             amount: amountByCat
