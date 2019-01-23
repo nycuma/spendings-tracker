@@ -1,5 +1,6 @@
 import React from 'react';
-import { Box, BarChart2, Settings } from 'react-feather';
+import { Home, BarChart2, Settings } from 'react-feather';
+import './style.css';
 
 class Sidebar extends React.Component {
     constructor(props) {
@@ -41,12 +42,12 @@ class Sidebar extends React.Component {
                         onMouseEnter={() => this.toggleNavTitle('displayTitleDashboard')}
                         onMouseLeave={() => this.toggleNavTitle('displayTitleDashboard')}
                         onClick={(e) => this.props.onClick(e)} >
-                        <Box 
+                        <Home 
                             width="27"
                             height="27"
                             className="nav-icon-side"
                         />
-                        <span className={this.state.displayTitleDashboard ? 'nav-title' : 'nav-title-hidden'}>Dashboard</span>
+                        <span className={this.state.displayTitleDashboard ? '' : 'nav-title-hidden'}>Dashboard</span>
                     </li>
                     
                     <li className="nav-icon-with-title"
@@ -58,7 +59,7 @@ class Sidebar extends React.Component {
                             height="27"
                             className="nav-icon-side"
                         />
-                        <span className={this.state.displayTitleAnalytics ? 'nav-title' : 'nav-title-hidden'}>Analytics</span>
+                        <span className={this.state.displayTitleAnalytics ? '' : 'nav-title-hidden'}>Analytics</span>
                     </li>
 
                     <li className="nav-icon-with-title"
@@ -70,7 +71,7 @@ class Sidebar extends React.Component {
                             height="27"
                             className="nav-icon-side"
                         />
-                        <span className={this.state.displayTitleSettings ? 'nav-title' : 'nav-title-hidden'}>Settings</span>
+                        <span className={this.state.displayTitleSettings ? '' : 'nav-title-hidden'}>Settings</span>
                     </li>
                 </ul>
             </div>
