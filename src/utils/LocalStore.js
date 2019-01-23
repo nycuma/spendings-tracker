@@ -34,16 +34,16 @@ function getSpendings(date, onlySameWeek, onlySameMonth, onlySameYear) {
         return data.filter(item => Utils.isSameDay(new Date(item.day), date));
     }
 
-    if(onlySameWeek && onlySameWeek === true) {
-        return data.filter(item => new Date(item.day).getFullYear() === date.getFullYear());
+    if(onlySameWeek === true) {
+        return data.filter(item => isSameWeek(new Date(item.day), date, {weekStartsOn: 1}));
     }
 
-    if(onlySameMonth && onlySameMonth === true) {
+    if(onlySameMonth === true) {
         return data.filter(item => isSameMonth(new Date(item.day), date));
     }
 
-    if(onlySameYear && onlySameYear === true) {
-        return data.filter(item => isSameWeek(new Date(item.day), date));
+    if(onlySameYear === true) {
+        return data.filter(item => new Date(item.day).getFullYear() === date.getFullYear());
     }
 
     return data;
