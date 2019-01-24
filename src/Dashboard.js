@@ -6,7 +6,6 @@ import Tiles from './dashboard/Tiles';
 import Utils from './utils/Utils';
 import * as localStore from './utils/LocalStore';
 import './dashboard/Dashboard.css';
-//import exampleData from './utils/ExampleData';
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -19,7 +18,6 @@ class Dashboard extends React.Component {
         this.openImportModal = this.openImportModal.bind(this);
         this.state = {
             selectedDay: new Date(),
-            //spendingsSelectedDay: [],
             totalSpendingsByCat: [],
             recentSpendings: [],
             addFormIsVisible: false
@@ -32,7 +30,7 @@ class Dashboard extends React.Component {
             // load total amount spent per category
             totalSpendingsByCat: localStore.getAmountSpentByCategory(),
             // load recent spendings
-            recentSpendings: localStore.getSpendingsRecentlyAdded()
+            recentSpendings: localStore.getSpendingsRecentlyAdded(15)
         });
     }
 
