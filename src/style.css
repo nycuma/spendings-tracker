@@ -81,6 +81,8 @@ header button:active {
 
 #sidebar {
     position: fixed;
+    left: 0;
+    z-index: 10;
     width: 50px;
     height: 100%;
     display: flex;
@@ -100,7 +102,6 @@ header button:active {
     justify-content: flex-start;
     align-items: center;  
     cursor: pointer;
-    z-index: 10;
     width: 100%;
     padding: 3px 5px 3px 3px;
 }
@@ -109,7 +110,6 @@ header button:active {
 #sidebar li:focus {
     color: #FAFAFA;
     background-color: black;
-    z-index: 10;
 }
 
 .nav-title:hover,

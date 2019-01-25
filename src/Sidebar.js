@@ -8,8 +8,18 @@ class Sidebar extends React.Component {
         this.state = {
             displayTitleDashboard: false,
             displayTitleAnalytics: false,
-            displayTitleSettings: false
+            displayTitleSettings: false,
+            distanceTop: 55
         };
+    }
+
+    componentDidMount() {
+        window.addEventListener('scroll', this.handleSidebarPosition.bind(this));
+    }
+
+    handleSidebarPosition() {
+        let scrollTop = (document.documentElement.scrollTop || document.body.scrollTop);
+        this.setState({ distanceTop: Math.max(55 - scrollTop, 0) });
     }
 
     toggleNavTitle(stateItem) {
@@ -36,7 +46,7 @@ class Sidebar extends React.Component {
         });
 
         return(
-            <div id="sidebar">
+            <div id="sidebar" style={{top: this.state.distanceTop}}>
                 <ul>
                     <li onMouseEnter={() => this.toggleNavTitle('displayTitleDashboard')}
                         onMouseLeave={() => this.toggleNavTitle('displayTitleDashboard')}
