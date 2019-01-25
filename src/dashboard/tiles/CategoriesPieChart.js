@@ -6,13 +6,23 @@ import './Tiles.css';
 
 function CategoriesPieChart(props) {
     const data = getAmountSpentByCategory();
-    const pieColors = [];
-    const chartData = Settings.SPENDING_CATEGORIES.map((cat, i) => {
+    let pieColors = [];
+    let chartData;
+
+    if(!data || data.length === 0) {
+        pieColors.push('#f1f4f4');
+        chartData = [{
+            name: 'No data available',
+            value: 1
+        }];
+    } else {
+        chartData = Settings.SPENDING_CATEGORIES.map((cat, i) => {
         pieColors.push(cat.color);
         return { 
             name: cat.label.length <= 20 ? cat.label : cat.label.substring(0, 18) + '...',
             value: data[i].amount };
-    });
+        });
+    }
     
     return (
         <div className="tile">
@@ -25,7 +35,7 @@ function CategoriesPieChart(props) {
                             chartData.map((entry, i) => <Cell fill={pieColors[i]} key={i}/>)
                         }
                     </Pie>   
-                    <Legend layout="vertical" align="right" width={190} iconType="square" iconSize={12}/>
+                    <Legend layout="vertical" align="right" verticalAlign="top" width={190} iconType="square" iconSize={12}/>
                 </PieChart>  
             </div>
         </div>
