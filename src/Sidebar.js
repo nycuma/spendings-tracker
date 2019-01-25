@@ -38,8 +38,7 @@ class Sidebar extends React.Component {
         return(
             <div id="sidebar">
                 <ul>
-                    <li className="nav-icon-with-title" 
-                        onMouseEnter={() => this.toggleNavTitle('displayTitleDashboard')}
+                    <li onMouseEnter={() => this.toggleNavTitle('displayTitleDashboard')}
                         onMouseLeave={() => this.toggleNavTitle('displayTitleDashboard')}
                         onClick={(e) => this.props.onClick(e)} >
                         <Home 
@@ -47,11 +46,10 @@ class Sidebar extends React.Component {
                             height="27"
                             className="nav-icon-side"
                         />
-                        <span className={this.state.displayTitleDashboard ? '' : 'nav-title-hidden'}>Dashboard</span>
+                        <span className={this.state.displayTitleDashboard ? '' : 'hidden'}>Dashboard</span>
                     </li>
                     
-                    <li className="nav-icon-with-title"
-                        onMouseEnter={() => this.toggleNavTitle('displayTitleAnalytics')}
+                    <li onMouseEnter={() => this.toggleNavTitle('displayTitleAnalytics')}
                         onMouseLeave={() => this.toggleNavTitle('displayTitleAnalytics')} 
                         onClick={(e) => this.props.onClick(e)} >
                         <BarChart2 
@@ -59,11 +57,10 @@ class Sidebar extends React.Component {
                             height="27"
                             className="nav-icon-side"
                         />
-                        <span className={this.state.displayTitleAnalytics ? '' : 'nav-title-hidden'}>Analytics</span>
+                        <span className={this.state.displayTitleAnalytics ? '' : 'hidden'}>Analytics</span>
                     </li>
 
-                    <li className="nav-icon-with-title"
-                        onMouseEnter={() => this.toggleNavTitle('displayTitleSettings')}
+                    <li onMouseEnter={() => this.toggleNavTitle('displayTitleSettings')}
                         onMouseLeave={() => this.toggleNavTitle('displayTitleSettings')} 
                         onClick={(e) => this.props.onClick(e)} >
                         <Settings 
@@ -71,7 +68,7 @@ class Sidebar extends React.Component {
                             height="27"
                             className="nav-icon-side"
                         />
-                        <span className={this.state.displayTitleSettings ? '' : 'nav-title-hidden'}>Settings</span>
+                        <span className={this.state.displayTitleSettings ? '' : 'hidden'}>Settings</span>
                     </li>
                 </ul>
             </div>

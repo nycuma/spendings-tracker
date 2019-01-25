@@ -26,6 +26,10 @@ body {
     grid-template-columns: 50px auto;
 }
 
+.hidden {
+    display: none;
+}
+
 /*****************/
 /**** Header *****/
 /*****************/
@@ -82,31 +86,40 @@ header button:active {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
 }
 
-.nav-icon-with-title {
-    /*position: relative;
+#sidebar ul {
+    margin: 0 -70px 0 0;
+    padding: 0;
+}
+
+#sidebar li {
     display: flex;
-    flex-direction: row;*/
-    display: inline-block;
-    width: 250px;
-    z-index: 10;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;  
     cursor: pointer;
+    z-index: 10;
+    width: 100%;
+    padding: 3px 5px 3px 3px;
 }
 
-.nav-icon-with-title:hover,
-.nav-icon-with-title:focus {
+#sidebar li:hover,
+#sidebar li:focus {
     color: #FAFAFA;
     background-color: black;
+    z-index: 10;
 }
 
-.nav-title-hidden {
-    display: none;
+.nav-title:hover,
+.nav-title:focus {
+    display: inline;
+    color: #FAFAFA;
 }
 
 .nav-icon-side {
-    margin: 15px 5px 15px 15px;
+    padding: 10px 9px 10px 19px;
 }
 
 .nav-icon-top {
