@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Switch, Route } from 'react-router-dom';
 import Header from './Header';
 import Dashboard from './Dashboard';
 import Analytics from './Analytics';
@@ -15,35 +16,23 @@ class Main extends Component {
         };
     }
 
-    switchMenuItem(evt) {
-        console.log('switch menu item: ' + JSON.stringify(evt.target.value));
-        //this.setState({ activeMenuItem : evt.target.innerHTML });
+    switchMenuItem(navItem) {
+        this.setState({ activeMenuItem : navItem });
     }
 
     render() {
-        
-        let menuItem;
-        switch(this.state.activeMenuItem) {
-            case 'Dashboard' : menuItem = <Dashboard />; break;
-            case 'Analytics' : menuItem = <Analytics />; break;
-            case 'Settings' : menuItem = <Settings />; break;
-            //case 'Login' : menuItem = <Login />; break;
-            default : menuItem = <Dashboard />; break;
-        }
-
         return (
-            <div id="main-container">
-                
+            <div id="main-container"> 
                 <Header />
-
                 <nav className="box">
-                    <Sidebar 
-                        activeMenuItem={this.state.activeMenuItem} 
-                        onClick={(e) => this.switchMenuItem(e)}
-                    />
+                    <Sidebar />
                 </nav> 
-                {menuItem}
-                 
+                <Switch>
+                    <Route exact path='/' component={Dashboard}/>
+                    <Route path='/dashboard' component={Dashboard}/>
+                    <Route path='/analytics' component={Analytics}/>
+                    <Route path='/settings' component={Settings}/>
+                </Switch>
             </div>
         );
     }

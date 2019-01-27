@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Home, BarChart2, Settings } from 'react-feather';
 import './style.css';
 
@@ -27,58 +28,44 @@ class Sidebar extends React.Component {
     }
 
     render() {
-        const activeMenuItem = this.props.activeMenuItem;
-        const navItems = ['Dashboard', 'Analytics', 'Settings'];
-
-        let navButtons = navItems.map((item, i) => {
-            let classes = '';
-            // highlight currently selected menu item
-            if(item === activeMenuItem) classes = 'active-item'; 
-            return (
-                <button 
-                    key={item.toLowerCase + '-btn-' + i} 
-                    id={item.toLowerCase + '-btn'} 
-                    className={classes} 
-                    onClick={(e) => this.props.onClick(e)}>
-                        {item}
-                </button>
-            );
-        });
-
         return(
             <div id="sidebar" style={{top: this.state.distanceTop}}>
                 <ul>
                     <li onMouseEnter={() => this.toggleNavTitle('displayTitleDashboard')}
-                        onMouseLeave={() => this.toggleNavTitle('displayTitleDashboard')}
-                        onClick={(e) => this.props.onClick(e)} >
-                        <Home 
-                            width="27"
-                            height="27"
-                            className="nav-icon-side"
-                        />
-                        <span className={this.state.displayTitleDashboard ? '' : 'hidden'}>Dashboard</span>
-                    </li>
+                        onMouseLeave={() => this.toggleNavTitle('displayTitleDashboard')} >
+                        <Link to='/dashboard'>
+                            <Home 
+                                width="27"
+                                height="27"
+                                className="nav-icon-side"
+                            />
+                            <span className={this.state.displayTitleDashboard ? '' : 'hidden'}>Dashboard</span>               
+                        </Link>   
+                    </li> 
+
                     
                     <li onMouseEnter={() => this.toggleNavTitle('displayTitleAnalytics')}
-                        onMouseLeave={() => this.toggleNavTitle('displayTitleAnalytics')} 
-                        onClick={(e) => this.props.onClick(e)} >
-                        <BarChart2 
-                            width="27"
-                            height="27"
-                            className="nav-icon-side"
-                        />
-                        <span className={this.state.displayTitleAnalytics ? '' : 'hidden'}>Analytics</span>
+                        onMouseLeave={() => this.toggleNavTitle('displayTitleAnalytics')} >
+                        <Link to='/analytics'>
+                            <BarChart2 
+                                width="27"
+                                height="27"
+                                className="nav-icon-side"
+                            />
+                            <span className={this.state.displayTitleAnalytics ? '' : 'hidden'}>Analytics</span>
+                        </Link>
                     </li>
 
                     <li onMouseEnter={() => this.toggleNavTitle('displayTitleSettings')}
-                        onMouseLeave={() => this.toggleNavTitle('displayTitleSettings')} 
-                        onClick={(e) => this.props.onClick(e)} >
-                        <Settings 
-                            width="27"
-                            height="27"
-                            className="nav-icon-side"
-                        />
-                        <span className={this.state.displayTitleSettings ? '' : 'hidden'}>Settings</span>
+                        onMouseLeave={() => this.toggleNavTitle('displayTitleSettings')} >
+                        <Link to='/settings'>
+                            <Settings 
+                                width="27"
+                                height="27"
+                                className="nav-icon-side"
+                            />
+                            <span className={this.state.displayTitleSettings ? '' : 'hidden'}>Settings</span>
+                        </Link>
                     </li>
                 </ul>
             </div>
