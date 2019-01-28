@@ -22,7 +22,7 @@ let Utils = {
 
     /**
      * Filters array of spending positions by their category.
-     * @param {Array} spendings 
+     * @param {Array} spendings objects with spending positions
      * @param {String} category 
      */
     filterSpendingsByCategory(spendings, category) {
@@ -30,6 +30,16 @@ let Utils = {
             return [];
         }
         return spendings.filter(item => item.cat === category); 
+    },
+
+    calculateTotalAmountByCategory(spendings, category) {
+        if(!spendings || spendings.length === 0) {
+            return 0;
+        }
+
+        return spendings.filter(item => item.cat === category)
+                        .map(item => item.amount)
+                        .reduce((prevAmount, nextAmount) => prevAmount + nextAmount, 0);  
     },
 
     calculateSumOfSpendings(spendings) {

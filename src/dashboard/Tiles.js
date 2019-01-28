@@ -1,4 +1,5 @@
 import React from 'react';
+import SpendingsToday from './tiles/SpendingsToday';
 import SpendingsSingleDay from './tiles/SpendingsSingleDay';
 import TotalSpendings from './tiles/TotalSpendings';
 import CategoriesPieChart from './tiles/CategoriesPieChart';
@@ -12,7 +13,8 @@ class Tiles extends React.Component {
             displayCatPieChart: true,
             displaySpendingsSingleDay: true,
             displayTotalSpendings: true,
-            displayRecentHistory: true
+            displayRecentHistory: true,
+            displaySpendingsToday: true
         };
     }
 
@@ -23,12 +25,8 @@ class Tiles extends React.Component {
                     <CategoriesPieChart />
                 }
 
-                {this.state.displaySpendingsSingleDay &&
-                    <SpendingsSingleDay
-                        totalAmountDay={this.props.totalAmountDay}
-                        spendingsForDay={this.props.spendingsForDay}
-                        selectedDay={this.props.selectedDay}
-                    />
+                {this.state.displaySpendingsToday &&
+                    <SpendingsToday />
                 }
 
                 {this.state.displayTotalSpendings &&
@@ -45,6 +43,14 @@ class Tiles extends React.Component {
                         recentSpendings={this.props.recentSpendings}
                     />
                 }
+
+                {this.state.displaySpendingsSingleDay &&
+                    <SpendingsSingleDay
+                        totalAmountDay={this.props.totalAmountDay}
+                        spendingsForDay={this.props.spendingsForDay}
+                        selectedDay={this.props.selectedDay}
+                    />
+                }   
                 
             </div>
         );
