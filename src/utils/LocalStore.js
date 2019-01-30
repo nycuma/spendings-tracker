@@ -7,7 +7,9 @@ import Utils from './Utils';
 import { isSameWeek, isSameMonth } from 'date-fns';
 import { Settings } from './Constants';
 
-const LOCAL_STORAGE_KEY = 'spendings';
+const KEY_SPENDINGS = 'spendings';
+const KEY_CURRENCY = 'currency';
+const KEY_RECURRENT_SPENDINGS = 'recurrentSpending';
 
  /**
   * Returns spending positons that were spent on the same day / in the same year, month,
@@ -20,8 +22,8 @@ const LOCAL_STORAGE_KEY = 'spendings';
   * @param {Boolean} onlySameMonth 
   * @param {Boolean} onlySameYear 
   */
-function getSpendings(date, onlySameWeek, onlySameMonth, onlySameYear) {
-    let data = store.get(LOCAL_STORAGE_KEY);
+ export function getSpendings(date, onlySameWeek, onlySameMonth, onlySameYear) {
+    let data = store.get(KEY_SPENDINGS);
     if(!data) { 
         return []; 
     }
@@ -57,11 +59,11 @@ function getSpendings(date, onlySameWeek, onlySameMonth, onlySameYear) {
  * @param {Date} dateEnd (optinal)
  * @param {Number} count number of positions that should be returned (optional)
  */
-const getSpendingsBetween = (dateStart, dateEnd, count) => {
+export const getSpendingsBetween = (dateStart, dateEnd, count) => {
     if(!dateStart && !dateEnd) { 
         return []; 
     }
-    let data = store.get(LOCAL_STORAGE_KEY);
+    let data = store.get(KEY_SPENDINGS);
     if(!data) { 
         return []; 
     }
@@ -82,8 +84,8 @@ const getSpendingsBetween = (dateStart, dateEnd, count) => {
  * 
  * @param {Number} count Number of positions to return
  */
-const getSpendingsRecentlyAdded = (count) => {
-    const data = store.get(LOCAL_STORAGE_KEY);
+export const getSpendingsRecentlyAdded = (count) => {
+    const data = store.get(KEY_SPENDINGS);
     if(!data) { 
         return []; 
     }
@@ -94,8 +96,8 @@ const getSpendingsRecentlyAdded = (count) => {
 /**
  * Returns array with total amount spent on each categorie all time.
  */
-const getAmountSpentByCategory = () => {
-    const data = store.get(LOCAL_STORAGE_KEY);
+export const getAmountSpentByCategory = () => {
+    const data = store.get(KEY_SPENDINGS);
     if(!data) { 
         return []; 
     }
@@ -112,8 +114,8 @@ const getAmountSpentByCategory = () => {
 };
 
 
-const postSpendingPosition = (pos) => {
-    let data = store.get(LOCAL_STORAGE_KEY);
+export const postSpendingPosition = (pos) => {
+    let data = store.get(KEY_SPENDINGS);
     if(!data) { 
         data = []; 
     }
@@ -125,9 +127,31 @@ const postSpendingPosition = (pos) => {
         comment: pos.comment,
         dateAdded: pos.dateAdded ? pos.dateAdded : new Date()
     });
-    store.set(LOCAL_STORAGE_KEY, data);
+    
+    store.set(KEY_SPENDINGS, data);
 };
 
+export const getCurrency = () => {
+    store.get(KEY_CURRENCY);
+};
 
-export { getSpendings, getSpendingsBetween, getSpendingsRecentlyAdded, 
-    getAmountSpentByCategory, postSpendingPosition };
+export const setCurrency = (currency) => {
+    store.set(KEY_CURRENCY, currency);
+};
+
+export const getRecurrentSpendings = () => {
+    store.get(KEY_RECURRENT_SPENDINGS);
+};
+
+export const postRecurrentSpending = (recurrentSpending) => {
+    let recSpendings = store.get(KEY_RECURRENT_SPENDINGS);
+    if(!recSpendings) { 
+        recSpendings = []; 
+    }
+    recSpendings.push({
+        interval: recurrentSpending.interval,
+        amount: recurrentSpending.amount
+    });
+    
+    store.set(KEY_RECURRENT_SPENDINGS, recurrentSpending);
+};
