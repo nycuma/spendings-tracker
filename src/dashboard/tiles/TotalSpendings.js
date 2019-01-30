@@ -2,6 +2,9 @@ import React from 'react';
 import { Constants, Settings } from '../../utils/Constants';
 import './Tiles.css';
 
+/**
+ * Shows total spendings of today, current week, month & year.
+ */
 function TotalSpendings(props) {
 
     return (
@@ -10,8 +13,8 @@ function TotalSpendings(props) {
             <table className="table-spendings">
                 <tbody>
                     <tr>
-                        <td>This day:</td>
-                        <td className="cell-amount">{props.totalAmountDay.toLocaleString(Settings.LOCALE_CURRENCY, Constants.LOCALE_CURRENCY_OPTIONS)}</td>
+                        <td>Today:</td>
+                        <td className="cell-amount">{props.totalAmountToday.toLocaleString(Settings.LOCALE_CURRENCY, Constants.LOCALE_CURRENCY_OPTIONS)}</td>
                     </tr>
                     <tr>
                         <td>This week:</td>

@@ -62,23 +62,23 @@ class Dashboard extends React.Component {
         localStore.postSpendingPosition(newSpending);
     }
 
-    getTotalAmountDay() {
-        let spendings = localStore.getSpendings(this.state.selectedDay);
+    getTotalAmountDay(date) {
+        let spendings = localStore.getSpendings(date ? date : this.state.selectedDay);
         return Utils.calculateSumOfSpendings(spendings);
     }
 
-    getTotalAmountWeek() {
-        let spendings = localStore.getSpendings(this.state.selectedDay, true);
+    getTotalAmountWeek(date) {
+        let spendings = localStore.getSpendings(date ? date : this.state.selectedDay, true);
         return Utils.calculateSumOfSpendings(spendings);
     }
 
-    getTotalAmountMonth() {
-        let spendings = localStore.getSpendings(this.state.selectedDay, false, true);
+    getTotalAmountMonth(date) {
+        let spendings = localStore.getSpendings(date ? date : this.state.selectedDay, false, true);
         return Utils.calculateSumOfSpendings(spendings);
     }
 
-    getTotalAmountYear() {
-        let spendings = localStore.getSpendings(this.state.selectedDay, false, false, true);
+    getTotalAmountYear(date) {
+        let spendings = localStore.getSpendings(date ? date : this.state.selectedDay, false, false, true);
         return Utils.calculateSumOfSpendings(spendings);
     }
 
@@ -156,10 +156,11 @@ class Dashboard extends React.Component {
         return (
             <div id="dashboard" className="box">
                     <Tiles 
+                        totalAmountToday={this.getTotalAmountDay(new Date())}
                         totalAmountDay={this.getTotalAmountDay()}
-                        totalAmountWeek={this.getTotalAmountWeek()}
-                        totalAmountMonth={this.getTotalAmountMonth()}
-                        totalAmountYear={this.getTotalAmountYear()}
+                        totalAmountWeek={this.getTotalAmountWeek(new Date())}
+                        totalAmountMonth={this.getTotalAmountMonth(new Date())}
+                        totalAmountYear={this.getTotalAmountYear(new Date())}
 
                         selectedDay={this.state.selectedDay}
                         spendingsForDay={this.getSpendingsForSelectedDay()}

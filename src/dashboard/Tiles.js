@@ -31,7 +31,7 @@ class Tiles extends React.Component {
 
                 {this.state.displayTotalSpendings &&
                     <TotalSpendings 
-                        totalAmountDay={this.props.totalAmountDay}
+                        totalAmountToday={this.props.totalAmountToday}
                         totalAmountWeek={this.props.totalAmountWeek}
                         totalAmountMonth={this.props.totalAmountMonth}
                         totalAmountYear={this.props.totalAmountYear}
