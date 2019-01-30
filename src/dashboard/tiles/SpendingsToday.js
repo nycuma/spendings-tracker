@@ -1,5 +1,4 @@
 import React from 'react';
-import dateFnsFormat from 'date-fns/format';
 import { Constants, Settings } from '../../utils/Constants';
 import Utils from '../../utils/Utils';
 import { getSpendings } from '../../utils/LocalStore';
@@ -36,7 +35,7 @@ class SpendingsToday extends React.Component {
                     <tr>
                         <td>{cat.label}</td>
                         <td className="cell-amount">{amountSpent.toLocaleString(Settings.LOCALE_CURRENCY, Constants.LOCALE_CURRENCY_OPTIONS)}</td>
-                        <td><span className={arrowClass} onClick={() => this.toggleDisplayAllPositionsForCat(cat.value)}></span></td>
+                        <td className="arrow"><span className={arrowClass} onClick={() => this.toggleDisplayAllPositionsForCat(cat.value)}></span></td>
                     </tr>
                     {this.renderSpendingsPositons(spendingsToday, cat.value)}
                 </tbody>

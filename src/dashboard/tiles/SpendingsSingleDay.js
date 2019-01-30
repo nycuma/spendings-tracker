@@ -3,7 +3,7 @@ import dateFnsFormat from 'date-fns/format';
 import { Constants, Settings } from '../../utils/Constants';
 import './Tiles.css';
 
-class SpendingsSingleDay extends React.Component {
+class SpendingsSingleDay extends React.Component { // TODO Merge with SpendingsToday
     constructor(props) {
         super(props);
         this.state = {
@@ -66,7 +66,7 @@ class SpendingsSingleDay extends React.Component {
                     <tr>
                         <td>{cat.label}</td>
                         <td className="cell-amount">{amountSpent.toLocaleString(Settings.LOCALE_CURRENCY, Constants.LOCALE_CURRENCY_OPTIONS)}</td>
-                        <td><span className={arrowClass} onClick={() => this.toggleDisplayAllPositionsForCat(cat.value)}></span></td>
+                        <td className="arrow"><span className={arrowClass} onClick={() => this.toggleDisplayAllPositionsForCat(cat.value)}></span></td>
                     </tr>
                     {this.renderSpendingsPositons(cat.value)}
                 </tbody>

@@ -19,6 +19,10 @@
   margin: 10px;
 }
 
+.arrow {
+    width: 10px;
+}
+
 .arrow-up {
     position: relative;
     bottom: 10px;
