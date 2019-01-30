@@ -20,6 +20,10 @@ body {
     padding: 0;
 }
 
+h4 {
+    color: #7E6258;
+  }
+
 #main-container {
    display: grid;
     grid-gap: 10px;
@@ -92,7 +96,7 @@ header button:active {
 }
 
 #sidebar ul {
-    margin: 0 -70px 0 0;
+    margin: 0 -55px 0 0;
     padding: 0;
 }
 
@@ -105,6 +109,7 @@ header button:active {
     width: 100%;
     padding: 3px 5px 3px 3px;
     text-decoration: none;
+    list-style-type: none;
 }
 
 #sidebar li:hover,
