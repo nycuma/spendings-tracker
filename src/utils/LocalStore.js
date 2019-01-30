@@ -140,7 +140,10 @@ export const setCurrency = (currency) => {
 };
 
 export const getRecurrentSpendings = () => {
-    store.get(KEY_RECURRENT_SPENDINGS);
+    const recSpendings = store.get(KEY_RECURRENT_SPENDINGS);
+    if(!recSpendings) { 
+        return []; 
+    }
 };
 
 export const postRecurrentSpending = (recurrentSpending) => {
@@ -149,8 +152,11 @@ export const postRecurrentSpending = (recurrentSpending) => {
         recSpendings = []; 
     }
     recSpendings.push({
+        startDate: recurrentSpending.startDate ? recurrentSpending.startDate : new Date(),
         interval: recurrentSpending.interval,
-        amount: recurrentSpending.amount
+        amount: recurrentSpending.amount,
+        cat: recurrentSpending.cat,
+        comment: recurrentSpending.comment
     });
     
     store.set(KEY_RECURRENT_SPENDINGS, recurrentSpending);

@@ -4,6 +4,7 @@ import SpendingsSingleDay from './tiles/SpendingsSingleDay';
 import TotalSpendings from './tiles/TotalSpendings';
 import CategoriesPieChart from './tiles/CategoriesPieChart';
 import RecentHistory from './tiles/RecentHistory';
+import RecurrentSpendings from './tiles/RecurrentSpendings';
 import './tiles/Tiles.css';
 
 class Tiles extends React.Component {
@@ -14,7 +15,8 @@ class Tiles extends React.Component {
             displaySpendingsSingleDay: true,
             displayTotalSpendings: true,
             displayRecentHistory: true,
-            displaySpendingsToday: true
+            displaySpendingsToday: true,
+            displayRecurrentSpendings: true
         };
     }
 
@@ -50,7 +52,11 @@ class Tiles extends React.Component {
                         spendingsForDay={this.props.spendingsForDay}
                         selectedDay={this.props.selectedDay}
                     />
-                }   
+                }  
+
+                {this.state.displayRecurrentSpendings &&
+                    <RecurrentSpendings />
+                } 
                 
             </div>
         );

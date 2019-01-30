@@ -27,7 +27,13 @@ const Constants = {
     },
     DATE_FORMAT: 'DD MMM YYYY',
     DATE_FORMAT_SHORT: 'DD.MM.YYYY',
-    DATE_FORMAT_INPUT: 'YYYY-MM-DD'
+    DATE_FORMAT_INPUT: 'YYYY-MM-DD',
+
+    CURRENCIES: [
+        { code: 'EUR', symbol: '€', locale: 'de-DE' },
+        { code: 'USD', symbol: '$', locale: 'en-US' },
+        { code: 'GBP', symbol: '£', locale: 'en-UK' }
+    ]
 };
 
 export { Constants, Settings };
