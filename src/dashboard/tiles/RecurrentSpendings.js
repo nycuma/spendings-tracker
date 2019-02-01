@@ -26,7 +26,7 @@ function RecurrentSpendings() {
                             <td> Description </td>
                             <td> Amount </td>
                         </tr>) 
-                        : 'No recurrent spendings found';
+                        : <tr><td>No recurrent spendings found</td></tr>;
 
     return (
         <div className="tile">
