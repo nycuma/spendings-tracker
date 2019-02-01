@@ -1,6 +1,6 @@
 import React from 'react';
 import dateFnsFormat from 'date-fns/format';
-import { Constants, Settings } from '../utils/Constants';
+import { Constants, prefs } from '../utils/Constants';
 import './AddForm.css';
 
 class SpendingsForm extends React.Component {
@@ -57,7 +57,7 @@ class SpendingsForm extends React.Component {
     }
 
     render() {
-        let categories = Settings.SPENDING_CATEGORIES.map((cat) => {
+        let categories = prefs.spendingCats.map((cat) => {
             return (
                 <option key={cat.value} value={cat.value}>{cat.label}</option>
             );
@@ -97,7 +97,7 @@ class SpendingsForm extends React.Component {
                                 <td>
                                     <input type="text" 
                                            style={this.state.showParsingError ? styleErrorInput : {}}
-                                           value={this.state.valAmount.toLocaleString(Settings.LOCALE_CURRENCY, Constants.LOCALE_DECIMAL_OPTIONS)} 
+                                           value={this.state.valAmount.toLocaleString(prefs.locale, Constants.LOCALE_DECIMAL_OPTIONS)} 
                                            onChange={(e) => this.handleAmount(e)} 
                                            />
                                 </td>

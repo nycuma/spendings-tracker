@@ -1,5 +1,5 @@
 import React from 'react';
-import { Constants, Settings } from '../../utils/Constants';
+import { prefs } from '../../utils/Constants';
 import './Tiles.css';
 
 /**
@@ -14,19 +14,19 @@ function TotalSpendings(props) {
                 <tbody>
                     <tr>
                         <td>Today:</td>
-                        <td className="cell-amount">{props.totalAmountToday.toLocaleString(Settings.LOCALE_CURRENCY, Constants.LOCALE_CURRENCY_OPTIONS)}</td>
+                        <td className="cell-amount">{props.totalAmountToday.toLocaleString(prefs.locale, prefs.currencyOptions)}</td>
                     </tr>
                     <tr>
                         <td>This week:</td>
-                        <td className="cell-amount">{props.totalAmountWeek.toLocaleString(Settings.LOCALE_CURRENCY, Constants.LOCALE_CURRENCY_OPTIONS)}</td>
+                        <td className="cell-amount">{props.totalAmountWeek.toLocaleString(prefs.locale, prefs.currencyOptions)}</td>
                     </tr>
                     <tr>
                         <td>This month:</td>
-                        <td className="cell-amount">{props.totalAmountMonth.toLocaleString(Settings.LOCALE_CURRENCY, Constants.LOCALE_CURRENCY_OPTIONS)}</td>
+                        <td className="cell-amount">{props.totalAmountMonth.toLocaleString(prefs.locale, prefs.currencyOptions)}</td>
                     </tr>
                     <tr>
                         <td>This year:</td>
-                        <td className="cell-amount">{props.totalAmountYear.toLocaleString(Settings.LOCALE_CURRENCY, Constants.LOCALE_CURRENCY_OPTIONS)}</td>
+                        <td className="cell-amount">{props.totalAmountYear.toLocaleString(prefs.locale, prefs.currencyOptions)}</td>
                     </tr>
                 </tbody>
             </table>

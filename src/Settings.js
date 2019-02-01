@@ -1,8 +1,9 @@
 import React from 'react';
 import { Constants, prefs } from './utils/Constants';
+import { setCurrency } from './utils/LocalStore';
 import './settings/TilesSettings.css';
 
-class Settings extends React.Component { // TODO change currency, spendings cats, 
+class Settings extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -16,6 +17,7 @@ class Settings extends React.Component { // TODO change currency, spendings cats
 
     componentWillUnmount() {
         prefs.currency = this.state.currency;
+        setCurrency(this.state.currency);
     }
 
     updateCurrency(e) {
@@ -30,7 +32,7 @@ class Settings extends React.Component { // TODO change currency, spendings cats
             <div id="settings" className="box">
                 <h1 className="menu-item-headline">Settings</h1>
                     <div className="tileSetting">
-                        <h4>General Settings</h4>
+                        <h4>Preferences</h4>
                         <table>
                             <tbody>
                                 <tr>

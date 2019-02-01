@@ -1,8 +1,14 @@
 class Preferences {
     constructor() {
-        this.curr = 'USD';
-        this.locale = 'de-DE';
-        this.spendingCategories = [
+        this._currency = 'EUR';
+        this._locale = 'de-DE';
+        this._currencyOptions = { 
+            style: 'currency', 
+            currency: this._currency, 
+            minimumFractionDigits: 2, 
+            maximumFractionDigits: 2 
+        };
+        this._spendingCategories = [
             { label: 'Food', value: 'food', descr: '', color: '#7E6258' },
             { label: 'Coffee Shops, Bars & Restaurants', value: 'coffeeshop', descr: '', color: '#3EAC9A' },
             { label: 'Household', value: 'household', descr: '', color: '#AC633E' },
@@ -10,58 +16,50 @@ class Preferences {
             { label: 'Clothes', value: 'clothes', descr: '', color: '#3EAC63' },
             { label: 'Transport', value: 'transport', descr: '', color: '#7E7558' },
             { label: 'Gifts & Donations', value: 'gifts', descr: '', color: '#AC9A3E' }
-        ]; 
+        ];
+        this._firstDayWeek = 1; // 0: Sunday, 1: Monday
     }
 
     get currency() {
-        return this.curr;
+        return this._currency;
     }
 
     set currency(newVal) {
-        this.curr = newVal;
+        this._currency = newVal;
     }   
     
-    get localeSetting() {
-        return this.locale;
+    get locale() {
+        return this._locale;
     }
 
-    set localeSetting(newVal) {
-        this.locale = newVal;
+    get currencyOptions() {
+        return this._currencyOptions;
+    }
+
+    set locale(newVal) {
+        this._locale = newVal;
     }  
 
     get spendingCats() {
-        return this.spendingCategories;
+        return this._spendingCategories;
     }
 
-    set spendingCats(newVal) {
-        this.spendingCategories.push(newVal);
+    set addCategory(newVal) {
+        this._spendingCategories.push(newVal);
     }  
+
+    get firstDayWeek() {
+        return this._firstDayWeek;
+    }
+
+    set firstDayWeek(newVal) {
+        this._firstDayWeek = newVal;
+    }
 }
 
 export let prefs = new Preferences();
 
-export let Settings = {
-    CURRENCY: 'EUR',
-    LOCALE_CURRENCY: 'de-DE',
-    FIRST_DAY_WEEK: 1, //0: Sunday, 1: Monday
-    SPENDING_CATEGORIES: [
-        { label: 'Food', value: 'food', descr: '', color: '#7E6258' },
-        { label: 'Coffee Shops, Bars & Restaurants', value: 'coffeeshop', descr: '', color: '#3EAC9A' },
-        { label: 'Household', value: 'household', descr: '', color: '#AC633E' },
-        { label: 'Culture', value: 'culture', descr: '', color: '#58747E' },
-        { label: 'Clothes', value: 'clothes', descr: '', color: '#3EAC63' },
-        { label: 'Transport', value: 'transport', descr: '', color: '#7E7558' },
-        { label: 'Gifts & Donations', value: 'gifts', descr: '', color: '#AC9A3E' }
-    ]   
-};
-
 export const Constants = {
-    LOCALE_CURRENCY_OPTIONS: { 
-        style: 'currency', 
-        currency: Settings.CURRENCY, 
-        minimumFractionDigits: 2, 
-        maximumFractionDigits: 2 
-    },
     LOCALE_DECIMAL_OPTIONS: { 
         style: 'decimal', 
         minimumFractionDigits: 2, 
@@ -72,8 +70,9 @@ export const Constants = {
     DATE_FORMAT_INPUT: 'YYYY-MM-DD',
 
     CURRENCIES: [
-        { name: 'Euro', code: 'EUR', symbol: '€', locale: 'de-DE' },
-        { name: 'US Dollar', code: 'USD', symbol: '$', locale: 'en-US' },
-        { name: 'British Pound', code: 'GBP', symbol: '£', locale: 'en-UK' }
-    ]
+        { name: 'Euro', code: 'EUR', symbol: '€' },
+        { name: 'US Dollar', code: 'USD', symbol: '$' },
+        { name: 'British Pound', code: 'GBP', symbol: '£' }
+    ],
+    LOCALES: ['de-DE', 'en-US', 'en-UK']
 };

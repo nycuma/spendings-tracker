@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 import TotalAmountDay from './TotalAmountDay';
-import { Settings } from '../utils/Constants';
+import { prefs } from '../utils/Constants';
 import { getSpendings } from './../utils/LocalStore';
 import Utils from './../utils/Utils';
 import './Calender.css';
@@ -68,7 +68,7 @@ class Calender extends React.Component {
             <div id="calender" className="box">
                 <DayPicker
                     todayButton="Today"
-                    firstDayOfWeek={Settings.FIRST_DAY_WEEK}
+                    firstDayOfWeek={prefs.firstDayWeek}
                     modifiers={modifiers}
                     modifiersStyles={modifiersStyles}
                     onDayClick={this.props.updateSelectedDay}

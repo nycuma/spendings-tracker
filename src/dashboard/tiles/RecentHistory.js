@@ -1,6 +1,6 @@
 import React from 'react';
 import dateFnsFormat from 'date-fns/format';
-import { Constants, Settings } from '../../utils/Constants';
+import { Constants, prefs } from '../../utils/Constants';
 import './Tiles.css';
 
 function RecentHistory(props) {
@@ -10,7 +10,7 @@ function RecentHistory(props) {
                 <td className="align-left">{dateFnsFormat(pos.day, Constants.DATE_FORMAT_SHORT)}</td>
                 <td>{pos.comment.length < 28 ? pos.comment : pos.comment.substring(0, 25) + '...'}</td>
                 <td className="font-small-colored align-right">
-                    {pos.amount.toLocaleString(Settings.LOCALE_CURRENCY, Constants.LOCALE_CURRENCY_OPTIONS)}
+                    {pos.amount.toLocaleString(prefs.locale, prefs.currencyOptions)}
                 </td>
             </tr>
         );

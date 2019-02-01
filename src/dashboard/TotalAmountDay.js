@@ -1,5 +1,5 @@
 import React from 'react';
-import { Constants, Settings } from '../utils/Constants';
+import { prefs } from '../utils/Constants';
 import './TotalAmountDay.css';
 
 /**
@@ -11,7 +11,7 @@ class TotalAmountDay extends React.Component {
     render() {
         return( 
             <div className="hover-total-amount-day" style={this.props.position}>
-                {this.props.totalAmountDay.toLocaleString(Settings.CURRENCY, Constants.LOCALE_CURRENCY_OPTIONS)}
+                {this.props.totalAmountDay.toLocaleString(prefs.locale, prefs.currencyOptions)}
             </div> 
         ); 
     }

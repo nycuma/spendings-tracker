@@ -5,7 +5,7 @@
 import store from 'store';
 import Utils from './Utils';
 import { isSameWeek, isSameMonth } from 'date-fns';
-import { Settings } from './Constants';
+import { prefs } from './Constants';
 
 const KEY_SPENDINGS = 'spendings';
 const KEY_CURRENCY = 'currency';
@@ -102,7 +102,7 @@ export const getAmountSpentByCategory = () => {
         return []; 
     }
 
-    return Settings.SPENDING_CATEGORIES.map(cat => {
+    return prefs.spendingCats.map(cat => {
         let amountByCat = data.filter(item => item.cat === cat.value)
                               .map(item => item.amount)
                               .reduce((prev, next) => prev + next, 0);

@@ -1,6 +1,6 @@
 import React from 'react';
 import dateFnsFormat from 'date-fns/format';
-import { Constants, Settings } from '../../utils/Constants';
+import { Constants, prefs } from '../../utils/Constants';
 import './Tiles.css';
 
 class SpendingsSingleDay extends React.Component { // TODO Merge with SpendingsToday
@@ -22,7 +22,7 @@ class SpendingsSingleDay extends React.Component { // TODO Merge with SpendingsT
 
     initStateObject() {
         let stateExpandedView = {};
-        Settings.SPENDING_CATEGORIES.forEach((cat) => {
+        prefs.spendingCats.forEach((cat) => {
             stateExpandedView[cat.value] = false;
         });
         return stateExpandedView;
@@ -58,14 +58,14 @@ class SpendingsSingleDay extends React.Component { // TODO Merge with SpendingsT
 
     renderTableBody() {
 
-        return Settings.SPENDING_CATEGORIES.map((cat) => {
+        return prefs.spendingCats.map((cat) => {
             let amountSpent = this.calculateTotalAmountPerCategory(cat.value);
             let arrowClass = amountSpent > 0 ? (this.state.catExpandedView[cat.value] ? 'arrow-up' : 'arrow-down') : '';
             return (
                 <tbody key={cat.value}>
                     <tr>
                         <td>{cat.label}</td>
-                        <td className="cell-amount">{amountSpent.toLocaleString(Settings.LOCALE_CURRENCY, Constants.LOCALE_CURRENCY_OPTIONS)}</td>
+                        <td className="cell-amount">{amountSpent.toLocaleString(prefs.locale, prefs.currencyOptions)}</td>
                         <td className="arrow"><span className={arrowClass} onClick={() => this.toggleDisplayAllPositionsForCat(cat.value)}></span></td>
                     </tr>
                     {this.renderSpendingsPositons(cat.value)}
@@ -83,7 +83,7 @@ class SpendingsSingleDay extends React.Component { // TODO Merge with SpendingsT
                 return (
                     <tr key={cat+i} style={{display: displayExpanded}} className="font-small-colored">
                         <td>{item.comment}</td>
-                        <td className="cell-amount">{item.amount.toLocaleString(Settings.LOCALE_CURRENCY, Constants.LOCALE_CURRENCY_OPTIONS)}</td>
+                        <td className="cell-amount">{item.amount.toLocaleString(prefs.locale, prefs.currencyOptions)}</td>
                     </tr>
                 );
             });
@@ -100,7 +100,7 @@ class SpendingsSingleDay extends React.Component { // TODO Merge with SpendingsT
                     <tfoot>
                         <tr>
                             <td><b>Total</b></td>
-                            <td className="cell-amount"><b>{this.props.totalAmountDay.toLocaleString(Settings.LOCALE_CURRENCY, Constants.LOCALE_CURRENCY_OPTIONS)}</b></td>
+                            <td className="cell-amount"><b>{this.props.totalAmountDay.toLocaleString(prefs.locale, prefs.currencyOptions)}</b></td>
                         </tr>
                     </tfoot>      
                 </table>
