@@ -66,20 +66,6 @@
     min-width: 5em;
 }
 
-.font-small-colored {
-    color: #7E6258;
-    font-size: smaller;
-    text-indent: 1em;
-}
-
-.align-right {
-    text-align: right;
-}
-
-.align-left {
-    text-align: left;
-}
-
 .table-spendings-history {
     width: 100%;
 }

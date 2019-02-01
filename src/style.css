@@ -24,15 +24,29 @@ h4 {
     color: #7E6258;
   }
 
-#main-container {
-   display: grid;
-    grid-gap: 10px;
-    grid-template-columns: 50px auto;
+.font-small-colored {
+    color: #7E6258;
+    font-size: smaller;
+    text-indent: 1em;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.align-left {
+    text-align: left;
 }
 
 .hidden {
     display: none;
 }
+
+#main-container {
+    display: grid;
+     grid-gap: 10px;
+     grid-template-columns: 50px auto;
+ }
 
 /*****************/
 /**** Header *****/
