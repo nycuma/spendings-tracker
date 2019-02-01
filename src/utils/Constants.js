@@ -1,6 +1,6 @@
 class Preferences {
     constructor() {
-        this.currency = 'USD';
+        this.curr = 'USD';
         this.locale = 'de-DE';
         this.spendingCategories = [
             { label: 'Food', value: 'food', descr: '', color: '#7E6258' },
@@ -14,26 +14,26 @@ class Preferences {
     }
 
     get currency() {
-        return this.currency;
+        return this.curr;
     }
 
     set currency(newVal) {
-        this.currency = newVal;
+        this.curr = newVal;
     }   
     
-    get locale() {
+    get localeSetting() {
         return this.locale;
     }
 
-    set locale(newVal) {
+    set localeSetting(newVal) {
         this.locale = newVal;
     }  
 
-    get spendingCategories() {
+    get spendingCats() {
         return this.spendingCategories;
     }
 
-    set spendingCategories(newVal) {
+    set spendingCats(newVal) {
         this.spendingCategories.push(newVal);
     }  
 }
