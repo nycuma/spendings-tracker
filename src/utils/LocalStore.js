@@ -9,6 +9,7 @@ import { prefs } from './Constants';
 
 const KEY_SPENDINGS = 'spendings';
 const KEY_CURRENCY = 'currency';
+const KEY_LOCALE = 'locale';
 const KEY_RECURRENT_SPENDINGS = 'recurrentSpending';
 
  /**
@@ -131,12 +132,20 @@ export const postSpendingPosition = (pos) => {
     store.set(KEY_SPENDINGS, data);
 };
 
-export const getCurrency = () => {
+export const loadCurrency = () => {
     return store.get(KEY_CURRENCY);
 };
 
-export const setCurrency = (currency) => {
+export const saveCurrency = (currency) => {
     store.set(KEY_CURRENCY, currency);
+};
+
+export const loadLocale = () => {
+    return store.get(KEY_LOCALE);
+};
+
+export const saveLocale = (locale) => {
+    store.set(KEY_LOCALE, locale);
 };
 
 export const getRecurrentSpendings = () => {
