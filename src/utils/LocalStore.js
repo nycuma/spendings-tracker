@@ -132,7 +132,7 @@ export const postSpendingPosition = (pos) => {
 };
 
 export const getCurrency = () => {
-    store.get(KEY_CURRENCY);
+    return store.get(KEY_CURRENCY);
 };
 
 export const setCurrency = (currency) => {

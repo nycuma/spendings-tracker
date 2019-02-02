@@ -26,6 +26,7 @@ class Preferences {
 
     set currency(newVal) {
         this._currency = newVal;
+        this._currencyOptions.currency = newVal;
     }   
     
     get locale() {
