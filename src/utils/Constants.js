@@ -1,5 +1,6 @@
 class Preferences {
     constructor() {
+        // Defaults
         this._currency = 'EUR';
         this._locale = 'de-DE';
         this._currencyOptions = { 
@@ -43,10 +44,6 @@ class Preferences {
 
     get spendingCats() {
         return this._spendingCategories;
-    }
-
-    set addCategory(newVal) {
-        this._spendingCategories.push(newVal);
     }  
 
     get firstDayWeek() {
@@ -55,6 +52,15 @@ class Preferences {
 
     set firstDayWeek(newVal) {
         this._firstDayWeek = newVal;
+    }
+
+    addCategory(newVal) {
+        this._spendingCategories.push(newVal);
+    }
+
+    removeCategory(catValue) {
+        let index = this._spendingCategories.findIndex(cat => cat.value === catValue);
+        this._spendingCategories.splice(index, 1);
     }
 }
 

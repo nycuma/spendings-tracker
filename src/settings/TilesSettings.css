@@ -17,7 +17,26 @@
     margin: 10px;
 }
 
+#settings table tr {
+    text-align: left;
+}
+
 #settings table td {
-    padding: 8px;
+    padding: 6px 8px 6px 8px;
+}
+
+#settings .prefTitle {
+    font-weight: bold;
+    vertical-align: top;
+}
+
+#settings .btnDelete {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+#settings .reducedPadding td{
+    padding: 1px 8px 1px 8px;
 }
 
