@@ -5,12 +5,13 @@ import Dashboard from './Dashboard';
 import Analytics from './Analytics';
 import Settings from './Settings';
 import Sidebar from './Sidebar';
-import { loadCurrency, loadLocale } from './utils/LocalStore';
+import { loadCurrency, loadLocale, loadCategories } from './utils/LocalStore';
 import { prefs } from './utils/Constants';
 import './style.css';
 
 class Main extends Component {
-    componentWillMount() {
+    constructor(props) {
+        super(props);
         let storedCurrency = loadCurrency();
         if(storedCurrency) {
             prefs.currency = storedCurrency;
@@ -19,6 +20,11 @@ class Main extends Component {
         let storedLocale = loadLocale();
         if(storedLocale) {
             prefs.locale = storedLocale;
+        }
+
+        let storedCats = loadCategories();
+        if(storedCats) {
+            prefs.spendingCats = storedCats;
         }
     }
 

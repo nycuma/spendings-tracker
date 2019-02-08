@@ -8,6 +8,7 @@ import { isSameWeek, isSameMonth } from 'date-fns';
 import { prefs } from './Constants';
 
 const KEY_SPENDINGS = 'spendings';
+const KEY_CATEGORIES = 'categories';
 const KEY_CURRENCY = 'currency';
 const KEY_LOCALE = 'locale';
 const KEY_RECURRENT_SPENDINGS = 'recurrentSpending';
@@ -146,6 +147,14 @@ export const loadLocale = () => {
 
 export const saveLocale = (locale) => {
     store.set(KEY_LOCALE, locale);
+};
+
+export const loadCategories = () => {
+    return store.get(KEY_CATEGORIES);
+};
+
+export const saveCategories = (cats) => {
+    store.set(KEY_CATEGORIES, cats);
 };
 
 export const getRecurrentSpendings = () => {

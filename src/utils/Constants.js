@@ -46,6 +46,10 @@ class Preferences {
         return this._spendingCategories;
     }  
 
+    set spendingCats(newVal) {
+        this._spendingCategories = newVal;
+    }
+
     get firstDayWeek() {
         return this._firstDayWeek;
     }
@@ -56,11 +60,6 @@ class Preferences {
 
     addCategory(newVal) {
         this._spendingCategories.push(newVal);
-    }
-
-    removeCategory(catValue) {
-        let index = this._spendingCategories.findIndex(cat => cat.value === catValue);
-        this._spendingCategories.splice(index, 1);
     }
 }
 
