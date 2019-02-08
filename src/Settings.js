@@ -1,6 +1,6 @@
 import React from 'react';
 import { Constants, prefs } from './utils/Constants';
-import { saveCurrency, saveLocale } from './utils/LocalStore';
+import { saveCurrency, saveLocale, saveCategories } from './utils/LocalStore';
 import './settings/TilesSettings.css';
 
 class Settings extends React.Component {
@@ -8,15 +8,18 @@ class Settings extends React.Component {
         super(props);
         this.state = {
             currency: prefs.currency,
-            locale: prefs.locale
+            locale: prefs.locale,
+            categories: prefs.spendingCats
         };
     }
 
     componentWillUnmount() {
         prefs.currency = this.state.currency;
         prefs.locale = this.state.locale;
+        prefs.spendingCats = this.state.categories;
         saveCurrency(this.state.currency);
         saveLocale(this.state.locale);
+        saveCategories(this.state.categories);
     }
 
     updateCurrency(e) {
@@ -27,9 +30,11 @@ class Settings extends React.Component {
         this.setState({ locale: e.target.value });
     }
 
-    deleteCategory(cat) {
-        prefs.removeCategory(cat);
-        console.log("deleted category: " + cat);
+    removeCategory(catValue) {
+        let index = this.state.categories.findIndex(cat => cat.value === catValue);
+        let copy = this.state.categories.slice();
+        copy.splice(index, 1);
+        this.setState({ categories: copy });
     }
 
     render() {
@@ -38,10 +43,10 @@ class Settings extends React.Component {
 
         let localeOptions = Constants.LOCALES.map(loc => (<option key={loc} value={loc}>{loc}</option>));
 
-        let categories = prefs.spendingCats.map(cat => (
+        let categories = this.state.categories.map(cat => (
             <tr className="reducedPadding" key={cat.value}>
                 <td><span className="font-small-colored">{cat.label}</span></td>
-                <td><button className="btnDelete" title="Delete" onClick={() => this.deleteCategory(cat.value)}>X</button></td>
+                <td><button className="btnDelete" title="Delete" onClick={() => this.removeCategory(cat.value)}>X</button></td>
             </tr>));
     
         return (
@@ -66,7 +71,7 @@ class Settings extends React.Component {
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td className="prefTitle" rowSpan={prefs.spendingCats.length + 1}>Categories</td>
+                                    <td className="prefTitle" rowSpan={this.state.categories.length + 1}>Categories</td>
                                 </tr>
                                 {categories}
                             </tbody>
