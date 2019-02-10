@@ -24,13 +24,6 @@ class Main extends Component {
             locale: loadLocale() || Constants.DEFAULT_LOCALE,
             categories: loadCategories() || Constants.DEFAULT_CATEGORIES
         };
-
-        this.currencyOptions = {
-            style: 'currency',
-            currency: this.state.currency,
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-        }; 
     }
 
     componentWillUnmount() {

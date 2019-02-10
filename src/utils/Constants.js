@@ -83,6 +83,12 @@ export const Constants = {
     ],
     LOCALES: ['de-DE', 'en-US', 'en-UK'],
 
+    DEFAULT_CURRENCY_OPTIONS: {
+        style: 'currency',
+        currency: 'EUR',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    },
     DEFAULT_LOCALE: 'de-DE',
     DEFAULT_CURRENCY: 'EUR',
     DEFAULT_CATEGORIES: [{ label: 'Food', value: 'food', descr: '', color: '#7E6258' },
