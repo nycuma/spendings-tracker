@@ -1,10 +1,10 @@
 import React from 'react';
 import dateFnsFormat from 'date-fns/format';
-import { Constants, prefs } from '../../utils/Constants';
+import { Constants } from '../../utils/Constants';
 import { getRecurrentSpendings } from '../../utils/LocalStore';
 import './Tiles.css';
 
-function RecurrentSpendings() {
+function RecurrentSpendings(props) {
     const recurrentSp = getRecurrentSpendings();
     const entries = recurrentSp.map((rs, i) => {
         return (
@@ -13,7 +13,7 @@ function RecurrentSpendings() {
                 <td>{rs.interval}</td>
                 <td>{rs.comment.length < 28 ? rs.comment : rs.comment.substring(0, 25) + '...'}</td>
                 <td className="font-small-colored align-right">
-                    {rs.amount.toLocaleString(prefs.locale, prefs.currencyOptions)}
+                    {rs.amount.toLocaleString(props.locale, props.currencyOptions)}
                 </td>
             </tr>
         );

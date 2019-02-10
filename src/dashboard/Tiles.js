@@ -5,6 +5,8 @@ import TotalSpendings from './tiles/TotalSpendings';
 import CategoriesPieChart from './tiles/CategoriesPieChart';
 import RecentHistory from './tiles/RecentHistory';
 import RecurrentSpendings from './tiles/RecurrentSpendings';
+import { PreferenceContext } from '../utils/Contexts';
+import { Constants } from '../utils/Constants';
 import './tiles/Tiles.css';
 
 class Tiles extends React.Component {
@@ -22,43 +24,67 @@ class Tiles extends React.Component {
 
     render() {
         return (
-            <div id="tiles" className="box">
-                {this.state.displayCatPieChart && 
-                    <CategoriesPieChart />
-                }
+            <PreferenceContext.Consumer>
+            {({currency, locale, categories}) => {
+                let currencyOptions = { ...Constants.DEFAULT_CURRENCY_OPTIONS, ...{ currency: currency }};
 
-                {this.state.displaySpendingsToday &&
-                    <SpendingsToday />
-                }
-
-                {this.state.displayTotalSpendings &&
-                    <TotalSpendings 
-                        totalAmountToday={this.props.totalAmountToday}
-                        totalAmountWeek={this.props.totalAmountWeek}
-                        totalAmountMonth={this.props.totalAmountMonth}
-                        totalAmountYear={this.props.totalAmountYear}
-                    />
-                }
-
-                {this.state.displayRecentHistory &&
-                    <RecentHistory 
-                        recentSpendings={this.props.recentSpendings}
-                    />
-                }
-
-                {this.state.displaySpendingsSingleDay &&
-                    <SpendingsSingleDay
-                        totalAmountDay={this.props.totalAmountDay}
-                        spendingsForDay={this.props.spendingsForDay}
-                        selectedDay={this.props.selectedDay}
-                    />
-                }  
-
-                {this.state.displayRecurrentSpendings &&
-                    <RecurrentSpendings />
-                } 
-                
-            </div>
+                return (
+                    <div id="tiles" className="box">
+                        {this.state.displayCatPieChart && 
+                            <CategoriesPieChart 
+                                categories={categories}
+                            />
+                        }
+        
+                        {this.state.displaySpendingsToday &&
+                            <SpendingsToday 
+                                locale={locale}
+                                currencyOptions={currencyOptions}
+                                categories={categories}
+                            />
+                        }
+        
+                        {this.state.displayTotalSpendings &&
+                            <TotalSpendings 
+                                totalAmountToday={this.props.totalAmountToday}
+                                totalAmountWeek={this.props.totalAmountWeek}
+                                totalAmountMonth={this.props.totalAmountMonth}
+                                totalAmountYear={this.props.totalAmountYear}
+                                locale={locale}
+                                currencyOptions={currencyOptions}
+                            />
+                        }
+        
+                        {this.state.displayRecentHistory &&
+                            <RecentHistory 
+                                recentSpendings={this.props.recentSpendings}
+                                locale={locale}
+                                currencyOptions={currencyOptions}
+                            />
+                        }
+        
+                        {this.state.displaySpendingsSingleDay &&
+                            <SpendingsSingleDay
+                                totalAmountDay={this.props.totalAmountDay}
+                                spendingsForDay={this.props.spendingsForDay}
+                                selectedDay={this.props.selectedDay}
+                                locale={locale}
+                                currencyOptions={currencyOptions}
+                                categories={categories}
+                            />
+                        }  
+        
+                        {this.state.displayRecurrentSpendings &&
+                            <RecurrentSpendings 
+                                locale={locale}
+                                currencyOptions={currencyOptions}
+                            />
+                        } 
+                    </div>
+                );
+            }}
+            </PreferenceContext.Consumer>
+            
         );
     }
 

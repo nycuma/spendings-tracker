@@ -5,6 +5,7 @@ import AddForm from './dashboard/AddForm';
 import Tiles from './dashboard/Tiles';
 import Utils from './utils/Utils';
 import * as localStore from './utils/LocalStore';
+import { PreferenceContext } from './utils/Contexts';
 import './dashboard/Dashboard.css';
 
 class Dashboard extends React.Component {
@@ -18,7 +19,6 @@ class Dashboard extends React.Component {
         this.openImportModal = this.openImportModal.bind(this);
         this.state = {
             selectedDay: new Date(),
-            totalSpendingsByCat: [],
             recentSpendings: [],
             addFormIsVisible: false
         };
@@ -27,8 +27,6 @@ class Dashboard extends React.Component {
     componentDidMount() {
         this.fileSelector = this.initFileSelector();
         this.setState({
-            // load total amount spent per category
-            totalSpendingsByCat: localStore.getAmountSpentByCategory(),
             // load recent spendings
             recentSpendings: localStore.getSpendingsRecentlyAdded(15)
         });
@@ -175,16 +173,24 @@ class Dashboard extends React.Component {
                     />
 
                     {this.state.addFormIsVisible &&
-                        <AddForm 
-                            selectedDay={this.state.selectedDay}
-                            addSpendingsPosition={this.addSpendingsPosition} 
-                            onClose={this.onClose}
-                        /> 
+                        <PreferenceContext.Consumer>
+                            {({locale, categories}) => (
+                                <AddForm 
+                                    selectedDay={this.state.selectedDay}
+                                    addSpendingsPosition={this.addSpendingsPosition} 
+                                    onClose={this.onClose}
+                                    locale={locale}
+                                    categories={categories}
+                                /> 
+                            )}
+                        </PreferenceContext.Consumer>
+                        
                     }
                 
             </div>
         );
     }
 }
+Dashboard.contextType = PreferenceContext; // TODO this.context not working..
 
 export default Dashboard;

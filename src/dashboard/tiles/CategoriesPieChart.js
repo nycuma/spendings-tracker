@@ -1,11 +1,10 @@
 import React from 'react';
 import { PieChart, Pie, Legend, Cell } from 'recharts';
-import { prefs } from '../../utils/Constants';
 import { getAmountSpentByCategory } from '../../utils/LocalStore';
 import './Tiles.css';
 
-function CategoriesPieChart() {
-    const data = getAmountSpentByCategory();
+function CategoriesPieChart(props) {
+    const data = getAmountSpentByCategory(props.categories);
     let pieColors = [];
     let chartData;
 
@@ -16,7 +15,7 @@ function CategoriesPieChart() {
             value: 1
         }];
     } else {
-        chartData = prefs.spendingCats.map((cat, i) => {
+        chartData = props.categories.map((cat, i) => {
         pieColors.push(cat.color);
         return { 
             name: cat.label.length <= 20 ? cat.label : cat.label.substring(0, 18) + '...',

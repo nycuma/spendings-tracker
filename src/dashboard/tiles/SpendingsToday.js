@@ -1,5 +1,4 @@
 import React from 'react';
-import { prefs } from '../../utils/Constants';
 import Utils from '../../utils/Utils';
 import { getSpendings } from '../../utils/LocalStore';
 import './Tiles.css';
@@ -14,7 +13,7 @@ class SpendingsToday extends React.Component {
 
     initStateObject() {
         let stateExpandedView = {};
-        prefs.spendingCats.forEach((cat) => {
+        this.props.categories.forEach((cat) => {
             stateExpandedView[cat.value] = true;
         });
         return stateExpandedView;
@@ -27,14 +26,14 @@ class SpendingsToday extends React.Component {
     }
 
     renderTableBody(spendingsToday) {
-        return prefs.spendingCats.map((cat) => {
+        return this.props.categories.map((cat) => {
             let amountSpent = Utils.calculateTotalAmountByCategory(spendingsToday, cat.value);
             let arrowClass = amountSpent > 0 ? (this.state.catExpandedView[cat.value] ? 'arrow-up' : 'arrow-down') : '';
             return (
                 <tbody key={cat.value}>
                     <tr>
                         <td>{cat.label}</td>
-                        <td className="cell-amount">{amountSpent.toLocaleString(prefs.locale, prefs.currencyOptions)}</td>
+                        <td className="cell-amount">{amountSpent.toLocaleString(this.props.locale, this.props.currencyOptions)}</td>
                         <td className="arrow"><span className={arrowClass} onClick={() => this.toggleDisplayAllPositionsForCat(cat.value)}></span></td>
                     </tr>
                     {this.renderSpendingsPositons(spendingsToday, cat.value)}
@@ -52,7 +51,7 @@ class SpendingsToday extends React.Component {
                 return (
                     <tr key={cat+i} style={{display: displayExpanded}} className="font-small-colored">
                         <td>{item.comment}</td>
-                        <td className="cell-amount">{item.amount.toLocaleString(prefs.locale, prefs.currencyOptions)}</td>
+                        <td className="cell-amount">{item.amount.toLocaleString(this.props.locale, this.props.currencyOptions)}</td>
                     </tr>
                 );
             });
@@ -71,7 +70,7 @@ class SpendingsToday extends React.Component {
                     <tfoot>
                         <tr>
                             <td><b>Total</b></td>
-                            <td className="cell-amount"><b>{totalToday.toLocaleString(prefs.locale, prefs.currencyOptions)}</b></td>
+                            <td className="cell-amount"><b>{totalToday.toLocaleString(this.props.locale, this.props.currencyOptions)}</b></td>
                         </tr>
                     </tfoot>      
                 </table>

@@ -5,7 +5,6 @@
 import store from 'store';
 import Utils from './Utils';
 import { isSameWeek, isSameMonth } from 'date-fns';
-import { prefs } from './Constants';
 
 const KEY_SPENDINGS = 'spendings';
 const KEY_CATEGORIES = 'categories';
@@ -97,14 +96,19 @@ export const getSpendingsRecentlyAdded = (count) => {
 
 /**
  * Returns array with total amount spent on each categorie all time.
+ * TODO move to utils
  */
-export const getAmountSpentByCategory = () => {
+export const getAmountSpentByCategory = (categories) => {
+    if(!categories || categories.length === 0) {
+        return [];
+    }
+
     const data = store.get(KEY_SPENDINGS);
     if(!data) { 
         return []; 
     }
 
-    return prefs.spendingCats.map(cat => {
+    return categories.map(cat => {
         let amountByCat = data.filter(item => item.cat === cat.value)
                               .map(item => item.amount)
                               .reduce((prev, next) => prev + next, 0);
