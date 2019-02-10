@@ -8,7 +8,7 @@ import Sidebar from './Sidebar';
 import { loadCurrency, loadLocale, loadCategories, 
     saveCurrency, saveLocale, saveCategories } from './utils/LocalStore';
 import { Constants } from './utils/Constants';
-import { PreferenceContext, CategoriesContext } from './utils/Contexts';
+import { PreferenceContext } from './utils/Contexts';
 import './style.css';
 
 class Main extends Component {
@@ -68,21 +68,18 @@ class Main extends Component {
             <PreferenceContext.Provider value={{
                 currency: this.state.currency,
                 locale: this.state.locale,
+                categories: this.state.categories,
                 updateCurrency: this.updateCurrency,
-                updateLocale: this.updateLocale
+                updateLocale: this.updateLocale,
+                addCategory: this.addCategory,
+                removeCategory: this.removeCategory
             }}>
-                <CategoriesContext.Provider value={{
-                    categories: this.state.categories,
-                    addCategory: this.addCategory,
-                    removeCategory: this.removeCategory
-                }}>
-                    <Switch>
-                        <Route exact path='/' component={Dashboard}/>
-                        <Route path='/dashboard' component={Dashboard}/>
-                        <Route path='/analytics' component={Analytics}/>
-                        <Route path='/settings' component={Settings}/>
-                    </Switch>
-                </CategoriesContext.Provider>
+                <Switch>
+                    <Route exact path='/' component={Dashboard}/>
+                    <Route path='/dashboard' component={Dashboard}/>
+                    <Route path='/analytics' component={Analytics}/>
+                    <Route path='/settings' component={Settings}/>
+                </Switch>
             </PreferenceContext.Provider>
         </div>
         );
