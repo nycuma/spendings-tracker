@@ -8,7 +8,7 @@ import Sidebar from './Sidebar';
 import { loadCurrency, loadLocale, loadCategories, 
     saveCurrency, saveLocale, saveCategories } from './utils/LocalStore';
 import { Constants } from './utils/Constants';
-import { PreferenceContext } from './utils/Contexts';
+import { PreferenceContext, CategoriesContext } from './utils/Contexts';
 import './style.css';
 
 class Main extends Component {
@@ -19,14 +19,10 @@ class Main extends Component {
         this.addCategory = this.addCategory.bind(this);
         this.removeCategory = this.removeCategory.bind(this);
 
-        let storedCurrency = loadCurrency() || Constants.DEFAULT_CURRENCY;
-        let storedLocale = loadLocale() || Constants.DEFAULT_LOCALE;
-        let storedCats = loadCategories() || Constants.DEFAULT_CATEGORIES;
-
         this.state = {
-            currency: storedCurrency,
-            locale: storedLocale,
-            categories: storedCats
+            currency: loadCurrency() || Constants.DEFAULT_CURRENCY,
+            locale: loadLocale() || Constants.DEFAULT_LOCALE,
+            categories: loadCategories() || Constants.DEFAULT_CATEGORIES
         };
 
         this.currencyOptions = {
@@ -63,7 +59,6 @@ class Main extends Component {
     }
 
     render() {
-
         return (
         <div id="main-container"> 
             <Header />
@@ -76,12 +71,18 @@ class Main extends Component {
                 updateCurrency: this.updateCurrency,
                 updateLocale: this.updateLocale
             }}>
-                <Switch>
-                    <Route exact path='/' component={Dashboard}/>
-                    <Route path='/dashboard' component={Dashboard}/>
-                    <Route path='/analytics' component={Analytics}/>
-                    <Route path='/settings' component={Settings}/>
-                </Switch>
+                <CategoriesContext.Provider value={{
+                    categories: this.state.categories,
+                    addCategory: this.addCategory,
+                    removeCategory: this.removeCategory
+                }}>
+                    <Switch>
+                        <Route exact path='/' component={Dashboard}/>
+                        <Route path='/dashboard' component={Dashboard}/>
+                        <Route path='/analytics' component={Analytics}/>
+                        <Route path='/settings' component={Settings}/>
+                    </Switch>
+                </CategoriesContext.Provider>
             </PreferenceContext.Provider>
         </div>
         );

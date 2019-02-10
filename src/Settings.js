@@ -1,6 +1,6 @@
 import React from 'react';
 import { Constants } from './utils/Constants';
-import { PreferenceContext } from './utils/Contexts';
+import { PreferenceContext, CategoriesContext } from './utils/Contexts';
 import './settings/TilesSettings.css';
 
 class Settings extends React.Component {
@@ -10,22 +10,15 @@ class Settings extends React.Component {
             (<option key={curr.code} value={curr.code}>{curr.name} ({curr.symbol})</option>));
 
         let localeOptions = Constants.LOCALES.map(loc => (<option key={loc} value={loc}>{loc}</option>));
-
-        // let categories = this.state.categories.map(cat => (
-        //     <tr className="reducedPadding" key={cat.value}>
-        //         <td><span className="font-small-colored">{cat.label}</span></td>
-        //         <td><button className="btnDelete" title="Delete" onClick={() => this.removeCategory(cat.value)}>X</button></td>
-        //     </tr>));
     
         return (
             <div id="settings" className="box">
                 <h1 className="menu-item-headline">Settings</h1>
                     <div className="tileSetting">
                         <h4>Preferences</h4>
-
-                        <PreferenceContext.Consumer>
-                        {({currency, locale, updateCurrency, updateLocale }) => (
-                            <table>
+                        <table>
+                            <PreferenceContext.Consumer>
+                            {({currency, locale, updateCurrency, updateLocale }) => (
                             <tbody>
                                 <tr>
                                     <td className="prefTitle">Currency</td>
@@ -41,14 +34,35 @@ class Settings extends React.Component {
                                         Update: <select value={locale} onChange={(e) => updateLocale(e)}>{localeOptions}</select>
                                     </td>
                                 </tr>
-                                {/* <tr>
-                                    <td className="prefTitle" rowSpan={this.state.categories.length + 1}>Categories</td>
-                                </tr>
-                                {categories} */}
                             </tbody>
+                            )}
+                            </PreferenceContext.Consumer>
+
+
+                            <CategoriesContext.Consumer>
+                                {(categories, addCategory, removeCategory) => {
+                                    let categoryTbl = categories.categories.map(cat => (
+                                        <tr className="reducedPadding" key={cat.value}>
+                                            <td><span className="font-small-colored">{cat.label}</span></td>
+                                            <td><button className="btnDelete" title="Delete" onClick={() => categories.removeCategory(cat.value)}>X</button></td>
+                                        </tr>));
+
+                                    return (
+                                        <tbody>
+                                            <tr>
+                                                <td className="prefTitle" rowSpan={categoryTbl.length + 1}>Categories</td>
+                                            </tr>
+                                            {categoryTbl}
+                                        </tbody>
+                                    );
+                                }}
+
+        
+            
+                            </CategoriesContext.Consumer>
+
+                            
                         </table> 
-                        )}
-                        </PreferenceContext.Consumer>
                   
                     </div>
                     <div className="tileSetting">

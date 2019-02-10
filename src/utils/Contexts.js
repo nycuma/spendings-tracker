@@ -8,6 +8,10 @@ const PreferenceContext = React.createContext({
     updateLocale: () => {}
 });
 
-const CategoriesContext = React.createContext(null);
+const CategoriesContext = React.createContext({
+    categories: Constants.DEFAULT_CATEGORIES,
+    addCategory: () => {},
+    removeCategory: () => {}
+});
 
 export { PreferenceContext, CategoriesContext };
