@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import SpendingsToday from './tiles/SpendingsToday';
 import SpendingsSingleDay from './tiles/SpendingsSingleDay';
 import TotalSpendings from './tiles/TotalSpendings';
@@ -89,5 +90,16 @@ class Tiles extends React.Component {
     }
 
 }
+
+Tiles.propTypes = {
+    selectedDay: PropTypes.instanceOf(Date).isRequired,
+    totalAmountDay: PropTypes.number,
+    totalAmountToday: PropTypes.number,
+    totalAmountWeek: PropTypes.number,
+    totalAmountMonth: PropTypes.number,
+    totalAmountYear: PropTypes.number,
+    spendingsForDay: PropTypes.arrayOf(PropTypes.object),
+    recentSpendings: PropTypes.arrayOf(PropTypes.object)
+};
 
 export default Tiles;

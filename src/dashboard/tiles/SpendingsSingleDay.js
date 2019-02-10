@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import dateFnsFormat from 'date-fns/format';
 import { Constants } from '../../utils/Constants';
 import './Tiles.css';
@@ -108,5 +109,14 @@ class SpendingsSingleDay extends React.Component { // TODO Merge with SpendingsT
         ); 
     }
 }
+
+SpendingsSingleDay.propTypes = {
+    selectedDay: PropTypes.instanceOf(Date),
+    locale: PropTypes.string.isRequired,
+    currencyOptions: PropTypes.object.isRequired,
+    totalAmountDay: PropTypes.number,
+    spendingsForDay: PropTypes.arrayOf(PropTypes.object),
+    categories: PropTypes.arrayOf(PropTypes.object).isRequired
+};
 
 export default SpendingsSingleDay;

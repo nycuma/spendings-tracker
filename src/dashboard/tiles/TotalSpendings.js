@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './Tiles.css';
 
 /**
@@ -32,5 +33,14 @@ function TotalSpendings(props) {
         </div>
     );
 }
+
+TotalSpendings.propTypes = {
+    locale: PropTypes.string.isRequired,
+    currencyOptions: PropTypes.object.isRequired,
+    totalAmountToday: PropTypes.number,
+    totalAmountWeek: PropTypes.number,
+    totalAmountMonth: PropTypes.number,
+    totalAmountYear: PropTypes.number
+};
 
 export default TotalSpendings;

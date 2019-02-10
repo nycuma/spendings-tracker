@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import dateFnsFormat from 'date-fns/format';
 import { Constants } from '../utils/Constants';
 import './AddForm.css';
@@ -125,5 +126,13 @@ class SpendingsForm extends React.Component {
         );
     }
 }
+
+SpendingsForm.propTypes = {
+    selectedDay: PropTypes.instanceOf(Date).isRequired,
+    locale: PropTypes.string.isRequired,
+    categories: PropTypes.arrayOf(PropTypes.object).isRequired,
+    addSpendingsPosition: PropTypes.func.isRequired,
+    onClose: PropTypes.func.isRequired
+};
 
 export default SpendingsForm;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box } from 'react-feather';
 
-function Header(props) {
+function Header() {
     return (
         <header>   
             <button id="generate-btn" title="TODO">Generate random data</button>

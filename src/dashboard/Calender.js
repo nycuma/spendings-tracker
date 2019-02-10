@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
 import TotalAmountDay from './TotalAmountDay';
-import { prefs } from '../utils/Constants';
+import { Constants } from '../utils/Constants';
 import { getSpendings } from './../utils/LocalStore';
 import Utils from './../utils/Utils';
 import './Calender.css';
@@ -68,7 +69,7 @@ class Calender extends React.Component {
             <div id="calender" className="box">
                 <DayPicker
                     todayButton="Today"
-                    firstDayOfWeek={prefs.firstDayWeek}
+                    firstDayOfWeek={Constants.FIRST_DAY_WEEK}
                     modifiers={modifiers}
                     modifiersStyles={modifiersStyles}
                     onDayClick={this.props.updateSelectedDay}
@@ -89,5 +90,12 @@ class Calender extends React.Component {
         );
     }
 }
+
+Calender.propTypes = {
+    selectedDay: PropTypes.instanceOf(Date).isRequired,
+    updateSelectedDay: PropTypes.func.isRequired,
+    openAddModal: PropTypes.func.isRequired,
+    openImportModal: PropTypes.func.isRequired
+};
 
 export default Calender;

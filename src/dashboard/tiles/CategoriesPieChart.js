@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { PieChart, Pie, Legend, Cell } from 'recharts';
 import { getAmountSpentByCategory } from '../../utils/LocalStore';
 import './Tiles.css';
@@ -40,5 +41,9 @@ function CategoriesPieChart(props) {
         </div>
     );
 }
+
+CategoriesPieChart.propTypes = {
+    categories: PropTypes.arrayOf(PropTypes.object).isRequired
+};
 
 export default CategoriesPieChart;

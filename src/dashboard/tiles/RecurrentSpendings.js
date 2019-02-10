@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import dateFnsFormat from 'date-fns/format';
 import { Constants } from '../../utils/Constants';
 import { getRecurrentSpendings } from '../../utils/LocalStore';
@@ -42,5 +43,10 @@ function RecurrentSpendings(props) {
         </div>
     );
 }
+
+RecurrentSpendings.propTypes = {
+    locale: PropTypes.string.isRequired,
+    currencyOptions: PropTypes.object.isRequired
+};
 
 export default RecurrentSpendings;

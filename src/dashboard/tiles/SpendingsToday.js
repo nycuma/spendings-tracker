@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Utils from '../../utils/Utils';
 import { getSpendings } from '../../utils/LocalStore';
 import './Tiles.css';
@@ -78,5 +79,11 @@ class SpendingsToday extends React.Component {
         ); 
     }
 }
+
+SpendingsToday.propTypes = {
+    locale: PropTypes.string.isRequired,
+    currencyOptions: PropTypes.object.isRequired,
+    categories: PropTypes.arrayOf(PropTypes.object).isRequired
+};
 
 export default SpendingsToday;

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import dateFnsFormat from 'date-fns/format';
 import { Constants } from '../../utils/Constants';
 import './Tiles.css';
@@ -27,5 +28,11 @@ function RecentHistory(props) {
         </div>
     );
 }
+
+RecentHistory.propTypes = {
+    locale: PropTypes.string.isRequired,
+    currencyOptions: PropTypes.object.isRequired,
+    recentSpendings: PropTypes.arrayOf(PropTypes.object)
+};
 
 export default RecentHistory;
