@@ -7,6 +7,8 @@ import './AddForm.css';
 class SpendingsForm extends React.Component {
     constructor(props) {
         super(props);
+        this.nodeRef = React.createRef();
+        this.handleClickOutideForm = this.handleClickOutideForm.bind(this);
         this.state = {
             valDay: this.initDay(),
             valCategory: 'food',
@@ -16,7 +18,22 @@ class SpendingsForm extends React.Component {
         };
     }
 
-    initDay() { // TODO Does not update when selected day changes
+    componentDidMount() {
+        // add event listener for clicks outside of form
+        document.addEventListener('click', this.handleClickOutideForm);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('click', this.handleClickOutideForm);
+    }
+
+    handleClickOutideForm(e) {
+        if(!this.nodeRef.current.contains(e.target)) {
+            this.props.onClose();
+        } 
+    }
+
+    initDay() {
         if (this.props.selectedDay) {
             return dateFnsFormat(this.props.selectedDay, Constants.DATE_FORMAT_INPUT);
         }
@@ -24,7 +41,6 @@ class SpendingsForm extends React.Component {
     }
 
     handleDay(e) {
-        console.log('day input: ' + e.target.value);
         this.setState({ valDay: e.target.value });
     }
 
@@ -64,7 +80,6 @@ class SpendingsForm extends React.Component {
             );
         });
 
-        // TODO why does CSS class not work?
         const styleErrorInput = { 
             border: 'solid 1px red',
             backgroundColor: '#ffe6e6' 
@@ -75,7 +90,7 @@ class SpendingsForm extends React.Component {
         const msgError = 'Please enter a correct value';
 
         return (
-            <div id="add-modal">
+            <div id="add-modal" ref={this.nodeRef}>
                 <div id="tooltip-error" style={styleErrorTooltip}>{msgError}</div>
                 <button className="close-X" onClick={this.props.onClose}>x</button>
 
