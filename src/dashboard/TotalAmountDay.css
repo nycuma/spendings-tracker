@@ -1,9 +1,8 @@
 .hover-total-amount-day {
     position: absolute;
-    height: 15px;
-    font-size: 12px;
+    font-weight: bold;
     color: white;
-    background-color: #7E6258;
-    padding: 2px;
+    background-color: #58747E;
+    padding: 4px;
     z-index: 100;
 }

@@ -14,12 +14,9 @@ import 'react-day-picker/lib/style.css';
 class Calender extends React.Component {
     constructor(props) {
         super(props);
-        this.displayAmountSpent = this.displayAmountSpent.bind(this);
-        /*
         this.state = {
-            dateDisplayingAmount: null
+            daysWithSpendings: this.getDaysWithSpendings()
         };
-        */
     }
 
     getTotalAmountForDay(date) {
@@ -27,23 +24,36 @@ class Calender extends React.Component {
         return Utils.calculateSumOfSpendings(spendings);
     }
 
-    displayAmountSpent(day, modifiers, evt) {
-        //this.setState({ dateDisplayingAmount: day });
-
+    displayAmountSpent(day, modifiers, e) {
         let amountSpent = this.getTotalAmountForDay(day);
         if(amountSpent && amountSpent > 0) {
-            let position = {top: evt.pageY, left: evt.pageX};
+            let position = {top: e.pageY, left: e.pageX};
             ReactDOM.render(<TotalAmountDay position={position} totalAmountDay={amountSpent} />, 
                         document.getElementById('total-amount-day'));
         }
-        
     }
 
-    hideAmountSpent(day, modifiers, evt) {
+    hideAmountSpent() {
         // remove component when mouse leaves day-picker
         ReactDOM.unmountComponentAtNode(document.getElementById('total-amount-day'));
     }
 
+    getDaysWithSpendings(date) {
+        date = date ? date : this.props.selectedDay;
+        let daysOfMonth = new Set();
+        // get all spendings of current month
+        let spendingsMonth = getSpendings(date, false, true, true);
+        // get all days on which sth. was spent in this month
+        spendingsMonth.forEach(spending => daysOfMonth.add(new Date(spending.day).getDate()));
+
+        return [...daysOfMonth].map(day => new Date(date.getFullYear(),
+                                                    date.getMonth(), 
+                                                    day));
+    }
+
+    updateDaysWithSpendings(date) {
+        this.setState({ daysWithSpendings: this.getDaysWithSpendings(date) });
+    }
 
 
     render() {
@@ -51,19 +61,24 @@ class Calender extends React.Component {
             weekend: { daysOfWeek: [6, 0] },
             today: new Date(),
             selectedDay: this.props.selectedDay,
-          };
-          const modifiersStyles = {
+            dayWithSpending: this.state.daysWithSpendings
+        };
+        const modifiersStyles = {
             today : {
                 color: '#58747E'
             },
             weekend: {
-              color: '#7E6258'
+                color: '#7E6258'
             },
             selectedDay: {
                 color: 'white',
                 backgroundColor: '#7E6258',
+            },
+            dayWithSpending: {
+                fontWeight: 'bold',
+                fontSize: 'larger'
             }
-          };
+        };
 
         return (
             <div id="calender" className="box">
@@ -73,8 +88,10 @@ class Calender extends React.Component {
                     modifiers={modifiers}
                     modifiersStyles={modifiersStyles}
                     onDayClick={this.props.updateSelectedDay}
-                    onDayMouseEnter={this.displayAmountSpent}
-                    onDayMouseLeave={this.hideAmountSpent} />
+                    onDayMouseEnter={(day, mod, e) => this.displayAmountSpent(day, mod, e)}
+                    onDayMouseLeave={this.hideAmountSpent} 
+                    onMonthChange={(date) => this.updateDaysWithSpendings(date)}
+                />
 
                 <div className="box add-actions">
                     <span className="add-action" onClick={this.props.openAddModal}>
