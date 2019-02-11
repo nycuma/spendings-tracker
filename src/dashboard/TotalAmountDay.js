@@ -22,7 +22,7 @@ function TotalAmountDay(props)  {
 
 TotalAmountDay.propTypes = {
     position: PropTypes.object,
-    totalAmountDay: PropTypes.instanceOf(Date)
+    totalAmountDay: PropTypes.number
 };
 
 export default TotalAmountDay;
