@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Constants } from '../utils/Constants';
-import './TotalAmountDay.css';
+import './TooltipAmountDay.css';
 import { PreferenceContext } from '../utils/Contexts';
 
 /**
  * Displays amount spent on a day when hovering over specific day
  * in the DayPicker
  */
-function TotalAmountDay(props)  {
+function TooltipAmountDay(props)  {
     return (
         <PreferenceContext.Consumer>
         {({ currency, locale }) => (
@@ -20,9 +20,9 @@ function TotalAmountDay(props)  {
     ); 
 }
 
-TotalAmountDay.propTypes = {
+TooltipAmountDay.propTypes = {
     style: PropTypes.object.isRequired,
     amount: PropTypes.number.isRequired
 };
 
-export default TotalAmountDay;
+export default TooltipAmountDay;

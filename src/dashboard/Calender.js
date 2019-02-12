@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
-import TotalAmountDay from './TotalAmountDay';
+import TooltipAmountDay from './TooltipAmountDay';
 import { Constants } from '../utils/Constants';
 import { getSpendings } from './../utils/LocalStore';
 import './Calender.css';
@@ -87,7 +87,7 @@ class Calender extends React.Component {
 
 
         const tooltips = Object.keys(this.state.daysWithSpendings).map(day =>
-            (<TotalAmountDay 
+            (<TooltipAmountDay 
                 key={day} 
                 amount={this.state.daysWithSpendings[day].amount} 
                 style={this.state.daysWithSpendings[day].style} 
