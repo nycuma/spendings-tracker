@@ -19,6 +19,9 @@ function RecentHistory(props) {
 
     return (
         <div className="tile">
+            <button className="close-tile" title="Close" onClick={() => props.toggleDisplay('recentHistory')}>
+                x
+            </button>
             <h4>Recent Spendings</h4>
             <table className="table-spendings-history">
                 <tbody>
@@ -32,7 +35,8 @@ function RecentHistory(props) {
 RecentHistory.propTypes = {
     locale: PropTypes.string.isRequired,
     currencyOptions: PropTypes.object.isRequired,
-    recentSpendings: PropTypes.arrayOf(PropTypes.object)
+    recentSpendings: PropTypes.arrayOf(PropTypes.object),
+    toggleDisplay: PropTypes.func.isRequired
 };
 
 export default RecentHistory;

@@ -31,6 +31,9 @@ function RecurrentSpendings(props) {
 
     return (
         <div className="tile">
+            <button className="close-tile" title="Close" onClick={() => props.toggleDisplay('recurrentSpendings')}>
+                x
+            </button>
             <h4>Recurrent Spendings</h4>
             <table className="table-spendings-history">
                 <thead>
@@ -46,7 +49,8 @@ function RecurrentSpendings(props) {
 
 RecurrentSpendings.propTypes = {
     locale: PropTypes.string.isRequired,
-    currencyOptions: PropTypes.object.isRequired
+    currencyOptions: PropTypes.object.isRequired,
+    toggleDisplay: PropTypes.func.isRequired
 };
 
 export default RecurrentSpendings;

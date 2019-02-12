@@ -9,6 +9,9 @@ function TotalSpendings(props) {
 
     return (
         <div className="tile">
+            <button className="close-tile" title="Close" onClick={() => props.toggleDisplay('totalSpendings')}>
+                x
+            </button>
             <h4>Total Spendings</h4>
             <table className="table-spendings">
                 <tbody>
@@ -40,7 +43,8 @@ TotalSpendings.propTypes = {
     totalAmountToday: PropTypes.number,
     totalAmountWeek: PropTypes.number,
     totalAmountMonth: PropTypes.number,
-    totalAmountYear: PropTypes.number
+    totalAmountYear: PropTypes.number,
+    toggleDisplay: PropTypes.func.isRequired
 };
 
 export default TotalSpendings;

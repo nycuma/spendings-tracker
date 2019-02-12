@@ -26,6 +26,9 @@ function CategoriesPieChart(props) {
     
     return (
         <div className="tile">
+            <button className="close-tile" title="Close" onClick={() => props.toggleDisplay('catPieChart')}>
+                x
+            </button>
             <h4>Spendings on Categories</h4>
             <div id="piechart"> {/* TODO: Animation and labal line not working */}
                 <PieChart width={400} height={150}>
@@ -43,6 +46,7 @@ function CategoriesPieChart(props) {
 }
 
 CategoriesPieChart.propTypes = {
+    toggleDisplay: PropTypes.func.isRequired,
     categories: PropTypes.arrayOf(PropTypes.object).isRequired
 };
 

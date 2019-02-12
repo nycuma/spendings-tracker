@@ -95,6 +95,9 @@ class SpendingsSingleDay extends React.Component { // TODO Merge with SpendingsT
     render() {
         return( 
             <div className="tile">
+                <button className="close-tile" title="Close" onClick={() => this.props.toggleDisplay('spendingsSingleDay')}>
+                    x
+                </button>
                 <h4>Spendings on {dateFnsFormat(this.props.selectedDay, Constants.DATE_FORMAT)}</h4>
                 <table className="table-spendings">  
                     {this.renderTableBody()}    
@@ -116,7 +119,8 @@ SpendingsSingleDay.propTypes = {
     currencyOptions: PropTypes.object.isRequired,
     totalAmountDay: PropTypes.number,
     spendingsForDay: PropTypes.arrayOf(PropTypes.object),
-    categories: PropTypes.arrayOf(PropTypes.object).isRequired
+    categories: PropTypes.arrayOf(PropTypes.object).isRequired,
+    toggleDisplay: PropTypes.func.isRequired
 };
 
 export default SpendingsSingleDay;

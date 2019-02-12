@@ -8,6 +8,7 @@
 }
 
 .tile {
+  position: relative;
   width: 400px;
   height: 230px;
   background-color: #FAFAFA;
@@ -68,6 +69,20 @@
 
 .table-spendings-history {
     width: 100%;
+}
+
+.close-tile {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-family: sans-serif;
+    font-weight: 900;
+    font-size: 1em;
+    color: #58747E;
+    background: none;
+    border: none;
+    cursor: pointer;
+
 }
 
 .table-spendings-history td {

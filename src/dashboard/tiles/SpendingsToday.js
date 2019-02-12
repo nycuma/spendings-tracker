@@ -65,6 +65,9 @@ class SpendingsToday extends React.Component {
 
         return( 
             <div className="tile">
+                <button className="close-tile" title="Close" onClick={() => this.props.toggleDisplay('spendingsToday')}>
+                    x
+                </button>
                 <h4>Today's Spendings</h4>
                 <table className="table-spendings">  
                     {this.renderTableBody(spendingsToday)}    
@@ -83,7 +86,8 @@ class SpendingsToday extends React.Component {
 SpendingsToday.propTypes = {
     locale: PropTypes.string.isRequired,
     currencyOptions: PropTypes.object.isRequired,
-    categories: PropTypes.arrayOf(PropTypes.object).isRequired
+    categories: PropTypes.arrayOf(PropTypes.object).isRequired,
+    toggleDisplay: PropTypes.func.isRequired
 };
 
 export default SpendingsToday;

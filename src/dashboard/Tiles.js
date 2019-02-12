@@ -13,14 +13,21 @@ import './tiles/Tiles.css';
 class Tiles extends React.Component {
     constructor(props) {
         super(props);
+        this.toggleDisplay = this.toggleDisplay.bind(this);
         this.state = {
-            displayCatPieChart: true,
-            displaySpendingsSingleDay: true,
-            displayTotalSpendings: true,
-            displayRecentHistory: true,
-            displaySpendingsToday: true,
-            displayRecurrentSpendings: true
+            display : {
+                catPieChart: true,
+                spendingsSingleDay: true,
+                totalSpendings: true,
+                recentHistory: true,
+                spendingsToday: true,
+                recurrentSpendings: true
+            }
         };
+    }
+
+    toggleDisplay(tile) {
+        this.setState({ display: {...this.state.display, ...{[tile] : !this.state.display[tile]} } });
     }
 
     render() {
@@ -31,22 +38,25 @@ class Tiles extends React.Component {
 
                 return (
                     <div id="tiles" className="box">
-                        {this.state.displayCatPieChart && 
+                        {this.state.display.catPieChart && 
                             <CategoriesPieChart 
+                                toggleDisplay={this.toggleDisplay}
                                 categories={categories}
                             />
                         }
         
-                        {this.state.displaySpendingsToday &&
+                        {this.state.display.spendingsToday &&
                             <SpendingsToday 
+                                toggleDisplay={this.toggleDisplay}
                                 locale={locale}
                                 currencyOptions={currencyOptions}
                                 categories={categories}
                             />
                         }
         
-                        {this.state.displayTotalSpendings &&
+                        {this.state.display.totalSpendings &&
                             <TotalSpendings 
+                                toggleDisplay={this.toggleDisplay}
                                 totalAmountToday={this.props.totalAmountToday}
                                 totalAmountWeek={this.props.totalAmountWeek}
                                 totalAmountMonth={this.props.totalAmountMonth}
@@ -56,16 +66,18 @@ class Tiles extends React.Component {
                             />
                         }
         
-                        {this.state.displayRecentHistory &&
+                        {this.state.display.recentHistory &&
                             <RecentHistory 
+                                toggleDisplay={this.toggleDisplay}
                                 recentSpendings={this.props.recentSpendings}
                                 locale={locale}
                                 currencyOptions={currencyOptions}
                             />
                         }
         
-                        {this.state.displaySpendingsSingleDay &&
+                        {this.state.display.spendingsSingleDay &&
                             <SpendingsSingleDay
+                                toggleDisplay={this.toggleDisplay}
                                 totalAmountDay={this.props.totalAmountDay}
                                 spendingsForDay={this.props.spendingsForDay}
                                 selectedDay={this.props.selectedDay}
@@ -75,8 +87,9 @@ class Tiles extends React.Component {
                             />
                         }  
         
-                        {this.state.displayRecurrentSpendings &&
+                        {this.state.display.recurrentSpendings &&
                             <RecurrentSpendings 
+                                toggleDisplay={this.toggleDisplay}
                                 locale={locale}
                                 currencyOptions={currencyOptions}
                             />
