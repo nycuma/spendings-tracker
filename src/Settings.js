@@ -14,7 +14,7 @@ class Settings extends React.Component {
         return (
             <div id="settings" className="box">
                 <h1 className="menu-item-headline">Settings</h1>
-                    <div className="tileSetting">
+                    <div className="border-dashed">
                         <h4>Preferences</h4>
                         <table>
                             <PreferenceContext.Consumer>
@@ -52,7 +52,7 @@ class Settings extends React.Component {
                             </PreferenceContext.Consumer>
                         </table> 
                     </div>
-                    <div className="tileSetting">
+                    <div className="border-dashed">
                         <h4>Recurrent Spendings</h4>
                     </div>
             </div>

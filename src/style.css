@@ -20,6 +20,10 @@ body {
     padding: 0;
 }
 
+button {
+    cursor: pointer;
+}
+
 h4 {
     color: #7E6258;
   }
@@ -28,6 +32,16 @@ h4 {
     color: #7E6258;
     font-size: smaller;
     text-indent: 1em;
+}
+
+.border-dashed {
+    width: 95%;
+    background-color: #FAFAFA;
+    border-radius: 2px;
+    border: 1px dashed #58747E;
+    overflow-x: hidden;
+    padding: 5px;
+    margin: 10px;
 }
 
 .align-right {

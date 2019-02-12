@@ -7,16 +7,6 @@
     align-content: space-around;
 }
 
-.tileSetting {
-    width: 95%;
-    background-color: #FAFAFA;
-    border-radius: 2px;
-    border: 1px dashed #58747E;
-    overflow-x: hidden;
-    padding: 5px;
-    margin: 10px;
-}
-
 #settings table tr {
     text-align: left;
 }
@@ -33,7 +23,6 @@
 #settings .btnDelete {
     background: none;
     border: none;
-    cursor: pointer;
 }
 
 #settings .reducedPadding td{
