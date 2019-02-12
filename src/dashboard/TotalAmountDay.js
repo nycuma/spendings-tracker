@@ -11,18 +11,18 @@ import { PreferenceContext } from '../utils/Contexts';
 function TotalAmountDay(props)  {
     return (
         <PreferenceContext.Consumer>
-            {({ currency, locale }) => (
-                <div className="hover-total-amount-day" style={props.position}>
-                    {props.totalAmountDay.toLocaleString(locale, { ...Constants.DEFAULT_CURRENCY_OPTIONS, ...{ currency: currency }})}
-                </div>
-            )}
+        {({ currency, locale }) => (
+            <div className="hover-total-amount-day" style={props.style}>
+                {props.amount.toLocaleString(locale, { ...Constants.DEFAULT_CURRENCY_OPTIONS, ...{ currency: currency }})}
+            </div>
+        )}
         </PreferenceContext.Consumer>
     ); 
 }
 
 TotalAmountDay.propTypes = {
-    position: PropTypes.object,
-    totalAmountDay: PropTypes.number
+    style: PropTypes.object.isRequired,
+    amount: PropTypes.number.isRequired
 };
 
 export default TotalAmountDay;
