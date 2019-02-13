@@ -1,7 +1,7 @@
 /**
  * Fetching data from local storage
  */
-
+import uuidv4 from 'uuid/v4';
 import store from 'store';
 import Utils from './Utils';
 import { isSameWeek, isSameMonth } from 'date-fns';
@@ -96,7 +96,7 @@ export const getSpendingsRecentlyAdded = (count) => {
 
 /**
  * Returns array with total amount spent on each categorie all time.
- * TODO move to utils
+ * // TODO move to utils
  */
 export const getAmountSpentByCategory = (categories) => {
     if(!categories || categories.length === 0) {
@@ -126,7 +126,7 @@ export const postSpendingPosition = (pos) => {
         data = []; 
     }
     data.push({
-        id: pos.id,
+        id: pos.id ? pos.id : uuidv4(),
         day: pos.day,
         cat: pos.cat,
         amount: pos.amount,
