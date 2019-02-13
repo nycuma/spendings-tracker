@@ -8,7 +8,8 @@ export const Constants = {
     DATE_FORMAT_SHORT: 'DD.MM.YYYY',
     DATE_FORMAT_INPUT: 'YYYY-MM-DD',
     FIRST_DAY_WEEK: 1, // 0: Sunday, 1: Monday
-
+    TIME_UNITS: ['day', 'week', 'month', 'year'],
+    
     CURRENCIES: [
         { name: 'Euro', code: 'EUR', symbol: '€' },
         { name: 'US Dollar', code: 'USD', symbol: '$' },
