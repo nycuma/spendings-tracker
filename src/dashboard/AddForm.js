@@ -101,8 +101,7 @@ class SpendingsForm extends React.Component {
                                 <td>Date: </td>
                                 <td><input type="date" 
                                            value={this.state.valDay} 
-                                           onChange={(e) => this.handleDay(e)} 
-                                           placeholder={this.props.selectedDay}/></td>
+                                           onChange={(e) => this.handleDay(e)} /></td>
                             </tr>
                             <tr>
                                 <td>Category: </td>
