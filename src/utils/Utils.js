@@ -5,7 +5,7 @@ import { saveSpendings } from './LocalStore';
 // Used for generating some random spendings
 const TEMPLATES = {
     food: { 
-        shareUpper: 0.3,
+        share: 0.25,
         items: [
             { comment: 'Groceries', min: 3, max: 100 },
             { comment: 'Drinks', min: 2, max: 30 },
@@ -13,7 +13,7 @@ const TEMPLATES = {
         ]
     },
     coffeeshop: { 
-        shareUpper: 0.5,
+        share: 0.2,
         items: [
             { comment: 'Coffee', min: 1, max: 2.50 },
             { comment: 'Coffee & cake', min: 4, max: 8 },
@@ -22,7 +22,7 @@ const TEMPLATES = {
         ]
     },
     household: { 
-        shareUpper: 0.7,
+        share: 0.2,
         items: [
             { comment: 'Bicycle repair', min: 50, max: 100 },
             { comment: 'Vacuum cleaner bags', min: 5, max: 20 },
@@ -34,7 +34,7 @@ const TEMPLATES = {
         ]
     },
     culture: { 
-        shareUpper: 0.85,
+        share: 0.1,
         items: [
             { comment: 'Book', min: 2, max: 25 },
             { comment: 'Cinema', min: 5, max: 9 },
@@ -42,8 +42,15 @@ const TEMPLATES = {
             { comment: 'Library membership', min: 10, max: 15 }
         ]
     },
+    clothes: {
+        share: 0.05,
+        items: [
+            { comment: 'Present', min: 5, max: 50 },
+            { comment: 'Donation', min: 5, max: 50 }
+        ]
+    },
     transport: {
-        shareUpper: 0.95,
+        share: 0.15,
         items: [
             { comment: 'Public transport ticket', min: 1.30, max: 5.40 },
             { comment: 'Train ticket', min: 5, max: 70 },
@@ -52,7 +59,7 @@ const TEMPLATES = {
         ]
     },
     gifts: {
-        shareUpper: 1,
+        share: 0.05,
         items: [
             { comment: 'Present', min: 5, max: 50 },
             { comment: 'Donation', min: 5, max: 50 }
@@ -130,32 +137,17 @@ let Utils = {
         let randomSpendings = [];
         for(let i = 0; i < count; i++) {
             const rand = Math.random();
+            const catKeys = Object.keys(TEMPLATES);
+            let accumulatedProb = 0; // accumulate shares of categories
 
-            if(rand < TEMPLATES.food.shareUpper) {
-                // generate spending for category Food
-                randomSpendings.push(this.createRandomSpending('food', startDate, endDate));
-
-            } else if(rand >= TEMPLATES.food.shareUpper && rand < TEMPLATES.coffeeshop.shareUpper) {
-                // generate spending for category Coffeeshop
-                randomSpendings.push(this.createRandomSpending('coffeeshop', startDate, endDate));
-
-            } else if(rand >= TEMPLATES.coffeeshop.shareUpper && rand < TEMPLATES.household.shareUpper) {
-                // generate spending for category Household
-                randomSpendings.push(this.createRandomSpending('household', startDate, endDate));
-                
-            } else if(rand >= TEMPLATES.household.shareUpper && rand < TEMPLATES.culture.shareUpper) {
-                // generate spending for second category Culture
-                randomSpendings.push(this.createRandomSpending('culture', startDate, endDate));
-
-            } else if(rand >= TEMPLATES.culture.shareUpper && rand < TEMPLATES.transport.shareUpper) {
-                // generate spending for second category Transport
-                randomSpendings.push(this.createRandomSpending('transport', startDate, endDate));
-
-            } else if(rand >= TEMPLATES.transport.shareUpper) {
-                // generate spending for second category Gifts
-                randomSpendings.push(this.createRandomSpending('gifts', startDate, endDate));
-
-            } 
+            for(let j = 0; j < catKeys.length; j++) {
+                accumulatedProb += TEMPLATES[catKeys[j]].share;
+                if(rand < accumulatedProb) {
+                    // generate spending for current category
+                    randomSpendings.push(this.createRandomSpending(catKeys[j], startDate, endDate));
+                    break;
+                }   
+            }
         }
 
         // save in local storage
