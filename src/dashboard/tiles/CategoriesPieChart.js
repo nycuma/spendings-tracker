@@ -30,10 +30,10 @@ function CategoriesPieChart(props) {
                 x
             </button>
             <h4>Spendings on Categories</h4>
-            <div id="piechart"> {/* TODO: Animation and labal line not working */}
+            <div id="piechart">
                 <PieChart width={400} height={150}>
-                    <Pie cx={100} cy={70} isAnimationActive={true} data={chartData} outerRadius={50} fill="#58747E" 
-                        labelLine={true} label={true} dataKey="value" nameKey="name">
+                    <Pie cx={100} cy={70} isAnimationActive={true} data={chartData} outerRadius={65} fill="#58747E" 
+                        labelLine={false} label={false} dataKey="value" nameKey="name">
                         {
                             chartData.map((entry, i) => <Cell fill={pieColors[i]} key={i}/>)
                         }
