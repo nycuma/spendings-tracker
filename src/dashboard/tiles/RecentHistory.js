@@ -22,7 +22,7 @@ function RecentHistory(props) {
             <button className="close-tile" title="Close" onClick={() => props.toggleDisplay('recentHistory')}>
                 x
             </button>
-            <h4>Recent Spendings</h4>
+            <h4>Recently Added Spendings</h4>
             <table className="table-spendings-history">
                 <tbody>
                     {entries}
