@@ -137,6 +137,14 @@ export const postSpendingPosition = (pos) => {
     store.set(KEY_SPENDINGS, data);
 };
 
+export const saveSpendings = (spendingsArray) => {
+    let data = store.get(KEY_SPENDINGS);
+    if(!data) { 
+        data = []; 
+    }
+    store.set(KEY_SPENDINGS, [...data, ...spendingsArray]);
+};
+
 export const loadCurrency = () => {
     return store.get(KEY_CURRENCY);
 };
