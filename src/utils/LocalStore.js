@@ -5,6 +5,7 @@ import uuidv4 from 'uuid/v4';
 import store from 'store';
 import Utils from './Utils';
 import { isSameWeek, isSameMonth } from 'date-fns';
+import { Constants } from './Constants';
 
 const KEY_SPENDINGS = 'spendings';
 const KEY_CATEGORIES = 'categories';
@@ -38,7 +39,7 @@ const KEY_RECURRENT_SPENDINGS = 'recurrentSpending';
     }
 
     if(onlySameWeek === true) {
-        return data.filter(item => isSameWeek(new Date(item.day), date, {weekStartsOn: 1}));
+        return data.filter(item => isSameWeek(new Date(item.day), date, { weekStartsOn: Constants.FIRST_DAY_WEEK }));
     }
 
     if(onlySameMonth === true) {
@@ -58,9 +59,10 @@ const KEY_RECURRENT_SPENDINGS = 'recurrentSpending';
  * 
  * @param {Date} dateStart (optional)
  * @param {Date} dateEnd (optinal)
+ * @param {String} category (optional)
  * @param {Number} count number of positions that should be returned (optional)
  */
-export const getSpendingsBetween = (dateStart, dateEnd, count) => {
+export const getSpendingsBetween = (dateStart, dateEnd, category, count) => {
     if(!dateStart && !dateEnd) { 
         return []; 
     }
@@ -70,11 +72,15 @@ export const getSpendingsBetween = (dateStart, dateEnd, count) => {
     }
 
     if(dateStart) {
-        data = data.filter(item => new Date(item.day) > dateStart);
+        data = data.filter(item => new Date(item.day) >= dateStart);
     }
 
     if(dateEnd) {
-        data = data.filter(item => new Date(item.day) < dateEnd);
+        data = data.filter(item => new Date(item.day) <= dateEnd);
+    }
+
+    if(category) {
+        data = data.filter(item => item.cat === category);
     }
 
     return count ? data.slice(0, count) : data;
