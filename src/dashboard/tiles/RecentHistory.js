@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import dateFnsFormat from 'date-fns/format';
 import { Constants } from '../../utils/Constants';
-import './Tiles.css';
+import './Tiles.scss';
 
 function RecentHistory(props) {
     const entries = props.recentSpendings.map((pos, i) => {

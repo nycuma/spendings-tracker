@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Home, BarChart2, Settings } from 'react-feather';
-import './style.css';
+import './style.scss';
 
 class Sidebar extends React.Component {
     constructor(props) {

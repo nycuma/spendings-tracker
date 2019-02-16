@@ -6,7 +6,7 @@ import Tiles from './dashboard/Tiles';
 import Utils from './utils/Utils';
 import * as localStore from './utils/LocalStore';
 import { PreferenceContext } from './utils/Contexts';
-import './dashboard/Dashboard.css';
+import './dashboard/Dashboard.scss';
 
 class Dashboard extends React.Component {
     constructor(props) {

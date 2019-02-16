@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import dateFnsFormat from 'date-fns/format';
 import { Constants } from '../utils/Constants';
-import './AddForm.css';
+import './AddForm.scss';
 
 class SpendingsForm extends React.Component {
     constructor(props) {

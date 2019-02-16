@@ -1,7 +1,7 @@
 import React from 'react';
 import { Constants } from './utils/Constants';
 import { PreferenceContext } from './utils/Contexts';
-import './settings/TilesSettings.css';
+import './settings/TilesSettings.scss';
 
 class Settings extends React.Component {
 

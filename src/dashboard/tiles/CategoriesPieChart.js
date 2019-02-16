@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { PieChart, Pie, Legend, Cell } from 'recharts';
 import { getAmountSpentByCategory } from '../../utils/LocalStore';
-import './Tiles.css';
+import './Tiles.scss';
 
 function CategoriesPieChart(props) {
     const data = getAmountSpentByCategory(props.categories);

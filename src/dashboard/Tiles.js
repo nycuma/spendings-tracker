@@ -8,7 +8,7 @@ import RecentHistory from './tiles/RecentHistory';
 import RecurrentSpendings from './tiles/RecurrentSpendings';
 import { PreferenceContext } from '../utils/Contexts';
 import { Constants } from '../utils/Constants';
-import './tiles/Tiles.css';
+import './tiles/Tiles.scss';
 
 class Tiles extends React.Component {
     constructor(props) {

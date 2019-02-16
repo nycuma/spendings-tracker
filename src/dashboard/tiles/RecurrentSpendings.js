@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import dateFnsFormat from 'date-fns/format';
 import { Constants } from '../../utils/Constants';
 import { getRecurrentSpendings } from '../../utils/LocalStore';
-import './Tiles.css';
+import './Tiles.scss';
 
 function RecurrentSpendings(props) {
     const recurrentSp = getRecurrentSpendings();

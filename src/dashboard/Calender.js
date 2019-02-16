@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import DayPicker from 'react-day-picker';
-import 'react-day-picker/lib/style.css';
 import TooltipAmountDay from './TooltipAmountDay';
 import { Constants } from '../utils/Constants';
 import { getSpendings } from './../utils/LocalStore';
-import './Calender.css';
+import './Calender.scss';
 import 'react-day-picker/lib/style.css';
 
 

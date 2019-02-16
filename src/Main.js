@@ -9,7 +9,7 @@ import { loadCurrency, loadLocale, loadCategories,
     saveCurrency, saveLocale, saveCategories } from './utils/LocalStore';
 import { Constants } from './utils/Constants';
 import { PreferenceContext } from './utils/Contexts';
-import './style.css';
+import './style.scss';
 
 class Main extends Component {
     constructor(props) {

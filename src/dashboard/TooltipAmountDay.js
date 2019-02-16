@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Constants } from '../utils/Constants';
-import './TooltipAmountDay.css';
+import './TooltipAmountDay.scss';
 import { PreferenceContext } from '../utils/Contexts';
 
 /**

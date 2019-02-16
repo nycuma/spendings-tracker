@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './Tiles.css';
+import './Tiles.scss';
 
 /**
  * Shows total spendings of today, current week, month & year.

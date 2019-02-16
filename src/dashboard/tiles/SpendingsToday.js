@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Utils from '../../utils/Utils';
 import { getSpendings } from '../../utils/LocalStore';
-import './Tiles.css';
+import './Tiles.scss';
 
 class SpendingsToday extends React.Component {
     constructor(props) {
