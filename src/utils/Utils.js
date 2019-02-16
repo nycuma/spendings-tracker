@@ -1,6 +1,8 @@
 import isLeapYear from 'date-fns/is_leap_year';
 import uuidv4 from 'uuid/v4';
+import addMonths from 'date-fns/add_months';
 import { saveSpendings } from './LocalStore';
+import { endOfMonth, isBefore, endOfWeek, addWeeks, endOfYear, addYears } from 'date-fns';
 
 // Used for generating some random spendings
 const TEMPLATES = {
@@ -120,6 +122,36 @@ let Utils = {
         return date1.getFullYear() === date2.getFullYear() 
                 && date1.getMonth() === date2.getMonth()
                 && date1.getDate() === date2.getDate();
+    },
+
+    dateInEachWeek(dateFrom, dateTo) {
+        let dates = [];
+        let dateToEnd = endOfWeek(dateTo);
+        while(isBefore(dateFrom, dateToEnd)) {
+            dates.push(dateFrom);
+            dateFrom = addWeeks(dateFrom, 1);
+        }
+        return dates;
+    },
+
+    dateInEachMonth(dateFrom, dateTo) {
+        let dates = [];
+        let dateToEnd = endOfMonth(dateTo);
+        while(isBefore(dateFrom, dateToEnd)) {
+            dates.push(dateFrom);
+            dateFrom = addMonths(dateFrom, 1);
+        }
+        return dates;
+    },
+
+    dateInEachYear(dateFrom, dateTo) {
+        let dates = [];
+        let dateToEnd = endOfYear(dateTo);
+        while(isBefore(dateFrom, dateToEnd)) {
+            dates.push(dateFrom);
+            dateFrom = addYears(dateFrom, 1);
+        }
+        return dates;
     },
 
     /**
