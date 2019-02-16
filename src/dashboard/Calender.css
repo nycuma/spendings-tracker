@@ -1,12 +1,17 @@
 .add-action {
     color: #58747E;
     font-weight: bold;
-    /*background-color: #EFECEB;*/
-    /*width: 70%;
-    border-radius: 6px;*/
-    padding: 2px;
+    padding: 0;
     margin: 5px;
     cursor: pointer;
+}
+
+.add-actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: flex-start;
+
 }
 
 button.add-pos-btn {

@@ -114,10 +114,10 @@ class Calender extends React.Component {
                 <div className="box add-actions">
                     <span className="add-action" onClick={this.props.openAddModal}>
                         <button className="add-pos-btn">+</button> 
-                        Add new spendings position
+                        Add spending
                     </span>
                     <span className="add-action" onClick={this.props.openImportModal}>
-                        <button className="add-pos-btn" >+</button>
+                        <button className="add-pos-btn">+</button>
                         Import from JSON
                     </span>
                 </div> 
