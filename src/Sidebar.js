@@ -37,7 +37,7 @@ class Sidebar extends React.Component {
                             <Home 
                                 width="27"
                                 height="27"
-                                className="nav-icon-side"
+                                className="nav-icon"
                             />
                             <span className={this.state.displayTitleDashboard ? '' : 'hidden'}>Dashboard</span>               
                         </Link>   
@@ -50,7 +50,7 @@ class Sidebar extends React.Component {
                             <BarChart2 
                                 width="27"
                                 height="27"
-                                className="nav-icon-side"
+                                className="nav-icon"
                             />
                             <span className={this.state.displayTitleAnalytics ? '' : 'hidden'}>Analytics</span>
                         </Link>
@@ -62,7 +62,7 @@ class Sidebar extends React.Component {
                             <Settings 
                                 width="27"
                                 height="27"
-                                className="nav-icon-side"
+                                className="nav-icon"
                             />
                             <span className={this.state.displayTitleSettings ? '' : 'hidden'}>Settings</span>
                         </Link>

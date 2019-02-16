@@ -7,25 +7,32 @@
     align-content: space-around;
 }
 
-#settings table tr {
-    text-align: left;
+#settings {
+
+    table {
+        tr {
+            text-align: left;
+        }
+        
+        td {
+            padding: 6px 8px 6px 8px;
+        }
+    }
+
+    .prefTitle {
+        font-weight: bold;
+        vertical-align: top;
+    }
+    
+    .btnDelete {
+        background: none;
+        border: none;
+    }
+    
+    .reducedPadding td {
+        padding: 1px 8px 1px 8px;
+    }
 }
 
-#settings table td {
-    padding: 6px 8px 6px 8px;
-}
 
-#settings .prefTitle {
-    font-weight: bold;
-    vertical-align: top;
-}
-
-#settings .btnDelete {
-    background: none;
-    border: none;
-}
-
-#settings .reducedPadding td{
-    padding: 1px 8px 1px 8px;
-}
 

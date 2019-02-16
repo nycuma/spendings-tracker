@@ -26,7 +26,15 @@ button {
 
 h4 {
     color: $primary-color-2;
-  }
+}
+
+a,
+a:hover,
+a:focus,
+a:active {
+    all: unset; 
+    /*TODO: fix nav link styling*/
+}
 
 .font-small-colored {
     color: $primary-color-2;
@@ -73,28 +81,34 @@ header {
     flex-wrap: nowrap;
     justify-content: flex-end;
     background-color: $primary-color-1;
-    color: $light-background   
+    color: $light-background;   
+
+    button {
+        color: $light-background;
+        font-family: 'rubik-regular', sans-serif;
+        font-size: 18px;
+        margin: 13px 10px 10px 10px;
+        padding: 0;
+        background-color: transparent;
+        border: none;
+        font-weight: normal;
+    }
+
+    button:hover,
+    button:focus,
+    button:active {
+        color: white;
+        margin: 13px 10px 10px 10px;
+        padding: 0;
+    }
+
+    .nav-icon {
+        margin: 15px 15px 15px 0;
+    }
 }
 
-header button {
-    color: $light-background;
-    font-family: 'rubik-regular', sans-serif;
-    font-size: 18px;
-    margin: 13px 10px 10px 10px;
-    padding: 0;
-    background-color: transparent;
-    border: none;
-    font-weight: normal;
-}
 
-header button:hover,
-header button:focus,
-header button:active {
-    color: white;
-    margin: 13px 10px 10px 10px;
-    padding: 0;
 
-}
 
 .menu-item-headline {
     color: $primary-color-1;
@@ -121,54 +135,41 @@ header button:active {
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-}
 
-#sidebar ul {
-    margin: 0 -55px 0 0;
-    padding: 0;
-}
+    ul {
+        margin: 0 -55px 0 0;
+        padding: 0;
+    }
 
-#sidebar li {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;  
-    cursor: pointer;
-    width: 100%;
-    padding: 3px 5px 3px 3px;
-    text-decoration: none;
-    list-style-type: none;
-}
+    li {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;  
+        cursor: pointer;
+        width: 100%;
+        padding: 3px 5px 3px 3px;
+        text-decoration: none;
+        list-style-type: none;
+    }
 
-#sidebar li:hover,
-#sidebar li:focus {
-    color: $light-background;
-    background-color: black;
-    text-decoration: none;
-}
+    li:hover,
+    li:focus {
+        color: $light-background;
+        background-color: black;
+        text-decoration: none;
+    }
 
-a,
-a:hover,
-a:focus,
-a:active {
-    all: unset; 
-    /*TODO: fix nav link styling*/
-}
+    .nav-title:hover,
+    .nav-title:focus {
+        display: inline;
+        color: $light-background;
+    }
 
-.nav-title:hover,
-.nav-title:focus {
-    display: inline;
-    color: $light-background;
+    .nav-icon {
+        padding: 10px 9px 10px 19px;
+    }
 }
-
-.nav-icon-side {
-    padding: 10px 9px 10px 19px;
-}
-
-.nav-icon-top {
-    margin: 15px 15px 15px 0;
-}
-
 
 /*****************/
 /*** Dashboard ***/
@@ -186,20 +187,22 @@ a:active {
 /*** Analytics ***/
 /*****************/
 
-#analytics .setup,
-#analytics .chart {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
+#analytics {
+    .setup,
+    .chart {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
 
-#analytics .setup > * {
-    padding: 3px;
-    margin: 15px;
-}
+    .setup > * {
+        padding: 3px;
+        margin: 15px;
+    }
 
-#analytics .setup * {
-    padding: 2px;
+    .setup * {
+        padding: 2px;
+    }
 }
 
 /* Display calender as additional column on wide screens */

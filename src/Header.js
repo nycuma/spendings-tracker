@@ -10,7 +10,7 @@ function Header() {
     return (
         <header>   
             <button id="generate-btn" title="Requires restart (TODO)" onClick={() => Utils.generateRandomData(150, someTimeAgo, today)}>Generate random data</button>
-            <Box className="nav-icon nav-icon-top" /> 
+            <Box className="nav-icon nav-icon" /> 
         </header>
     );
 }

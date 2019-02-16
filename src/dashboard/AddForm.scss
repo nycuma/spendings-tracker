@@ -4,54 +4,54 @@
     position: fixed;
     top: 50%;
     left: 50%;
-    /* bring your own prefixes */
     transform: translate(-50%, -50%);
-
     padding: 20px;
     background-color: $modal-background;
     border-radius: 10px;
     box-shadow: -3px 3px 15px 4px #666666;
 }
 
-#add-form table {
-    margin: auto;
-    text-align: left;
-    color: $primary-color-1; 
-}
+#add-form {
+    table {
+        margin: auto;
+        text-align: left;
+        color: $primary-color-1; 
 
-#add-form table input {
-    box-sizing: border-box;
-    width: 100%;
-    height: 1,5em;
-    border: none;
-    padding: 5px;
-}
+        input {
+            box-sizing: border-box;
+            width: 100%;
+            height: 1,5em;
+            border: none;
+            padding: 5px;
+        }
 
-#add-form select {
-    box-sizing: border-box;
-    width: 100%;
-    height: 2em;
-    border: none;
-    background-color: white;
-}
+        input[type=submit] {
+            color: white;
+            box-align: right;
+            text-align: right;
+            margin: 4px;
+            padding: 5px;
+            background-color: $primary-color-1;
+            border: none;
+            font-weight: normal;
+        }
 
-#add-form table input[type=submit] {
-    color: white;
-    box-align: right;
-    text-align: right;
-    margin: 4px;
-    padding: 5px;
-    background-color: $primary-color-1;
-    border: none;
-    font-weight: normal;
-}
+        input[type=submit]:hover,
+        input[type=submit]:focus,
+        input[type=submit]:active {
+            color: white;
+            margin: 4px;
+            padding: 5px;
+        }
 
-#add-form input[type=submit]:hover,
-#add-form input[type=submit]:focus,
-#add-form input[type=submit]:active {
-    color: white;
-    margin: 4px;
-    padding: 5px;
+        select {
+            box-sizing: border-box;
+            width: 100%;
+            height: 2em;
+            border: none;
+            background-color: white;
+        }
+    }
 }
 
 #tooltip-error {
@@ -72,7 +72,6 @@
     margin: 2px;
     background: transparent;
     border: none;
-
 }
 
 
