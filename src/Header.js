@@ -9,7 +9,10 @@ function Header() {
 
     return (
         <header>   
-            <button id="generate-btn" title="Requires restart (TODO)" onClick={() => Utils.generateRandomData(150, someTimeAgo, today)}>Generate random data</button>
+            <div className="wrapper-generate-btn">
+                <button id="generate-btn" onClick={() => Utils.generateRandomData(150, someTimeAgo, today)}>Generate random data</button>
+                <span className="btn-sub-title">Requires page reload (TODO)</span>
+            </div>
             <Box className="nav-icon nav-icon" /> 
         </header>
     );

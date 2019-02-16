@@ -52,6 +52,10 @@ a:active {
     margin: 10px;
 }
 
+.scroll-x-axis {
+    overflow-x: scroll;
+}
+
 .align-right {
     text-align: right;
 }
@@ -87,7 +91,8 @@ header {
         color: $light-background;
         font-family: 'rubik-regular', sans-serif;
         font-size: 18px;
-        margin: 13px 10px 10px 10px;
+        /*margin: 13px 10px 10px 10px;*/
+        margin: 0;
         padding: 0;
         background-color: transparent;
         border: none;
@@ -98,12 +103,25 @@ header {
     button:focus,
     button:active {
         color: white;
-        margin: 13px 10px 10px 10px;
+        /*argin: 13px 10px 10px 10px;*/
+        margin: 0;
         padding: 0;
     }
 
     .nav-icon {
         margin: 15px 15px 15px 0;
+    }
+
+    .wrapper-generate-btn {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 13px 10px 10px 10px;
+        /*align-content: flex-start;*/
+    }
+
+    .btn-sub-title {
+        font-size: x-small;
     }
 }
 
