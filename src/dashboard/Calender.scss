@@ -1,5 +1,7 @@
+@import "../variables.scss";
+
 .add-action {
-    color: #58747E;
+    color: $primary-color-1;
     font-weight: bold;
     padding: 0;
     margin: 5px;
@@ -15,8 +17,8 @@
 }
 
 button.add-pos-btn {
-    color: #EFECEB;
-    background-color: #58747E;
+    color: $modal-background;
+    background-color: $primary-color-1;
     font-size: larger;
     font-weight: bold;
     border: none;

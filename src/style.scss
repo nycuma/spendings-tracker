@@ -1,8 +1,8 @@
+@import "./variables.scss";
+
 /**
  * Import Fonts
  */
-
-
  @font-face {
     font-family: 'rubik-regular';
     src: url('./fonts/rubik/rubik-regular-webfont.woff2') format('woff2'),
@@ -14,7 +14,7 @@
 
 
 body {
-    background-color: #FAFAFA;
+    background-color: $light-background;
     font-family: 'rubik-regular', sans-serif;
     margin: 0;
     padding: 0;
@@ -25,20 +25,20 @@ button {
 }
 
 h4 {
-    color: #7E6258;
+    color: $primary-color-2;
   }
 
 .font-small-colored {
-    color: #7E6258;
+    color: $primary-color-2;
     font-size: smaller;
     text-indent: 1em;
 }
 
 .border-dashed {
     width: 95%;
-    background-color: #FAFAFA;
+    background-color: $light-background;
     border-radius: 2px;
-    border: 1px dashed #58747E;
+    border: 1px dashed $primary-color-1;
     overflow-x: hidden;
     padding: 5px;
     margin: 10px;
@@ -72,12 +72,12 @@ header {
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: flex-end;
-    background-color: #58747E;
-    color: #f1f4f4;   
+    background-color: $primary-color-1;
+    color: $light-background   
 }
 
 header button {
-    color: #f1f4f4;
+    color: $light-background;
     font-family: 'rubik-regular', sans-serif;
     font-size: 18px;
     margin: 13px 10px 10px 10px;
@@ -97,7 +97,7 @@ header button:active {
 }
 
 .menu-item-headline {
-    color: #58747E;
+    color: $primary-color-1;
     grid-column: 1 / 3;
 }
 
@@ -142,7 +142,7 @@ header button:active {
 
 #sidebar li:hover,
 #sidebar li:focus {
-    color: #FAFAFA;
+    color: $light-background;
     background-color: black;
     text-decoration: none;
 }
@@ -158,7 +158,7 @@ a:active {
 .nav-title:hover,
 .nav-title:focus {
     display: inline;
-    color: #FAFAFA;
+    color: $light-background;
 }
 
 .nav-icon-side {

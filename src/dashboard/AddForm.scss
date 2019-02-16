@@ -1,3 +1,5 @@
+@import "../variables.scss";
+
 #add-modal {
     position: fixed;
     top: 50%;
@@ -6,7 +8,7 @@
     transform: translate(-50%, -50%);
 
     padding: 20px;
-    background-color: #EFECEB;
+    background-color: $modal-background;
     border-radius: 10px;
     box-shadow: -3px 3px 15px 4px #666666;
 }
@@ -14,7 +16,7 @@
 #add-form table {
     margin: auto;
     text-align: left;
-    color: #58747E; 
+    color: $primary-color-1; 
 }
 
 #add-form table input {
@@ -39,7 +41,7 @@
     text-align: right;
     margin: 4px;
     padding: 5px;
-    background-color: #58747E;
+    background-color: $primary-color-1;
     border: none;
     font-weight: normal;
 }
@@ -58,7 +60,7 @@
     color: red;
     border: none;
     padding: 1px;
-    background-color: #ffe6e6;
+    background-color: $error-input;
 }
 
 .close-X {
@@ -66,7 +68,7 @@
     top: 0px;
     right: 3px;
     padding: 0;
-    color: #58747E;
+    color: $primary-color-1;
     margin: 2px;
     background: transparent;
     border: none;

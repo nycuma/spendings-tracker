@@ -1,8 +1,10 @@
+@import "../variables.scss";
+
 .hover-total-amount-day {
     position: absolute;
     font-weight: bold;
     color: white;
-    background-color: #58747E;
+    background-color: $primary-color-1;
     padding: 4px;
     z-index: 100;
 }
