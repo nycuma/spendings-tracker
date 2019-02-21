@@ -68,10 +68,10 @@ class Main extends Component {
                 removeCategory: this.removeCategory
             }}>
                 <Switch>
-                    <Route exact path='/' component={Dashboard}/>
-                    <Route path='/dashboard' component={Dashboard}/>
-                    <Route path='/analytics' component={Analytics}/>
-                    <Route path='/settings' component={Settings}/>
+                    <Route exact path={Constants.BASE_URL + '/'} component={Dashboard}/>
+                    <Route path={Constants.BASE_URL + '/dashboard'} component={Dashboard}/>
+                    <Route path={Constants.BASE_URL + '/analytics'} component={Analytics}/>
+                    <Route path={Constants.BASE_URL + '/settings'} component={Settings}/>
                 </Switch>
             </PreferenceContext.Provider>
         </div>

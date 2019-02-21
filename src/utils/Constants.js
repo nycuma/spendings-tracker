@@ -1,4 +1,5 @@
 export const Constants = {
+    BASE_URL: '/spendings-tracker',
     LOCALE_DECIMAL_OPTIONS: { 
         style: 'decimal', 
         minimumFractionDigits: 2, 
