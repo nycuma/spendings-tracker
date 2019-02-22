@@ -79,8 +79,7 @@ class Calender extends React.Component {
                 backgroundColor: '#7E6258',
             },
             dayWithSpending: {
-                fontWeight: 'bold',
-                fontSize: 'larger'
+                fontWeight: 'bold'
             }
         };
 
