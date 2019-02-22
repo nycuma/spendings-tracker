@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Home, BarChart2, Settings } from 'react-feather';
-import { Constants } from './utils/Constants';
 import './style.scss';
 
 class Sidebar extends React.Component {
@@ -34,7 +33,7 @@ class Sidebar extends React.Component {
                 <ul>
                     <li onMouseEnter={() => this.toggleNavTitle('displayTitleDashboard')}
                         onMouseLeave={() => this.toggleNavTitle('displayTitleDashboard')} >
-                        <Link to={Constants.BASE_URL + '/dashboard'}>
+                        <Link to="/dashboard">
                             <Home 
                                 width="27"
                                 height="27"
@@ -47,7 +46,7 @@ class Sidebar extends React.Component {
                     
                     <li onMouseEnter={() => this.toggleNavTitle('displayTitleAnalytics')}
                         onMouseLeave={() => this.toggleNavTitle('displayTitleAnalytics')} >
-                        <Link to={Constants.BASE_URL + '/analytics'}>
+                        <Link to="/analytics">
                             <BarChart2 
                                 width="27"
                                 height="27"
@@ -59,7 +58,7 @@ class Sidebar extends React.Component {
 
                     <li onMouseEnter={() => this.toggleNavTitle('displayTitleSettings')}
                         onMouseLeave={() => this.toggleNavTitle('displayTitleSettings')} >
-                        <Link to={Constants.BASE_URL + '/settings'}>
+                        <Link to="/settings">
                             <Settings 
                                 width="27"
                                 height="27"
