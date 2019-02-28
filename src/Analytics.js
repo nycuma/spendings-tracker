@@ -12,7 +12,7 @@ import endOfYear from 'date-fns/end_of_year';
 import eachDay from 'date-fns/each_day';
 import dateFnsFormat from 'date-fns/format';
 import { Constants } from './utils/Constants';
-import { PreferenceContext } from './utils/Contexts';
+import { PreferenceConsumer } from './utils/Contexts';
 import { getSpendingsBetween} from './utils/LocalStore';
 import Utils from './utils/Utils';
 
@@ -116,13 +116,13 @@ class Analytics extends Component {
                         <div>Categories:&nbsp;
                             <select value={this.state.category} onChange={(e) => this.handleCategory(e)}>
                                 <option value="all">All</option>
-                                <PreferenceContext.Consumer>
+                                <PreferenceConsumer>
                                     {({categories}) => {
                                         const optionsCats = categories.map((cat) => 
                                                 <option key={cat.value} value={cat.value}>{cat.label}</option>);
                                         return (optionsCats);
                                     }}
-                                </PreferenceContext.Consumer>
+                                </PreferenceConsumer>
                             </select>
                         </div>
                         <div>

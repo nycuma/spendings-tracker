@@ -5,7 +5,7 @@ import AddForm from './dashboard/AddForm';
 import Tiles from './dashboard/Tiles';
 import Utils from './utils/Utils';
 import * as localStore from './utils/LocalStore';
-import { PreferenceContext } from './utils/Contexts';
+import { PreferenceConsumer } from './utils/Contexts';
 import './dashboard/Dashboard.scss';
 
 class Dashboard extends React.Component {
@@ -173,7 +173,7 @@ class Dashboard extends React.Component {
                     />
 
                     {this.state.addFormIsVisible &&
-                        <PreferenceContext.Consumer>
+                        <PreferenceConsumer>
                             {({locale, categories}) => (
                                 <AddForm 
                                     selectedDay={this.state.selectedDay}
@@ -183,7 +183,7 @@ class Dashboard extends React.Component {
                                     categories={categories}
                                 /> 
                             )}
-                        </PreferenceContext.Consumer>
+                        </PreferenceConsumer>
                         
                     }
                 
@@ -191,6 +191,6 @@ class Dashboard extends React.Component {
         );
     }
 }
-Dashboard.contextType = PreferenceContext; // TODO this.context not working..
+//Dashboard.contextType = PreferenceContext; // TODO this.context not working..
 
 export default Dashboard;

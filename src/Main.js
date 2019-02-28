@@ -5,51 +5,10 @@ import Dashboard from './Dashboard';
 import Analytics from './Analytics';
 import Settings from './Settings';
 import Sidebar from './Sidebar';
-import { loadCurrency, loadLocale, loadCategories, 
-    saveCurrency, saveLocale, saveCategories } from './utils/LocalStore';
-import { Constants } from './utils/Constants';
-import { PreferenceContext } from './utils/Contexts';
+import { PreferenceProvider } from './utils/Contexts';
 import './style.scss';
 
 class Main extends Component {
-    constructor(props) {
-        super(props);
-        this.updateCurrency = this.updateCurrency.bind(this);
-        this.updateLocale = this.updateLocale.bind(this);
-        this.addCategory = this.addCategory.bind(this);
-        this.removeCategory = this.removeCategory.bind(this);
-
-        this.state = {
-            currency: loadCurrency() || Constants.DEFAULT_CURRENCY,
-            locale: loadLocale() || Constants.DEFAULT_LOCALE,
-            categories: loadCategories() || Constants.DEFAULT_CATEGORIES
-        };
-    }
-
-    componentWillUnmount() {
-        saveCurrency(this.state.currency);
-        saveLocale(this.state.locale);
-        saveCategories(this.state.categories);
-    }
-
-    updateCurrency(e) {
-        this.setState({ currency: e.target.value });
-    }   
-
-    updateLocale(e) {
-        this.setState({ locale: e.target.value });
-    }  
-
-    addCategory(newVal) {
-        this.setState({ categories: [...this.state.categories, newVal] });
-    }
-
-    removeCategory(catValue) {
-        let index = this.state.categories.findIndex(cat => cat.value === catValue);
-        let copy = this.state.categories.slice();
-        copy.splice(index, 1);
-        this.setState({ categories: copy });
-    }
 
     render() {
         return (
@@ -58,22 +17,14 @@ class Main extends Component {
             <nav className="box">
                 <Sidebar />
             </nav>
-            <PreferenceContext.Provider value={{
-                currency: this.state.currency,
-                locale: this.state.locale,
-                categories: this.state.categories,
-                updateCurrency: this.updateCurrency,
-                updateLocale: this.updateLocale,
-                addCategory: this.addCategory,
-                removeCategory: this.removeCategory
-            }}>
+            <PreferenceProvider>
                 <Switch>
                     <Route exact path="/" component={Dashboard}/>
                     <Route path="/dashboard" component={Dashboard}/>
                     <Route path="/analytics" component={Analytics}/>
                     <Route path="/settings" component={Settings}/>
                 </Switch>
-            </PreferenceContext.Provider>
+            </PreferenceProvider>
         </div>
         );
     }

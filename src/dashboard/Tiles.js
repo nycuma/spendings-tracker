@@ -6,7 +6,7 @@ import TotalSpendings from './tiles/TotalSpendings';
 import CategoriesPieChart from './tiles/CategoriesPieChart';
 import RecentHistory from './tiles/RecentHistory';
 import RecurrentSpendings from './tiles/RecurrentSpendings';
-import { PreferenceContext } from '../utils/Contexts';
+import { PreferenceConsumer } from '../utils/Contexts';
 import { Constants } from '../utils/Constants';
 import './tiles/Tiles.scss';
 
@@ -32,7 +32,7 @@ class Tiles extends React.Component {
 
     render() {
         return (
-            <PreferenceContext.Consumer>
+            <PreferenceConsumer>
             {({currency, locale, categories}) => {
                 let currencyOptions = { ...Constants.DEFAULT_CURRENCY_OPTIONS, ...{ currency: currency }};
 
@@ -97,7 +97,7 @@ class Tiles extends React.Component {
                     </div>
                 );
             }}
-            </PreferenceContext.Consumer>
+            </PreferenceConsumer>
             
         );
     }
