@@ -43,10 +43,7 @@ class PreferenceProvider extends React.Component {
     }
 
     removeCategory = (catValue) => {
-        let index = this.state.categories.findIndex(cat => cat.value === catValue);
-        let copy = this.state.categories.slice();
-        copy.splice(index, 1);
-        this.setState({ categories: copy });
+        this.setState({ categories: this.state.categories.filter(cat => cat.value !== catValue) });
     }
 
     render() {
