@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import SpendingsToday from './tiles/SpendingsToday';
 import SpendingsSingleDay from './tiles/SpendingsSingleDay';
 import TotalSpendings from './tiles/TotalSpendings';
 import CategoriesPieChart from './tiles/CategoriesPieChart';
@@ -20,7 +19,6 @@ class Tiles extends React.Component {
                 spendingsSingleDay: true,
                 totalSpendings: true,
                 recentHistory: true,
-                spendingsToday: true,
                 recurrentSpendings: true
             }
         };
@@ -44,15 +42,18 @@ class Tiles extends React.Component {
                                 categories={categories}
                             />
                         }
-        
-                        {this.state.display.spendingsToday &&
-                            <SpendingsToday 
+
+                        {this.state.display.spendingsSingleDay &&
+                            <SpendingsSingleDay
                                 toggleDisplay={this.toggleDisplay}
                                 locale={locale}
                                 currencyOptions={currencyOptions}
                                 categories={categories}
+
+                                onlyToday={true}
+                                spendingsForDay={this.props.spendingsForDay}
                             />
-                        }
+                        }  
         
                         {this.state.display.totalSpendings &&
                             <TotalSpendings 
@@ -78,12 +79,14 @@ class Tiles extends React.Component {
                         {this.state.display.spendingsSingleDay &&
                             <SpendingsSingleDay
                                 toggleDisplay={this.toggleDisplay}
-                                totalAmountDay={this.props.totalAmountDay}
-                                spendingsForDay={this.props.spendingsForDay}
-                                selectedDay={this.props.selectedDay}
                                 locale={locale}
                                 currencyOptions={currencyOptions}
                                 categories={categories}
+
+                                onlyToday={false}
+                                totalAmountDay={this.props.totalAmountDay}
+                                spendingsForDay={this.props.spendingsForDay}
+                                selectedDay={this.props.selectedDay}
                             />
                         }  
         

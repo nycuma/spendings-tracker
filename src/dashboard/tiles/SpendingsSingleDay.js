@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import dateFnsFormat from 'date-fns/format';
+import Utils from '../../utils/Utils';
+import { getSpendings } from '../../utils/LocalStore';
 import { Constants } from '../../utils/Constants';
 import './Tiles.scss';
 
-class SpendingsSingleDay extends React.Component { // TODO Merge with SpendingsToday
+class SpendingsSingleDay extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            //spendingThisDay: 
             catExpandedView: this.initStateObject()
         };
     }
@@ -24,31 +25,9 @@ class SpendingsSingleDay extends React.Component { // TODO Merge with SpendingsT
     initStateObject() {
         let stateExpandedView = {};
         this.props.categories.forEach((cat) => {
-            stateExpandedView[cat.value] = false;
+            stateExpandedView[cat.value] = this.props.onlyToday ? true : false;
         });
         return stateExpandedView;
-    }
-    
-    calculateTotalAmountPerCategory(cat) {
-        if (this.props.spendingsForDay && this.props.spendingsForDay.length > 0) {
-            return this.props.spendingsForDay.filter((item) => {
-                return item.cat === cat;
-            }).map((item) => {
-                return item.amount;
-            }).reduce((prevAmount, nextAmount) => {
-                return prevAmount + nextAmount;
-            }, 0);
-        }
-
-        return 0;  
-    }
-
-    getSpendingsPositionByCat(cat) {
-        if (this.props.spendingsForDay && this.props.spendingsForDay.length > 0) {
-            return this.props.spendingsForDay.filter((item) => {
-                return item.cat === cat;
-            });
-        }
     }
 
     toggleDisplayAllPositionsForCat(cat) {
@@ -57,10 +36,9 @@ class SpendingsSingleDay extends React.Component { // TODO Merge with SpendingsT
         this.setState({ catExpandedView: updatedCatState });
     }
 
-    renderTableBody() {
-
+    renderTableBody(spendingsDay) {
         return this.props.categories.map((cat) => {
-            let amountSpent = this.calculateTotalAmountPerCategory(cat.value);
+            let amountSpent = Utils.calculateTotalAmountByCategory(spendingsDay, cat.value);
             let arrowClass = amountSpent > 0 ? (this.state.catExpandedView[cat.value] ? 'arrow-up' : 'arrow-down') : '';
             return (
                 <tbody key={cat.value}>
@@ -69,14 +47,14 @@ class SpendingsSingleDay extends React.Component { // TODO Merge with SpendingsT
                         <td className="cell-amount">{amountSpent.toLocaleString(this.props.locale, this.props.currencyOptions)}</td>
                         <td className="arrow"><span className={arrowClass} onClick={() => this.toggleDisplayAllPositionsForCat(cat.value)}></span></td>
                     </tr>
-                    {this.renderSpendingsPositons(cat.value)}
+                    {this.renderSpendingsPositons(spendingsDay, cat.value)}
                 </tbody>
             );
         });
     }
 
-    renderSpendingsPositons(cat) {
-        let spendingPositions = this.getSpendingsPositionByCat(cat);
+    renderSpendingsPositons(spendingsDay, cat) {
+        let spendingPositions = Utils.filterSpendingsByCategory(spendingsDay, cat);
         let displayExpanded = this.state.catExpandedView[cat] ? '' : 'none';
 
         if (spendingPositions) {
@@ -89,22 +67,24 @@ class SpendingsSingleDay extends React.Component { // TODO Merge with SpendingsT
                 );
             });
         }
-
     }
 
     render() {
+        const spendings = this.props.onlyToday ? getSpendings(new Date()) : this.props.spendingsForDay;
+        const total = this.props.onlyToday ? Utils.calculateSumOfSpendings(spendings) : this.props.totalAmountDay;
+        const title = this.props.onlyToday ? 'Today\'s Spendings' : 'Spendings on ' + dateFnsFormat(this.props.selectedDay, Constants.DATE_FORMAT);
         return( 
             <div className="tile">
                 <button className="close-tile" title="Close" onClick={() => this.props.toggleDisplay('spendingsSingleDay')}>
                     x
                 </button>
-                <h4>Spendings on {dateFnsFormat(this.props.selectedDay, Constants.DATE_FORMAT)}</h4>
+                <h4>{title}</h4>
                 <table className="table-spendings">  
-                    {this.renderTableBody()}    
+                    {this.renderTableBody(spendings)}    
                     <tfoot>
                         <tr>
                             <td><b>Total</b></td>
-                            <td className="cell-amount"><b>{this.props.totalAmountDay.toLocaleString(this.props.locale, this.props.currencyOptions)}</b></td>
+                            <td className="cell-amount"><b>{total.toLocaleString(this.props.locale, this.props.currencyOptions)}</b></td>
                         </tr>
                     </tfoot>      
                 </table>
@@ -120,7 +100,8 @@ SpendingsSingleDay.propTypes = {
     totalAmountDay: PropTypes.number,
     spendingsForDay: PropTypes.arrayOf(PropTypes.object),
     categories: PropTypes.arrayOf(PropTypes.object).isRequired,
-    toggleDisplay: PropTypes.func.isRequired
+    toggleDisplay: PropTypes.func.isRequired,
+    onlyToday: PropTypes.bool.isRequired
 };
 
 export default SpendingsSingleDay;
