@@ -29,8 +29,9 @@ function RecurrentSpendings(props) {
                         </tr>) 
                         : <tr><td>No recurrent spendings found</td></tr>;
 
+    let classes = props.fadeout ? 'tile fade-out' : 'tile';
     return (
-        <div className="tile">
+        <div className={classes}>
             <button className="close-tile" title="Close" onClick={() => props.toggleDisplay('recurrentSpendings')}>
                 x
             </button>
@@ -50,7 +51,8 @@ function RecurrentSpendings(props) {
 RecurrentSpendings.propTypes = {
     locale: PropTypes.string.isRequired,
     currencyOptions: PropTypes.object.isRequired,
-    toggleDisplay: PropTypes.func.isRequired
+    toggleDisplay: PropTypes.func.isRequired,
+    fadeout: PropTypes.bool.isRequired
 };
 
 export default RecurrentSpendings;

@@ -20,12 +20,22 @@ class Tiles extends React.Component {
                 totalSpendings: true,
                 recentHistory: true,
                 recurrentSpendings: true
+            },
+            fadeout: {
+                catPieChart: false,
+                spendingsSingleDay: false,
+                totalSpendings: false,
+                recentHistory: false,
+                recurrentSpendings: false
             }
         };
     }
 
     toggleDisplay(tile) {
-        this.setState({ display: {...this.state.display, ...{[tile] : !this.state.display[tile]} } });
+        this.setState({ fadeout: {...this.state.fadeout, ...{[tile] : !this.state.fadeout[tile]} } });
+        setTimeout(() => {
+            this.setState({ display: {...this.state.display, ...{[tile] : !this.state.display[tile]} } });
+        }, 500);
     }
 
     render() {
@@ -40,6 +50,7 @@ class Tiles extends React.Component {
                             <CategoriesPieChart 
                                 toggleDisplay={this.toggleDisplay}
                                 categories={categories}
+                                fadeout={this.state.fadeout.catPieChart}
                             />
                         }
 
@@ -49,6 +60,7 @@ class Tiles extends React.Component {
                                 locale={locale}
                                 currencyOptions={currencyOptions}
                                 categories={categories}
+                                fadeout={this.state.fadeout.spendingsSingleDay}
 
                                 onlyToday={true}
                                 spendingsForDay={this.props.spendingsForDay}
@@ -64,6 +76,7 @@ class Tiles extends React.Component {
                                 totalAmountYear={this.props.totalAmountYear}
                                 locale={locale}
                                 currencyOptions={currencyOptions}
+                                fadeout={this.state.fadeout.totalSpendings}
                             />
                         }
         
@@ -73,6 +86,7 @@ class Tiles extends React.Component {
                                 recentSpendings={this.props.recentSpendings}
                                 locale={locale}
                                 currencyOptions={currencyOptions}
+                                fadeout={this.state.fadeout.recentHistory}
                             />
                         }
         
@@ -82,6 +96,7 @@ class Tiles extends React.Component {
                                 locale={locale}
                                 currencyOptions={currencyOptions}
                                 categories={categories}
+                                fadeout={this.state.fadeout.spendingsSingleDay}
 
                                 onlyToday={false}
                                 totalAmountDay={this.props.totalAmountDay}
@@ -95,6 +110,7 @@ class Tiles extends React.Component {
                                 toggleDisplay={this.toggleDisplay}
                                 locale={locale}
                                 currencyOptions={currencyOptions}
+                                fadeout={this.state.fadeout.recurrentSpendings}
                             />
                         } 
                     </div>

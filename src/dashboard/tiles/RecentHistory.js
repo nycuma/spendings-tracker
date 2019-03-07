@@ -17,8 +17,9 @@ function RecentHistory(props) {
         );
     });
 
+    let classes = props.fadeout ? 'tile fade-out' : 'tile';
     return (
-        <div className="tile">
+        <div className={classes}>
             <button className="close-tile" title="Close" onClick={() => props.toggleDisplay('recentHistory')}>
                 x
             </button>
@@ -36,7 +37,8 @@ RecentHistory.propTypes = {
     locale: PropTypes.string.isRequired,
     currencyOptions: PropTypes.object.isRequired,
     recentSpendings: PropTypes.arrayOf(PropTypes.object),
-    toggleDisplay: PropTypes.func.isRequired
+    toggleDisplay: PropTypes.func.isRequired,
+    fadeout: PropTypes.bool.isRequired
 };
 
 export default RecentHistory;

@@ -23,9 +23,9 @@ function CategoriesPieChart(props) {
             value: data[i].amount };
         });
     }
-    
+    let classes = props.fadeout ? 'tile fade-out' : 'tile';
     return (
-        <div className="tile">
+        <div className={classes}>
             <button className="close-tile" title="Close" onClick={() => props.toggleDisplay('catPieChart')}>
                 x
             </button>
@@ -47,7 +47,8 @@ function CategoriesPieChart(props) {
 
 CategoriesPieChart.propTypes = {
     toggleDisplay: PropTypes.func.isRequired,
-    categories: PropTypes.arrayOf(PropTypes.object).isRequired
+    categories: PropTypes.arrayOf(PropTypes.object).isRequired,
+    fadeout: PropTypes.bool.isRequired
 };
 
 export default CategoriesPieChart;

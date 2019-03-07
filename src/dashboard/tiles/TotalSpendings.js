@@ -6,9 +6,9 @@ import './Tiles.scss';
  * Shows total spendings of today, current week, month & year.
  */
 function TotalSpendings(props) {
-
+    let classes = props.fadeout ? 'tile fade-out' : 'tile';
     return (
-        <div className="tile">
+        <div className={classes}>
             <button className="close-tile" title="Close" onClick={() => props.toggleDisplay('totalSpendings')}>
                 x
             </button>
@@ -44,7 +44,8 @@ TotalSpendings.propTypes = {
     totalAmountWeek: PropTypes.number,
     totalAmountMonth: PropTypes.number,
     totalAmountYear: PropTypes.number,
-    toggleDisplay: PropTypes.func.isRequired
+    toggleDisplay: PropTypes.func.isRequired,
+    fadeout: PropTypes.bool.isRequired
 };
 
 export default TotalSpendings;

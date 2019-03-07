@@ -68,13 +68,14 @@ class SpendingsSingleDay extends React.Component {
             });
         }
     }
-
+    
     render() {
+        let classes = this.props.fadeout ? 'tile fade-out' : 'tile';
         const spendings = this.props.onlyToday ? getSpendings(new Date()) : this.props.spendingsForDay;
         const total = this.props.onlyToday ? Utils.calculateSumOfSpendings(spendings) : this.props.totalAmountDay;
         const title = this.props.onlyToday ? 'Today\'s Spendings' : 'Spendings on ' + dateFnsFormat(this.props.selectedDay, Constants.DATE_FORMAT);
         return( 
-            <div className="tile">
+            <div className={classes}>
                 <button className="close-tile" title="Close" onClick={() => this.props.toggleDisplay('spendingsSingleDay')}>
                     x
                 </button>
@@ -101,7 +102,8 @@ SpendingsSingleDay.propTypes = {
     spendingsForDay: PropTypes.arrayOf(PropTypes.object),
     categories: PropTypes.arrayOf(PropTypes.object).isRequired,
     toggleDisplay: PropTypes.func.isRequired,
-    onlyToday: PropTypes.bool.isRequired
+    onlyToday: PropTypes.bool.isRequired,
+    fadeout: PropTypes.bool.isRequired
 };
 
 export default SpendingsSingleDay;
