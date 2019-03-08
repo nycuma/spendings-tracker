@@ -11,12 +11,6 @@ import './dashboard/Dashboard.scss';
 class Dashboard extends React.Component {
     constructor(props) {
         super(props);
-        this.updateSelectedDay = this.updateSelectedDay.bind(this);
-        this.addSpendingsPosition = this.addSpendingsPosition.bind(this);
-        this.handleFileUpload = this.handleFileUpload.bind(this);
-        this.onClose = this.onClose.bind(this);
-        this.openAddModal = this.openAddModal.bind(this);
-        this.openImportModal = this.openImportModal.bind(this);
         this.state = {
             selectedDay: new Date(),
             recentSpendings: [],
@@ -167,9 +161,9 @@ class Dashboard extends React.Component {
 
                     <Calender
                         selectedDay={this.state.selectedDay}
-                        updateSelectedDay={this.updateSelectedDay}
-                        openAddModal={this.openAddModal}  
-                        openImportModal={this.openImportModal}  
+                        updateSelectedDay={(day) => this.updateSelectedDay(day)}
+                        openAddModal={() => this.openAddModal()}  
+                        openImportModal={(e) => this.openImportModal(e)}  
                     />
 
                     {this.state.addFormIsVisible &&
@@ -177,8 +171,8 @@ class Dashboard extends React.Component {
                             {({locale, categories}) => (
                                 <AddForm 
                                     selectedDay={this.state.selectedDay}
-                                    addSpendingsPosition={this.addSpendingsPosition} 
-                                    onClose={this.onClose}
+                                    addSpendingsPosition={(cat, amount, comment, day) => this.addSpendingsPosition(cat, amount, comment, day)} 
+                                    onClose={() => this.onClose()}
                                     locale={locale}
                                     categories={categories}
                                 /> 

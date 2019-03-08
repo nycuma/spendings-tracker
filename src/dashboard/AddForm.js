@@ -8,7 +8,6 @@ class SpendingsForm extends React.Component {
     constructor(props) {
         super(props);
         this.nodeRef = React.createRef();
-        this.handleClickOutideForm = this.handleClickOutideForm.bind(this);
         this.state = {
             valDay: this.initDay(),
             valCategory: 'food',
@@ -20,11 +19,11 @@ class SpendingsForm extends React.Component {
 
     componentDidMount() {
         // add event listener for clicks outside of form
-        document.addEventListener('click', this.handleClickOutideForm);
+        document.addEventListener('click', (e) => this.handleClickOutideForm(e));
     }
 
     componentWillUnmount() {
-        document.removeEventListener('click', this.handleClickOutideForm);
+        document.removeEventListener('click', (e) => this.handleClickOutideForm(e));
     }
 
     handleClickOutideForm(e) {

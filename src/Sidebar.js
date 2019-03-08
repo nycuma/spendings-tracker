@@ -15,7 +15,7 @@ class Sidebar extends React.Component {
     }
 
     componentDidMount() {
-        window.addEventListener('scroll', this.handleSidebarPosition.bind(this));
+        window.addEventListener('scroll', () => this.handleSidebarPosition());
     }
 
     handleSidebarPosition() {

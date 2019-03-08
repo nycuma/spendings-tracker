@@ -12,7 +12,6 @@ import './tiles/Tiles.scss';
 class Tiles extends React.Component {
     constructor(props) {
         super(props);
-        this.toggleDisplay = this.toggleDisplay.bind(this);
         this.state = {
             display : {
                 catPieChart: true,
@@ -48,7 +47,7 @@ class Tiles extends React.Component {
                     <div id="tiles" className="box">
                         {this.state.display.catPieChart && 
                             <CategoriesPieChart 
-                                toggleDisplay={this.toggleDisplay}
+                                toggleDisplay={(t) => this.toggleDisplay(t)}
                                 categories={categories}
                                 fadeout={this.state.fadeout.catPieChart}
                             />
@@ -56,7 +55,7 @@ class Tiles extends React.Component {
 
                         {this.state.display.spendingsSingleDay &&
                             <SpendingsSingleDay
-                                toggleDisplay={this.toggleDisplay}
+                                toggleDisplay={(t) => this.toggleDisplay(t)}
                                 locale={locale}
                                 currencyOptions={currencyOptions}
                                 categories={categories}
@@ -69,7 +68,7 @@ class Tiles extends React.Component {
         
                         {this.state.display.totalSpendings &&
                             <TotalSpendings 
-                                toggleDisplay={this.toggleDisplay}
+                                toggleDisplay={(t) => this.toggleDisplay(t)}
                                 totalAmountToday={this.props.totalAmountToday}
                                 totalAmountWeek={this.props.totalAmountWeek}
                                 totalAmountMonth={this.props.totalAmountMonth}
@@ -82,7 +81,7 @@ class Tiles extends React.Component {
         
                         {this.state.display.recentHistory &&
                             <RecentHistory 
-                                toggleDisplay={this.toggleDisplay}
+                                toggleDisplay={(t) => this.toggleDisplay(t)}
                                 recentSpendings={this.props.recentSpendings}
                                 locale={locale}
                                 currencyOptions={currencyOptions}
@@ -92,7 +91,7 @@ class Tiles extends React.Component {
         
                         {this.state.display.spendingsSingleDay &&
                             <SpendingsSingleDay
-                                toggleDisplay={this.toggleDisplay}
+                                toggleDisplay={(t) => this.toggleDisplay(t)}
                                 locale={locale}
                                 currencyOptions={currencyOptions}
                                 categories={categories}
@@ -107,7 +106,7 @@ class Tiles extends React.Component {
         
                         {this.state.display.recurrentSpendings &&
                             <RecurrentSpendings 
-                                toggleDisplay={this.toggleDisplay}
+                                toggleDisplay={(t) => this.toggleDisplay(t)}
                                 locale={locale}
                                 currencyOptions={currencyOptions}
                                 fadeout={this.state.fadeout.recurrentSpendings}
