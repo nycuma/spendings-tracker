@@ -3,9 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "https://nycuma.github.io/spendings-tracker",
+  "devDependencies": {
+    "gh-pages": "^2.0.1",
+    "react-scripts": "^2.1.8",
+    "redux-logger": "^3.0.6"
+  },
   "dependencies": {
     "date-fns": "^1.29.0",
-    "gh-pages": "^2.0.1",
     "node-sass": "^4.11.0",
     "react": "^16.8.1",
     "react-day-picker": "^7.2.4",
@@ -13,7 +17,6 @@
     "react-feather": "^1.1.4",
     "react-redux": "^6.0.1",
     "react-router-dom": "^4.3.1",
-    "react-scripts": "^2.1.5",
     "recharts": "^1.4.2",
     "redux": "^4.0.1",
     "store": "^2.0.12",
