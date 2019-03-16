@@ -93,7 +93,7 @@ const Utils = {
         if(!spendings || !day) {
             return [];
         }
-        
+
         return spendings.filter(item => isSameDay(new Date(item.day), day)); 
     },
 
@@ -138,12 +138,6 @@ const Utils = {
             return 0;
         }
         return spendings.map(item => item.amount).reduce((prev, next) => prev + next, 0);
-    },
-
-    isSameDay(date1, date2) {
-        return date1.getFullYear() === date2.getFullYear() 
-                && date1.getMonth() === date2.getMonth()
-                && date1.getDate() === date2.getDate();
     },
 
     dateInEachWeek(dateFrom, dateTo) {

@@ -3,8 +3,7 @@
  */
 import uuidv4 from 'uuid/v4';
 import store from 'store';
-import Utils from './Utils';
-import { isSameWeek, isSameMonth } from 'date-fns';
+import { isSameDay, isSameWeek, isSameMonth } from 'date-fns';
 import { Constants } from './Constants';
 
 const KEY_SPENDINGS = 'spendings';
@@ -35,7 +34,7 @@ const KEY_RECURRENT_SPENDINGS = 'recurrentSpending';
     }
 
     if(arguments.length === 1) {
-        return data.filter(item => Utils.isSameDay(new Date(item.day), date));
+        return data.filter(item => isSameDay(new Date(item.day), date));
     }
 
     if(onlySameWeek === true) {
