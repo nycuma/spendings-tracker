@@ -3,8 +3,7 @@ import uuidv4 from 'uuid/v4';
 import Calender from './dashboard/Calender';
 import AddForm from './dashboard/AddForm';
 import Tiles from './dashboard/Tiles';
-import Utils from './utils/Utils';
-import * as localStore from './utils/LocalStore';
+import { getSpendingsRecentlyAdded, postSpendingPosition} from './utils/LocalStore';
 import { PreferenceConsumer } from './utils/Contexts';
 import './dashboard/Dashboard.scss';
 
@@ -22,7 +21,7 @@ class Dashboard extends React.Component {
         this.fileSelector = this.initFileSelector();
         this.setState({
             // load recent spendings
-            recentSpendings: localStore.getSpendingsRecentlyAdded(15)
+            recentSpendings: getSpendingsRecentlyAdded(15)
         });
     }
 
@@ -51,46 +50,7 @@ class Dashboard extends React.Component {
         this.setState({
             recentSpendings: [newSpending].concat(this.state.recentSpendings)
         });
-        localStore.postSpendingPosition(newSpending);
-    }
-
-    getTotalAmountDay(date) {
-        let spendings = localStore.getSpendings(date ? date : this.state.selectedDay);
-        return Utils.calculateSumOfSpendings(spendings);
-    }
-
-    getTotalAmountWeek(date) {
-        let spendings = localStore.getSpendings(date ? date : this.state.selectedDay, true);
-        return Utils.calculateSumOfSpendings(spendings);
-    }
-
-    getTotalAmountMonth(date) {
-        let spendings = localStore.getSpendings(date ? date : this.state.selectedDay, false, true);
-        return Utils.calculateSumOfSpendings(spendings);
-    }
-
-    getTotalAmountYear(date) {
-        let spendings = localStore.getSpendings(date ? date : this.state.selectedDay, false, false, true);
-        return Utils.calculateSumOfSpendings(spendings);
-    }
-
-    /** TODO still needed?
-     * Returns an array that contains the total amount of
-     * money spent on each day for an entire month.
-     * Position i contains amount for (i+1)th day of the month.
-     * 
-     * @param {Number} month (Jan=0, Dec=11)
-     */
-    calculateTotalAmoutsPerDay(month) {
-        // init array with 0.00 as default value
-        let totalAmounts = new Array(Utils.getNumDaysOfMonth(this.state.selectedDay)).fill(0);
-        this.state.spendingPositions.filter((item) => {
-            return item.day.getMonth() === month;
-        }).forEach((item) => {
-            totalAmounts[item.day.getDate()-1] += item.amount;
-        });
-
-        return totalAmounts;
+        postSpendingPosition(newSpending);
     }
 
     openAddModal() {
@@ -144,12 +104,6 @@ class Dashboard extends React.Component {
         return (
             <div id="dashboard" className="box">
                     <Tiles 
-                        totalAmountToday={this.getTotalAmountDay(new Date())}
-                        totalAmountDay={this.getTotalAmountDay()}
-                        totalAmountWeek={this.getTotalAmountWeek(new Date())}
-                        totalAmountMonth={this.getTotalAmountMonth(new Date())}
-                        totalAmountYear={this.getTotalAmountYear(new Date())}
-
                         selectedDay={this.state.selectedDay}
                         recentSpendings={this.state.recentSpendings}
                     />
@@ -180,6 +134,5 @@ class Dashboard extends React.Component {
         );
     }
 }
-//Dashboard.contextType = PreferenceContext; // TODO this.context not working..
 
 export default Dashboard;

@@ -1,8 +1,8 @@
-import isLeapYear from 'date-fns/is_leap_year';
 import uuidv4 from 'uuid/v4';
 import addMonths from 'date-fns/add_months';
 import { saveSpendings } from './LocalStore';
-import { endOfMonth, isBefore, endOfWeek, addWeeks, endOfYear, addYears, isSameDay } from 'date-fns';
+import { endOfMonth, isBefore, endOfWeek, addWeeks, endOfYear, addYears, 
+    isSameDay, isSameWeek, isSameMonth, isSameYear } from 'date-fns';
 
 // Used for generating some random spendings
 const TEMPLATES = {
@@ -71,30 +71,36 @@ const TEMPLATES = {
 
 const Utils = {
 
-    getNumDaysOfMonth(date) {
-        let numDays;
-        switch(date.getMonth()) {
-            case 0: case 2: case 4: case 6: case 7: case 9: case 11:
-                numDays = 31;
-                break;
-            case 3: case 5: case 8: case 10:
-                numDays = 30;
-                break;
-            case 1: 
-                numDays = isLeapYear(date) ? 29 : 28;
-                break;
-            default:
-                numDays = 31;
-        }
-        return numDays;
-    },
-
     filterSpendingsByDay(spendings, day) {
         if(!spendings || !day) {
             return [];
         }
 
         return spendings.filter(item => isSameDay(new Date(item.day), day)); 
+    },
+
+    filterSpendingsByWeek(spendings, day) {
+        if(!spendings || !day) {
+            return [];
+        }
+
+        return spendings.filter(item => isSameWeek(new Date(item.day), day)); 
+    },
+
+    filterSpendingsByMonth(spendings, day) {
+        if(!spendings || !day) {
+            return [];
+        }
+
+        return spendings.filter(item => isSameMonth(new Date(item.day), day)); 
+    },
+
+    filterSpendingsByYear(spendings, day) {
+        if(!spendings || !day) {
+            return [];
+        }
+
+        return spendings.filter(item => isSameYear(new Date(item.day), day)); 
     },
 
     /**

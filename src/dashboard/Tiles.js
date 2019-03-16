@@ -68,10 +68,6 @@ class Tiles extends React.Component {
                         {this.state.display.totalSpendings &&
                             <TotalSpendings 
                                 toggleDisplay={(t) => this.toggleDisplay(t)}
-                                totalAmountToday={this.props.totalAmountToday}
-                                totalAmountWeek={this.props.totalAmountWeek}
-                                totalAmountMonth={this.props.totalAmountMonth}
-                                totalAmountYear={this.props.totalAmountYear}
                                 locale={locale}
                                 currencyOptions={currencyOptions}
                                 fadeout={this.state.fadeout.totalSpendings}
@@ -97,7 +93,6 @@ class Tiles extends React.Component {
                                 fadeout={this.state.fadeout.spendingsSingleDay}
 
                                 onlyToday={false}
-                                totalAmountDay={this.props.totalAmountDay}
                                 selectedDay={this.props.selectedDay}
                             />
                         }  
@@ -122,11 +117,6 @@ class Tiles extends React.Component {
 
 Tiles.propTypes = {
     selectedDay: PropTypes.instanceOf(Date).isRequired,
-    totalAmountDay: PropTypes.number,
-    totalAmountToday: PropTypes.number,
-    totalAmountWeek: PropTypes.number,
-    totalAmountMonth: PropTypes.number,
-    totalAmountYear: PropTypes.number,
     recentSpendings: PropTypes.arrayOf(PropTypes.object)
 };
 

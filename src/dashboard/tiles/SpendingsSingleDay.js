@@ -75,7 +75,7 @@ class SpendingsSingleDay extends React.Component {
         let classes = this.props.fadeout ? 'tile fade-out' : 'tile';
         const day = this.props.onlyToday ? new Date() : this.props.selectedDay;
         const spendingsForDay = Utils.filterSpendingsByDay(this.props.spendings, day);
-        const total = this.props.onlyToday ? Utils.calculateSumOfSpendings(spendingsForDay) : this.props.totalAmountDay;
+        const total = Utils.calculateSumOfSpendings(spendingsForDay);
         const title = this.props.onlyToday ? 'Today\'s Spendings' : 'Spendings on ' + dateFnsFormat(this.props.selectedDay, Constants.DATE_FORMAT);
         return( 
             <div className={classes}>
