@@ -116,12 +116,19 @@ export const postSpendingPosition = (pos) => {
     store.set(KEY_SPENDINGS, data);
 };
 
-export const saveSpendings = (spendingsArray) => {
-    let data = store.get(KEY_SPENDINGS);
-    if(!data) { 
-        data = []; 
+export const saveSpendings = (spendingsArray, shouldOverwrite) => {
+    if(!spendingsArray || spendingsArray.length === 0) {
+        return;
     }
-    store.set(KEY_SPENDINGS, [...data, ...spendingsArray]);
+
+    let newData;
+    if(shouldOverwrite) {
+        newData = spendingsArray;
+    } else {
+        let oldData = store.get(KEY_SPENDINGS) || [];
+        newData = [...oldData, ...spendingsArray];
+    }
+    store.set(KEY_SPENDINGS, newData);
 };
 
 export const loadCurrency = () => {
