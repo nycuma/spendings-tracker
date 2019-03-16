@@ -14,8 +14,8 @@ const KEY_LOCALE = 'locale';
 const KEY_RECURRENT_SPENDINGS = 'recurrentSpending';
 
  /**
-  * Returns spending positons that were spent on the same day / in the same year, month,
-  * or week as the reference date.
+  * Returns spending positons from local storage that were spent 
+  * on the same day / in the same year, month, or week as the reference date.
   * If no parameter is given, all spendings will be returned.
   * If only date is given, all spendings from the same day will be returned.
   * 
@@ -99,32 +99,6 @@ export const getSpendingsRecentlyAdded = (count) => {
     // return elements from the end of the array
     return data.slice(-count).reverse();
 };
-
-/**
- * Returns array with total amount spent on each categorie all time.
- * // TODO move to utils
- */
-export const getAmountSpentByCategory = (categories) => {
-    if(!categories || categories.length === 0) {
-        return [];
-    }
-
-    const data = store.get(KEY_SPENDINGS);
-    if(!data) { 
-        return []; 
-    }
-
-    return categories.map(cat => {
-        let amountByCat = data.filter(item => item.cat === cat.value)
-                              .map(item => item.amount)
-                              .reduce((prev, next) => prev + next, 0);
-        return {
-            cat: cat.value,
-            amount: Math.round(amountByCat)
-        };
-    });
-};
-
 
 export const postSpendingPosition = (pos) => {
     let data = store.get(KEY_SPENDINGS);

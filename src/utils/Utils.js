@@ -69,7 +69,7 @@ const TEMPLATES = {
     }
 };
 
-let Utils = {
+const Utils = {
 
     getNumDaysOfMonth(date) {
         let numDays;
@@ -109,6 +109,20 @@ let Utils = {
         return spendings.filter(item => item.cat === category)
                         .map(item => item.amount)
                         .reduce((prevAmount, nextAmount) => prevAmount + nextAmount, 0);  
+    },
+
+    calculateTotalAmountsByCategories(spendings, categories) {
+        if(!categories || !spendings) {
+            return [];
+        }
+
+        return categories.map(cat => {
+            let amountByCat = this.calculateTotalAmountByCategory(spendings, cat.value);
+            return {
+                cat: cat.value,
+                amount: Math.round(amountByCat)
+            };
+        });
     },
 
     calculateSumOfSpendings(spendings) {

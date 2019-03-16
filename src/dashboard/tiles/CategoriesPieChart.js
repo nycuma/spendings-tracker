@@ -1,11 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { PieChart, Pie, Legend, Cell } from 'recharts';
-import { getAmountSpentByCategory } from '../../utils/LocalStore';
+import Utils from '../../utils/Utils';
 import './Tiles.scss';
 
+const mapStateToProps = (state) => ({ spendings: state.spendings });
+
 function CategoriesPieChart(props) {
-    const data = getAmountSpentByCategory(props.categories);
+    const data = Utils.calculateTotalAmountsByCategories(props.spendings, props.categories);
     let pieColors = [];
     let chartData;
 
@@ -48,7 +51,9 @@ function CategoriesPieChart(props) {
 CategoriesPieChart.propTypes = {
     toggleDisplay: PropTypes.func.isRequired,
     categories: PropTypes.arrayOf(PropTypes.object).isRequired,
-    fadeout: PropTypes.bool.isRequired
+    fadeout: PropTypes.bool.isRequired,
+    spendings: PropTypes.arrayOf(PropTypes.object)
 };
 
-export default CategoriesPieChart;
+
+export default connect(mapStateToProps)(CategoriesPieChart);
