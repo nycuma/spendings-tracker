@@ -62,7 +62,6 @@ class Tiles extends React.Component {
                                 fadeout={this.state.fadeout.spendingsSingleDay}
 
                                 onlyToday={true}
-                                spendingsForDay={this.props.spendingsForDay}
                             />
                         }  
         
@@ -99,7 +98,6 @@ class Tiles extends React.Component {
 
                                 onlyToday={false}
                                 totalAmountDay={this.props.totalAmountDay}
-                                spendingsForDay={this.props.spendingsForDay}
                                 selectedDay={this.props.selectedDay}
                             />
                         }  
@@ -129,7 +127,6 @@ Tiles.propTypes = {
     totalAmountWeek: PropTypes.number,
     totalAmountMonth: PropTypes.number,
     totalAmountYear: PropTypes.number,
-    spendingsForDay: PropTypes.arrayOf(PropTypes.object),
     recentSpendings: PropTypes.arrayOf(PropTypes.object)
 };
 

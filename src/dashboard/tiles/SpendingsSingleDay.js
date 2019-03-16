@@ -1,10 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import dateFnsFormat from 'date-fns/format';
 import Utils from '../../utils/Utils';
-import { getSpendings } from '../../utils/LocalStore';
 import { Constants } from '../../utils/Constants';
 import './Tiles.scss';
+
+const mapStateToProps = (state) => ({ spendings: state.spendings });
 
 class SpendingsSingleDay extends React.Component {
     constructor(props) {
@@ -71,8 +73,9 @@ class SpendingsSingleDay extends React.Component {
     
     render() {
         let classes = this.props.fadeout ? 'tile fade-out' : 'tile';
-        const spendings = this.props.onlyToday ? getSpendings(new Date()) : this.props.spendingsForDay;
-        const total = this.props.onlyToday ? Utils.calculateSumOfSpendings(spendings) : this.props.totalAmountDay;
+        const day = this.props.onlyToday ? new Date() : this.props.selectedDay;
+        const spendingsForDay = Utils.filterSpendingsByDay(this.props.spendings, day);
+        const total = this.props.onlyToday ? Utils.calculateSumOfSpendings(spendingsForDay) : this.props.totalAmountDay;
         const title = this.props.onlyToday ? 'Today\'s Spendings' : 'Spendings on ' + dateFnsFormat(this.props.selectedDay, Constants.DATE_FORMAT);
         return( 
             <div className={classes}>
@@ -81,7 +84,7 @@ class SpendingsSingleDay extends React.Component {
                 </button>
                 <h4>{title}</h4>
                 <table className="table-spendings">  
-                    {this.renderTableBody(spendings)}    
+                    {this.renderTableBody(spendingsForDay)}    
                     <tfoot>
                         <tr>
                             <td><b>Total</b></td>
@@ -103,7 +106,8 @@ SpendingsSingleDay.propTypes = {
     categories: PropTypes.arrayOf(PropTypes.object).isRequired,
     toggleDisplay: PropTypes.func.isRequired,
     onlyToday: PropTypes.bool.isRequired,
-    fadeout: PropTypes.bool.isRequired
+    fadeout: PropTypes.bool.isRequired,
+    spendings: PropTypes.arrayOf(PropTypes.object)
 };
 
-export default SpendingsSingleDay;
+export default connect(mapStateToProps)(SpendingsSingleDay);

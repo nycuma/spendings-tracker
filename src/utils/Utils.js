@@ -2,7 +2,7 @@ import isLeapYear from 'date-fns/is_leap_year';
 import uuidv4 from 'uuid/v4';
 import addMonths from 'date-fns/add_months';
 import { saveSpendings } from './LocalStore';
-import { endOfMonth, isBefore, endOfWeek, addWeeks, endOfYear, addYears } from 'date-fns';
+import { endOfMonth, isBefore, endOfWeek, addWeeks, endOfYear, addYears, isSameDay } from 'date-fns';
 
 // Used for generating some random spendings
 const TEMPLATES = {
@@ -87,6 +87,14 @@ const Utils = {
                 numDays = 31;
         }
         return numDays;
+    },
+
+    filterSpendingsByDay(spendings, day) {
+        if(!spendings || !day) {
+            return [];
+        }
+        
+        return spendings.filter(item => isSameDay(new Date(item.day), day)); 
     },
 
     /**

@@ -74,10 +74,6 @@ class Dashboard extends React.Component {
         return Utils.calculateSumOfSpendings(spendings);
     }
 
-    getSpendingsForSelectedDay() {
-        return localStore.getSpendings(this.state.selectedDay);
-    }
-
     /** TODO still needed?
      * Returns an array that contains the total amount of
      * money spent on each day for an entire month.
@@ -155,7 +151,6 @@ class Dashboard extends React.Component {
                         totalAmountYear={this.getTotalAmountYear(new Date())}
 
                         selectedDay={this.state.selectedDay}
-                        spendingsForDay={this.getSpendingsForSelectedDay()}
                         recentSpendings={this.state.recentSpendings}
                     />
 
