@@ -6,7 +6,6 @@ import Calender from './dashboard/Calender';
 import AddForm from './dashboard/AddForm';
 import Tiles from './dashboard/Tiles';
 import { addSpending } from './utils/ReduxStore';
-import { getSpendingsRecentlyAdded } from './utils/LocalStore';
 import { PreferenceConsumer } from './utils/Contexts';
 import './dashboard/Dashboard.scss';
 
@@ -19,17 +18,12 @@ class Dashboard extends React.Component {
         super(props);
         this.state = {
             selectedDay: new Date(),
-            recentSpendings: [],
             addFormIsVisible: false
         };
     }
 
     componentDidMount() {
         this.fileSelector = this.initFileSelector();
-        this.setState({
-            // load recent spendings
-            recentSpendings: getSpendingsRecentlyAdded(15)
-        });
     }
 
     initFileSelector() {
@@ -53,10 +47,6 @@ class Dashboard extends React.Component {
             amount: amount,
             comment: comment
         };
-
-        this.setState({
-            recentSpendings: [newSpending].concat(this.state.recentSpendings)
-        });
         this.props.addSpending(newSpending);
     }
 
@@ -112,7 +102,6 @@ class Dashboard extends React.Component {
             <div id="dashboard" className="box">
                     <Tiles 
                         selectedDay={this.state.selectedDay}
-                        recentSpendings={this.state.recentSpendings}
                     />
 
                     <Calender

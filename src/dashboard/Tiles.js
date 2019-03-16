@@ -77,7 +77,6 @@ class Tiles extends React.Component {
                         {this.state.display.recentHistory &&
                             <RecentHistory 
                                 toggleDisplay={(t) => this.toggleDisplay(t)}
-                                recentSpendings={this.props.recentSpendings}
                                 locale={locale}
                                 currencyOptions={currencyOptions}
                                 fadeout={this.state.fadeout.recentHistory}
@@ -117,7 +116,6 @@ class Tiles extends React.Component {
 
 Tiles.propTypes = {
     selectedDay: PropTypes.instanceOf(Date).isRequired,
-    recentSpendings: PropTypes.arrayOf(PropTypes.object)
 };
 
 export default Tiles;

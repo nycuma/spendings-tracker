@@ -1,11 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import dateFnsFormat from 'date-fns/format';
 import { Constants } from '../../utils/Constants';
 import './Tiles.scss';
 
+const mapStateToProps = (state) => ({ spendings: state.spendings });
+
 function RecentHistory(props) {
-    const entries = props.recentSpendings.map((pos, i) => {
+    const entries = props.spendings.slice(-15).reverse().map((pos, i) => {
         return (
             <tr key={i}> 
                 <td className="align-left">{dateFnsFormat(pos.day, Constants.DATE_FORMAT_SHORT)}</td>
@@ -36,9 +39,9 @@ function RecentHistory(props) {
 RecentHistory.propTypes = {
     locale: PropTypes.string.isRequired,
     currencyOptions: PropTypes.object.isRequired,
-    recentSpendings: PropTypes.arrayOf(PropTypes.object),
+    spendings: PropTypes.arrayOf(PropTypes.object),
     toggleDisplay: PropTypes.func.isRequired,
     fadeout: PropTypes.bool.isRequired
 };
 
-export default RecentHistory;
+export default connect(mapStateToProps)(RecentHistory);

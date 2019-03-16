@@ -85,20 +85,6 @@ export const getSpendingsBetween = (dateStart, dateEnd, category, count) => {
     return count ? data.slice(0, count) : data;
 };
 
-/**
- * Returns most recently added spending positions, descending order.
- * 
- * @param {Number} count Number of positions to return
- */
-export const getSpendingsRecentlyAdded = (count) => {
-    const data = store.get(KEY_SPENDINGS);
-    if(!data) { 
-        return []; 
-    }
-    // return elements from the end of the array
-    return data.slice(-count).reverse();
-};
-
 export const postSpendingPosition = (pos) => {
     let data = store.get(KEY_SPENDINGS);
     if(!data) { 
