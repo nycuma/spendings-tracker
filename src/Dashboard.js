@@ -1,11 +1,18 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import uuidv4 from 'uuid/v4';
 import Calender from './dashboard/Calender';
 import AddForm from './dashboard/AddForm';
 import Tiles from './dashboard/Tiles';
-import { getSpendingsRecentlyAdded, postSpendingPosition} from './utils/LocalStore';
+import { addSpending } from './utils/ReduxStore';
+import { getSpendingsRecentlyAdded } from './utils/LocalStore';
 import { PreferenceConsumer } from './utils/Contexts';
 import './dashboard/Dashboard.scss';
+
+const mapDispatchToProps = dispatch => ({ 
+    addSpending: spending => dispatch(addSpending(spending))
+});
 
 class Dashboard extends React.Component {
     constructor(props) {
@@ -50,7 +57,7 @@ class Dashboard extends React.Component {
         this.setState({
             recentSpendings: [newSpending].concat(this.state.recentSpendings)
         });
-        postSpendingPosition(newSpending);
+        this.props.addSpending(newSpending);
     }
 
     openAddModal() {
@@ -135,4 +142,8 @@ class Dashboard extends React.Component {
     }
 }
 
-export default Dashboard;
+Dashboard.propTypes = {
+    addSpending: PropTypes.func.isRequired
+};
+
+export default connect(null, mapDispatchToProps)(Dashboard);

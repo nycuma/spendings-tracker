@@ -27,7 +27,7 @@ class SpendingsForm extends React.Component {
     }
 
     handleClickOutideForm(e) {
-        if(!this.nodeRef.current.contains(e.target)) {
+        if(this.nodeRef.current && !this.nodeRef.current.contains(e.target)) {
             this.props.onClose();
         } 
     }
