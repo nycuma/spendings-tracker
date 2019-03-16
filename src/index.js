@@ -1,14 +1,21 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+import logger from 'redux-logger';
 import { HashRouter } from 'react-router-dom';
-import { reducer } from './utils/ReduxStore';
+import { rootReducer } from './utils/ReduxStore';
 import Main from './Main';
 import registerServiceWorker from './registerServiceWorker';
+import { getSpendings } from './utils/LocalStore';
 import './style.scss';
 
-const store = createStore(reducer);
+//  pre-load all spenings into redux store
+const store = createStore(
+  rootReducer,
+  { spendings: getSpendings() || [] },
+  applyMiddleware(logger)
+);
 
 render((
         <HashRouter>
