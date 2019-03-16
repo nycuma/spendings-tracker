@@ -177,11 +177,10 @@ const Utils = {
     },
 
     /**
-     * Generates and saves random spendings within a given time span.
+     * Generates and returns random spendings within a given time span.
      * Currently works only with default categories!
      * 
      * // TODO generalise code for any categories
-     * // TODO Save data in state/global store
      * 
      * @param {Number} count number of spendings to be generated
      * @param {Date} startDate start of time span
@@ -203,9 +202,7 @@ const Utils = {
                 }   
             }
         }
-
-        // save in local storage
-        saveSpendings(randomSpendings);
+        return randomSpendings;
     },
 
     /**
