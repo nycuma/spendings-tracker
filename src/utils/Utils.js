@@ -1,6 +1,5 @@
 import uuidv4 from 'uuid/v4';
 import addMonths from 'date-fns/add_months';
-import { saveSpendings } from './LocalStore';
 import { endOfMonth, isBefore, endOfWeek, addWeeks, endOfYear, addYears, 
     isSameDay, isSameWeek, isSameMonth, isSameYear } from 'date-fns';
 

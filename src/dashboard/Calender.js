@@ -1,12 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import DayPicker from 'react-day-picker';
 import TooltipAmountDay from './TooltipAmountDay';
 import { Constants } from '../utils/Constants';
-import { getSpendings } from './../utils/LocalStore';
+import Utils from './../utils/Utils';
 import './Calender.scss';
 import 'react-day-picker/lib/style.css';
 
+const mapStateToProps = (state) => ({ spendings: state.spendings });
 
 class Calender extends React.Component {
     constructor(props) {
@@ -14,6 +16,13 @@ class Calender extends React.Component {
         this.state = {
             daysWithSpendings: this.getDaysWithSpendings()
         };
+    }
+
+    componentDidUpdate(prevProps) {
+        if(prevProps.spendings.length !== this.props.spendings.length) {
+            // update amounts when new spending(s) are added 
+            this.updateDaysWithSpendings();
+        }
     }
 
     displayAmountSpent(day, modifiers, e) {
@@ -37,7 +46,7 @@ class Calender extends React.Component {
     getDaysWithSpendings(date) {
         date = date ? date : this.props.selectedDay;
         // get all spendings of current month
-        const spendingsMonth = getSpendings(date, false, true, true);
+        const spendingsMonth = Utils.filterSpendingsByMonth(this.props.spendings, date);
         // get all days on which sth. was spent in this month and add up amounts
         const daysWithSpendings = {};
         spendingsMonth.forEach(spending => {
@@ -128,7 +137,8 @@ Calender.propTypes = {
     selectedDay: PropTypes.instanceOf(Date).isRequired,
     updateSelectedDay: PropTypes.func.isRequired,
     openAddModal: PropTypes.func.isRequired,
-    openImportModal: PropTypes.func.isRequired
+    openImportModal: PropTypes.func.isRequired,
+    spendings: PropTypes.arrayOf(PropTypes.object)
 };
 
-export default Calender;
+export default connect(mapStateToProps)(Calender);
