@@ -25,7 +25,7 @@ class Main extends Component {
     }
 
     componentUnmount() {
-        // save spendings from redux store to local storage
+        // save spendings from redux store to local storage when closing or reloading the page
         saveSpendings(this.props.spendings, true);
     }
 

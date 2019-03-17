@@ -10,11 +10,13 @@ import registerServiceWorker from './registerServiceWorker';
 import { getSpendings } from './utils/LocalStore';
 import './style.scss';
 
+const DEBUG = true;
+
 //  pre-load all spenings into redux store
 const store = createStore(
   rootReducer,
   { spendings: getSpendings() || [] },
-  applyMiddleware(logger)
+  DEBUG ? applyMiddleware(logger) : undefined
 );
 
 render((
