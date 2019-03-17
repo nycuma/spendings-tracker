@@ -12,27 +12,27 @@ self.__precacheManifest = [
     "url": "/spendings-tracker/static/media/Rubik-Regular.35af6dbe.ttf"
   },
   {
-    "revision": "febd9e64ba5a127ffa8e",
-    "url": "/spendings-tracker/static/js/runtime~main.febd9e64.js"
+    "revision": "8a96578241db6db6935d",
+    "url": "/spendings-tracker/static/js/runtime~main.a68245cc.js"
   },
   {
-    "revision": "f7210622a5eb1b9ad8a3",
-    "url": "/spendings-tracker/static/js/main.f7210622.chunk.js"
+    "revision": "214b294a50b46f9889ec",
+    "url": "/spendings-tracker/static/js/main.fe41624f.chunk.js"
   },
   {
-    "revision": "9531348dd2cd8fb91f0a",
-    "url": "/spendings-tracker/static/js/2.9531348d.chunk.js"
+    "revision": "8d2c0ab76c125ff3f479",
+    "url": "/spendings-tracker/static/js/2.df70db21.chunk.js"
   },
   {
-    "revision": "f7210622a5eb1b9ad8a3",
-    "url": "/spendings-tracker/static/css/main.7e702e1c.chunk.css"
+    "revision": "214b294a50b46f9889ec",
+    "url": "/spendings-tracker/static/css/main.0e9d793d.chunk.css"
   },
   {
-    "revision": "9531348dd2cd8fb91f0a",
+    "revision": "8d2c0ab76c125ff3f479",
     "url": "/spendings-tracker/static/css/2.6ba9cccb.chunk.css"
   },
   {
-    "revision": "7989159dc81b24459d3074ac9a24bf88",
+    "revision": "5b743ecebcd667bedaac5cb970284caf",
     "url": "/spendings-tracker/index.html"
   }
 ];
