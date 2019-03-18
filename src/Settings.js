@@ -5,14 +5,11 @@ import { Constants } from './utils/Constants';
 import { updateCurrency, updateLocale } from './utils/ReduxStore';
 import './settings/TilesSettings.scss';
 
-const mapStateToProps = (state) => { 
-    return {
-        currency: state.settings.currency,
-        locale: state.settings.locale,
-        categories: state.settings.categories 
-    };
-    
-};
+const mapStateToProps = (state) => ({ 
+    currency: state.settings.currency,
+    locale: state.settings.locale,
+    categories: state.settings.categories  
+});
 
 const mapDispatchToProps = dispatch => ({ 
     updateCurrency: e => dispatch(updateCurrency(e.target.value)),

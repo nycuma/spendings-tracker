@@ -7,10 +7,15 @@ import Dashboard from './Dashboard';
 import Analytics from './Analytics';
 import Settings from './Settings';
 import Sidebar from './Sidebar';
-import { saveSpendings } from './utils/LocalStore';
+import { saveSpendings, saveCurrency, saveLocale, saveCategories } from './utils/LocalStore';
 import './style.scss';
 
-const mapStateToProps = (state) => ({ spendings: state.spendings });
+const mapStateToProps = (state) => ({ 
+    spendings: state.spendings,
+    currency: state.settings.currency,
+    locale: state.settings.locale,
+    categories: state.settings.categories  
+});
 
 class Main extends Component {
 
@@ -26,6 +31,9 @@ class Main extends Component {
     componentUnmount() {
         // save spendings from redux store to local storage when closing or reloading the page
         saveSpendings(this.props.spendings, true);
+        saveCurrency(this.props.currency);
+        saveLocale(this.props.locale);
+        saveCategories(this.props.categories);
     }
 
     render() {
@@ -47,7 +55,10 @@ class Main extends Component {
 }
 
 Main.propTypes = {
-    spendings: PropTypes.arrayOf(PropTypes.object)
+    spendings: PropTypes.arrayOf(PropTypes.object),
+    currency: PropTypes.string.isRequired,
+    locale: PropTypes.string.isRequired,
+    categories: PropTypes.arrayOf(PropTypes.object),
 };
 
 export default connect(mapStateToProps)(Main);
