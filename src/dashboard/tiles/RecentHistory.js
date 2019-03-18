@@ -5,7 +5,10 @@ import dateFnsFormat from 'date-fns/format';
 import { Constants } from '../../utils/Constants';
 import './Tiles.scss';
 
-const mapStateToProps = (state) => ({ spendings: state.spendings });
+const mapStateToProps = (state) => ({ 
+    spendings: state.spendings,
+    locale: state.settings.locale
+});
 
 function RecentHistory(props) {
     const entries = props.spendings.slice(-15).reverse().map((pos, i) => {

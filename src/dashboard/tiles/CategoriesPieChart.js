@@ -5,7 +5,10 @@ import { PieChart, Pie, Legend, Cell } from 'recharts';
 import Utils from '../../utils/Utils';
 import './Tiles.scss';
 
-const mapStateToProps = (state) => ({ spendings: state.spendings });
+const mapStateToProps = (state) => ({ 
+    spendings: state.spendings,
+    categories: state.settings.categories
+});
 
 function CategoriesPieChart(props) {
     const data = Utils.calculateTotalAmountsByCategories(props.spendings, props.categories);

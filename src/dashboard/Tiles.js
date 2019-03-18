@@ -1,13 +1,15 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import SpendingsSingleDay from './tiles/SpendingsSingleDay';
 import TotalSpendings from './tiles/TotalSpendings';
 import CategoriesPieChart from './tiles/CategoriesPieChart';
 import RecentHistory from './tiles/RecentHistory';
 import RecurrentSpendings from './tiles/RecurrentSpendings';
-import { PreferenceConsumer } from '../utils/Contexts';
 import { Constants } from '../utils/Constants';
 import './tiles/Tiles.scss';
+
+const mapStateToProps = (state) => ({ currency: state.settings.currency });
 
 class Tiles extends React.Component {
     constructor(props) {
@@ -38,84 +40,66 @@ class Tiles extends React.Component {
     }
 
     render() {
+        let currencyOptions = { ...Constants.DEFAULT_CURRENCY_OPTIONS, ...{ currency: this.props.currency }};
         return (
-            <PreferenceConsumer>
-            {({currency, locale, categories}) => {
-                let currencyOptions = { ...Constants.DEFAULT_CURRENCY_OPTIONS, ...{ currency: currency }};
+            <div id="tiles" className="box">
+                {this.state.display.catPieChart && 
+                    <CategoriesPieChart 
+                        toggleDisplay={(t) => this.toggleDisplay(t)}
+                        fadeout={this.state.fadeout.catPieChart}
+                    />
+                }
 
-                return (
-                    <div id="tiles" className="box">
-                        {this.state.display.catPieChart && 
-                            <CategoriesPieChart 
-                                toggleDisplay={(t) => this.toggleDisplay(t)}
-                                categories={categories}
-                                fadeout={this.state.fadeout.catPieChart}
-                            />
-                        }
+                {this.state.display.spendingsSingleDay &&
+                    <SpendingsSingleDay
+                        toggleDisplay={(t) => this.toggleDisplay(t)}
+                        currencyOptions={currencyOptions}
+                        fadeout={this.state.fadeout.spendingsSingleDay}
+                        onlyToday={true}
+                    />
+                }  
 
-                        {this.state.display.spendingsSingleDay &&
-                            <SpendingsSingleDay
-                                toggleDisplay={(t) => this.toggleDisplay(t)}
-                                locale={locale}
-                                currencyOptions={currencyOptions}
-                                categories={categories}
-                                fadeout={this.state.fadeout.spendingsSingleDay}
+                {this.state.display.totalSpendings &&
+                    <TotalSpendings 
+                        toggleDisplay={(t) => this.toggleDisplay(t)}
+                        currencyOptions={currencyOptions}
+                        fadeout={this.state.fadeout.totalSpendings}
+                    />
+                }
 
-                                onlyToday={true}
-                            />
-                        }  
-        
-                        {this.state.display.totalSpendings &&
-                            <TotalSpendings 
-                                toggleDisplay={(t) => this.toggleDisplay(t)}
-                                locale={locale}
-                                currencyOptions={currencyOptions}
-                                fadeout={this.state.fadeout.totalSpendings}
-                            />
-                        }
-        
-                        {this.state.display.recentHistory &&
-                            <RecentHistory 
-                                toggleDisplay={(t) => this.toggleDisplay(t)}
-                                locale={locale}
-                                currencyOptions={currencyOptions}
-                                fadeout={this.state.fadeout.recentHistory}
-                            />
-                        }
-        
-                        {this.state.display.spendingsSingleDay &&
-                            <SpendingsSingleDay
-                                toggleDisplay={(t) => this.toggleDisplay(t)}
-                                locale={locale}
-                                currencyOptions={currencyOptions}
-                                categories={categories}
-                                fadeout={this.state.fadeout.spendingsSingleDay}
+                {this.state.display.recentHistory &&
+                    <RecentHistory 
+                        toggleDisplay={(t) => this.toggleDisplay(t)}
+                        currencyOptions={currencyOptions}
+                        fadeout={this.state.fadeout.recentHistory}
+                    />
+                }
 
-                                onlyToday={false}
-                                selectedDay={this.props.selectedDay}
-                            />
-                        }  
-        
-                        {this.state.display.recurrentSpendings &&
-                            <RecurrentSpendings 
-                                toggleDisplay={(t) => this.toggleDisplay(t)}
-                                locale={locale}
-                                currencyOptions={currencyOptions}
-                                fadeout={this.state.fadeout.recurrentSpendings}
-                            />
-                        } 
-                    </div>
-                );
-            }}
-            </PreferenceConsumer>
-            
+                {this.state.display.spendingsSingleDay &&
+                    <SpendingsSingleDay
+                        toggleDisplay={(t) => this.toggleDisplay(t)}
+                        currencyOptions={currencyOptions}
+                        fadeout={this.state.fadeout.spendingsSingleDay}
+                        onlyToday={false}
+                        selectedDay={this.props.selectedDay}
+                    />
+                }  
+
+                {this.state.display.recurrentSpendings &&
+                    <RecurrentSpendings 
+                        toggleDisplay={(t) => this.toggleDisplay(t)}
+                        currencyOptions={currencyOptions}
+                        fadeout={this.state.fadeout.recurrentSpendings}
+                    />
+                } 
+            </div>
         );
     }
-
 }
 
 Tiles.propTypes = {
     selectedDay: PropTypes.instanceOf(Date).isRequired,
+    currency: PropTypes.string
 };
 
-export default Tiles;
+export default connect(mapStateToProps)(Tiles);

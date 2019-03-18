@@ -1,18 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts';
-import subYears from 'date-fns/sub_years';
-import startOfDay from 'date-fns/start_of_day';
-import startOfWeek from 'date-fns/start_of_week';
-import startOfMonth from 'date-fns/start_of_month';
-import startOfYear from 'date-fns/start_of_year';
-import endOfDay from 'date-fns/end_of_day';
-import endOfWeek from 'date-fns/end_of_week';
-import endOfMonth from 'date-fns/end_of_month';
-import endOfYear from 'date-fns/end_of_year';
-import eachDay from 'date-fns/each_day';
+import { subYears, startOfDay, startOfWeek, startOfMonth, startOfYear,
+ endOfDay, endOfWeek, endOfMonth, endOfYear, eachDay } from 'date-fns';
 import dateFnsFormat from 'date-fns/format';
 import { Constants } from './utils/Constants';
-import { PreferenceConsumer } from './utils/Contexts';
 import { getSpendingsBetween} from './utils/LocalStore';
 import Utils from './utils/Utils';
 
@@ -20,6 +13,8 @@ const FORMAT_DAY = 'DD.MM.';
 const FORMAT_WEEK = 'W';
 const FORMAT_MONTH = 'MMM';
 const FORMAT_YEAR = 'YYYY';
+
+const mapStateToProps = (state) => ({ categories: state.settings.categories });
 
 class Analytics extends Component {
     constructor(props) {
@@ -97,6 +92,7 @@ class Analytics extends Component {
     }
 
     render() {
+        const optionsCats = this.props.categories.map(cat => (<option key={cat.value} value={cat.value}>{cat.label}</option>));
         const optionsUnits = Constants.TIME_UNITS.map(unit => (<option key={unit} value={unit}>{unit}</option>));
         return (
             <div id="analytics" className="box">
@@ -116,13 +112,7 @@ class Analytics extends Component {
                         <div>Categories:&nbsp;
                             <select value={this.state.category} onChange={(e) => this.handleCategory(e)}>
                                 <option value="all">All</option>
-                                <PreferenceConsumer>
-                                    {({categories}) => {
-                                        const optionsCats = categories.map((cat) => 
-                                                <option key={cat.value} value={cat.value}>{cat.label}</option>);
-                                        return (optionsCats);
-                                    }}
-                                </PreferenceConsumer>
+                                {optionsCats}     
                             </select>
                         </div>
                         <div>
@@ -151,4 +141,8 @@ class Analytics extends Component {
     }
 }
 
-export default Analytics;
+Analytics.propTypes = {
+    categories: PropTypes.arrayOf(PropTypes.object)
+};
+
+export default connect(mapStateToProps)(Analytics);

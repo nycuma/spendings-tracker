@@ -6,7 +6,11 @@ import Utils from '../../utils/Utils';
 import { Constants } from '../../utils/Constants';
 import './Tiles.scss';
 
-const mapStateToProps = (state) => ({ spendings: state.spendings });
+const mapStateToProps = (state) => ({ 
+    spendings: state.spendings,
+    categories: state.settings.categories,
+    locale: state.settings.locale
+});
 
 class SpendingsSingleDay extends React.Component {
     constructor(props) {

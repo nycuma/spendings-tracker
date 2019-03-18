@@ -6,7 +6,6 @@ import Calender from './dashboard/Calender';
 import AddForm from './dashboard/AddForm';
 import Tiles from './dashboard/Tiles';
 import { addSpending } from './utils/ReduxStore';
-import { PreferenceConsumer } from './utils/Contexts';
 import './dashboard/Dashboard.scss';
 
 const mapDispatchToProps = dispatch => ({ 
@@ -112,18 +111,11 @@ class Dashboard extends React.Component {
                     />
 
                     {this.state.addFormIsVisible &&
-                        <PreferenceConsumer>
-                            {({locale, categories}) => (
-                                <AddForm 
-                                    selectedDay={this.state.selectedDay}
-                                    addSpendingsPosition={(cat, amount, comment, day) => this.addSpendingsPosition(cat, amount, comment, day)} 
-                                    onClose={() => this.onClose()}
-                                    locale={locale}
-                                    categories={categories}
-                                /> 
-                            )}
-                        </PreferenceConsumer>
-                        
+                        <AddForm 
+                            selectedDay={this.state.selectedDay}
+                            addSpendingsPosition={(cat, amount, comment, day) => this.addSpendingsPosition(cat, amount, comment, day)} 
+                            onClose={() => this.onClose()}
+                        /> 
                     }
                 
             </div>

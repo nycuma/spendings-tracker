@@ -7,7 +7,6 @@ import Dashboard from './Dashboard';
 import Analytics from './Analytics';
 import Settings from './Settings';
 import Sidebar from './Sidebar';
-import { PreferenceProvider } from './utils/Contexts';
 import { saveSpendings } from './utils/LocalStore';
 import './style.scss';
 
@@ -36,14 +35,12 @@ class Main extends Component {
             <nav className="box">
                 <Sidebar />
             </nav>
-            <PreferenceProvider>
-                <Switch>
-                    <Route exact path="/" component={Dashboard}/>
-                    <Route path="/dashboard" component={Dashboard}/>
-                    <Route path="/analytics" component={Analytics}/>
-                    <Route path="/settings" component={Settings}/>
-                </Switch>
-            </PreferenceProvider>
+            <Switch>
+                <Route exact path="/" component={Dashboard}/>
+                <Route path="/dashboard" component={Dashboard}/>
+                <Route path="/analytics" component={Analytics}/>
+                <Route path="/settings" component={Settings}/>
+            </Switch>
         </div>
         );
     }

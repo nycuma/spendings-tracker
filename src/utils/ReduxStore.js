@@ -3,6 +3,8 @@ import uuidv4 from 'uuid/v4';
 
 const ADD_SPENDING = 'ADD_SPENDING';
 const ADD_SPENDINGS = 'ADD_SPENDINGS';
+const UPDATE_CURRENCY = 'UPDATE_CURRENCY';
+const UPDATE_LOCALE = 'UPDATE_LOCALE';
 
 // action creators
 export const addSpending = (spending) => {
@@ -16,6 +18,20 @@ export const addSpendings = (spendings) => {
     return {
         type: ADD_SPENDINGS,
         spendings
+    };
+};
+
+export const updateCurrency = (currency) => {
+    return {
+        type: UPDATE_CURRENCY,
+        currency
+    };
+};
+
+export const updateLocale = (locale) => {
+    return {
+        type: UPDATE_LOCALE,
+        locale
     };
 };
 
@@ -46,6 +62,28 @@ const spendingsReducer = (state = [], action) => {
     }
 };
 
+const settingsReducer = (state = [], action) => {
+    switch(action.type) {
+        case UPDATE_CURRENCY : {
+            return { 
+                ...state,
+                currency: action.currency
+            };
+
+        }
+        case UPDATE_LOCALE : {
+            return {
+                ...state,
+                locale: action.locale
+            };
+        }
+        default :
+            return state;
+    }
+
+};
+
 export let rootReducer = combineReducers({
-    spendings: spendingsReducer
+    spendings: spendingsReducer,
+    settings: settingsReducer
 });

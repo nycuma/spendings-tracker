@@ -1,8 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Constants } from '../utils/Constants';
 import './TooltipAmountDay.scss';
-import { PreferenceConsumer } from '../utils/Contexts';
+
+const mapStateToProps = (state) => ({ 
+    currency: state.settings.currency,
+    locale: state.settings.locale 
+});
 
 /**
  * Displays amount spent on a day when hovering over specific day
@@ -10,19 +15,17 @@ import { PreferenceConsumer } from '../utils/Contexts';
  */
 function TooltipAmountDay(props)  {
     return (
-        <PreferenceConsumer>
-        {({ currency, locale }) => (
-            <div className="hover-total-amount-day" style={props.style}>
-                {props.amount.toLocaleString(locale, { ...Constants.DEFAULT_CURRENCY_OPTIONS, ...{ currency: currency }})}
-            </div>
-        )}
-        </PreferenceConsumer>
+        <div className="hover-total-amount-day" style={props.style}>
+            {props.amount.toLocaleString(props.locale, { ...Constants.DEFAULT_CURRENCY_OPTIONS, ...{ currency: props.currency }})}
+        </div>
     ); 
 }
 
 TooltipAmountDay.propTypes = {
     style: PropTypes.object.isRequired,
-    amount: PropTypes.number.isRequired
+    amount: PropTypes.number.isRequired,
+    currency: PropTypes.string.isRequired,
+    locale: PropTypes.string.isRequired
 };
 
-export default TooltipAmountDay;
+export default connect(mapStateToProps)(TooltipAmountDay);

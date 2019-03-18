@@ -1,9 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import dateFnsFormat from 'date-fns/format';
 import { Constants } from '../../utils/Constants';
 import { getRecurrentSpendings } from '../../utils/LocalStore';
 import './Tiles.scss';
+
+const mapStateToProps = (state) => ({ locale: state.settings.locale });
 
 function RecurrentSpendings(props) {
     const recurrentSp = getRecurrentSpendings();
@@ -55,4 +58,4 @@ RecurrentSpendings.propTypes = {
     fadeout: PropTypes.bool.isRequired
 };
 
-export default RecurrentSpendings;
+export default connect(mapStateToProps)(RecurrentSpendings);

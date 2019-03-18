@@ -4,7 +4,10 @@ import PropTypes from 'prop-types';
 import Utils from '../../utils/Utils';
 import './Tiles.scss';
 
-const mapStateToProps = (state) => ({ spendings: state.spendings });
+const mapStateToProps = (state) => ({ 
+    spendings: state.spendings,
+    locale: state.settings.locale
+});
 
 /**
  * Shows total spendings of today, current week, month & year.

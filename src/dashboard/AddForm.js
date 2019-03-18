@@ -1,8 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import dateFnsFormat from 'date-fns/format';
 import { Constants } from '../utils/Constants';
 import './AddForm.scss';
+
+const mapStateToProps = (state) => ({ 
+    categories: state.settings.categories,
+    locale: state.settings.locale
+ });
 
 class SpendingsForm extends React.Component {
     constructor(props) {
@@ -148,4 +154,4 @@ SpendingsForm.propTypes = {
     onClose: PropTypes.func.isRequired
 };
 
-export default SpendingsForm;
+export default connect(mapStateToProps)(SpendingsForm);
