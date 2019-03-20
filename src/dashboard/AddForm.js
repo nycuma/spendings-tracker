@@ -74,6 +74,9 @@ class SpendingsForm extends React.Component {
     }
 
     handleFormInputAndClose(e) {
+        if(e.key && e.key !== 'Enter') {
+            return;
+        }
         this.handleFormInput(e);
         this.props.onClose();
     }
@@ -128,7 +131,8 @@ class SpendingsForm extends React.Component {
                                     <input type="text" 
                                            maxLength="150" 
                                            value={this.state.valComment} 
-                                           onChange={(e) => this.handleComment(e)} />
+                                           onChange={(e) => this.handleComment(e)}
+                                           onKeyPress={(e) => this.handleFormInputAndClose(e)} />
                                 </td>
                             </tr>
                             <tr>
