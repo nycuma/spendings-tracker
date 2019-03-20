@@ -46,8 +46,9 @@ const TEMPLATES = {
     clothes: {
         share: 0.05,
         items: [
-            { comment: 'Present', min: 5, max: 50 },
-            { comment: 'Donation', min: 5, max: 50 }
+            { comment: 'Pants', min: 20, max: 100 },
+            { comment: 'Socks', min: 5, max: 20 },
+            { comment: 'T-Shirt', min: 10, max: 20 }
         ]
     },
     transport: {
