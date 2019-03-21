@@ -1,16 +1,16 @@
 {
-  "main.css": "/spendings-tracker/static/css/main.0e9d793d.chunk.css",
-  "main.js": "/spendings-tracker/static/js/main.fa9cd091.chunk.js",
-  "main.js.map": "/spendings-tracker/static/js/main.fa9cd091.chunk.js.map",
+  "main.css": "/spendings-tracker/static/css/main.b3ba2ab4.chunk.css",
+  "main.js": "/spendings-tracker/static/js/main.d9c5e650.chunk.js",
+  "main.js.map": "/spendings-tracker/static/js/main.d9c5e650.chunk.js.map",
   "runtime~main.js": "/spendings-tracker/static/js/runtime~main.a68245cc.js",
   "runtime~main.js.map": "/spendings-tracker/static/js/runtime~main.a68245cc.js.map",
   "static/css/2.6ba9cccb.chunk.css": "/spendings-tracker/static/css/2.6ba9cccb.chunk.css",
-  "static/js/2.e865fbec.chunk.js": "/spendings-tracker/static/js/2.e865fbec.chunk.js",
-  "static/js/2.e865fbec.chunk.js.map": "/spendings-tracker/static/js/2.e865fbec.chunk.js.map",
+  "static/js/2.3832c4dd.chunk.js": "/spendings-tracker/static/js/2.3832c4dd.chunk.js",
+  "static/js/2.3832c4dd.chunk.js.map": "/spendings-tracker/static/js/2.3832c4dd.chunk.js.map",
   "index.html": "/spendings-tracker/index.html",
-  "precache-manifest.a029c8e2bd5ca5634f3cf5e871bb3441.js": "/spendings-tracker/precache-manifest.a029c8e2bd5ca5634f3cf5e871bb3441.js",
+  "precache-manifest.8ad728326113dd7ea9c9e26c2a3080c8.js": "/spendings-tracker/precache-manifest.8ad728326113dd7ea9c9e26c2a3080c8.js",
   "service-worker.js": "/spendings-tracker/service-worker.js",
   "static/css/2.6ba9cccb.chunk.css.map": "/spendings-tracker/static/css/2.6ba9cccb.chunk.css.map",
-  "static/css/main.0e9d793d.chunk.css.map": "/spendings-tracker/static/css/main.0e9d793d.chunk.css.map",
+  "static/css/main.b3ba2ab4.chunk.css.map": "/spendings-tracker/static/css/main.b3ba2ab4.chunk.css.map",
   "static/media/style.scss": "/spendings-tracker/static/media/rubik-regular-webfont.e02f6d94.woff"
 }
