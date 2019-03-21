@@ -13,13 +13,16 @@ const mapStateToProps = (state) => ({
 class SpendingsForm extends React.Component {
     constructor(props) {
         super(props);
+        this.updatePosition = this.updatePosition.bind(this);
         this.nodeRef = React.createRef();
         this.state = {
             valDay: this.initDay(),
             valCategory: 'food',
             valAmount: '',
             valComment: '',
-            showParsingError: false
+            showParsingError: false,
+            pos: { x: null, y: null },
+            cursor: 'auto',
         };
     }
 
@@ -81,12 +84,37 @@ class SpendingsForm extends React.Component {
         this.props.onClose();
     }
 
+    updatePosition(e) {
+        let newX = this.startPos.x - (this.clickPos.x - e.pageX);
+        let newY = this.startPos.y - (this.clickPos.y - e.pageY);
+        this.setState({ pos: { x: newX, y: newY } });
+    }
+
+    addMouseListener(e) {
+        this.setState({ cursor: 'grabbing' });
+        let rect = this.nodeRef.current.getBoundingClientRect();
+        this.startPos = { x: rect.left, y: rect.top };
+        this.clickPos = { x: e.pageX, y: e.pageY };
+        document.addEventListener('mousemove', this.updatePosition);
+    }
+
+    removeMouseListener() {
+        this.setState({ cursor: 'auto' });
+        document.removeEventListener('mousemove', this.updatePosition);
+    }
+
     render() {
         let categories = this.props.categories.map((cat) => {
             return (
                 <option key={cat.value} value={cat.value}>{cat.label}</option>
             );
         });
+
+        const stylePosition = {
+            cursor: this.state.cursor,
+            top: this.state.pos.y,
+            left: this.state.pos.x
+        };
 
         const styleErrorInput = { 
             border: 'solid 1px red',
@@ -98,7 +126,13 @@ class SpendingsForm extends React.Component {
         const msgError = 'Please enter a correct value';
 
         return (
-            <div id="add-modal" ref={this.nodeRef}>
+            <div 
+                id="add-modal" 
+                ref={this.nodeRef} 
+                style={stylePosition}
+                onMouseDown={(e) => this.addMouseListener(e)}
+                onMouseUp={(e) => this.removeMouseListener(e)}
+            >
                 <div id="tooltip-error" style={styleErrorTooltip}>{msgError}</div>
                 <button className="close-X" onClick={this.props.onClose}>x</button>
 
