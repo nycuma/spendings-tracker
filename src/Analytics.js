@@ -6,7 +6,6 @@ import { subYears, startOfDay, startOfWeek, startOfMonth, startOfYear,
  endOfDay, endOfWeek, endOfMonth, endOfYear, eachDay } from 'date-fns';
 import dateFnsFormat from 'date-fns/format';
 import { Constants } from './utils/Constants';
-import { getSpendingsBetween} from './utils/LocalStore';
 import Utils from './utils/Utils';
 
 const FORMAT_DAY = 'DD.MM.';
@@ -14,7 +13,10 @@ const FORMAT_WEEK = 'W';
 const FORMAT_MONTH = 'MMM';
 const FORMAT_YEAR = 'YYYY';
 
-const mapStateToProps = (state) => ({ categories: state.settings.categories });
+const mapStateToProps = (state) => ({ 
+    spendings: state.spendings,
+    categories: state.settings.categories
+});
 
 class Analytics extends Component {
     constructor(props) {
@@ -80,8 +82,8 @@ class Analytics extends Component {
 
         let data = datesEach.map(date => {
             const cat = this.state.category === 'all' ? undefined : this.state.category;
-            const spendings = getSpendingsBetween(startOf(date), endOf(date), cat);
-            const total = Utils.calculateSumOfSpendings(spendings);
+            const spendingsBetween = Utils.getSpendingsBetween(this.props.spendings, startOf(date), endOf(date), cat);
+            const total = Utils.calculateSumOfSpendings(spendingsBetween);
             return {
                 name: dateFnsFormat(date, dateFormat),
                 value: total
@@ -142,7 +144,8 @@ class Analytics extends Component {
 }
 
 Analytics.propTypes = {
-    categories: PropTypes.arrayOf(PropTypes.object)
+    categories: PropTypes.arrayOf(PropTypes.object),
+    spendings: PropTypes.arrayOf(PropTypes.object)
 };
 
 export default connect(mapStateToProps)(Analytics);

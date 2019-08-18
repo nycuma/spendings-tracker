@@ -103,6 +103,28 @@ const Utils = {
         return spendings.filter(item => isSameYear(new Date(item.day), day)); 
     },
 
+    getSpendingsBetween(spendings, dateStart, dateEnd, category) {
+        if(!spendings || (!dateStart && !dateEnd)) { 
+            return []; 
+        }
+
+        let filteredSpendings = spendings;
+    
+        if(dateStart) {
+            filteredSpendings = filteredSpendings.filter(item => new Date(item.day) >= dateStart);
+        }
+    
+        if(dateEnd) {
+            filteredSpendings = filteredSpendings.filter(item => new Date(item.day) <= dateEnd);
+        }
+    
+        if(category) {
+            filteredSpendings = filteredSpendings.filter(item => item.cat === category);
+        }
+    
+        return filteredSpendings;
+    },
+
     /**
      * Filters array of spending positions by their category.
      * @param {Array} spendings objects with spending positions
