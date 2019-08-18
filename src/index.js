@@ -6,7 +6,6 @@ import logger from 'redux-logger';
 import { HashRouter } from 'react-router-dom';
 import { rootReducer } from './utils/ReduxStore';
 import Main from './Main';
-import registerServiceWorker from './registerServiceWorker';
 import { getSpendings, loadCurrency, loadLocale, loadCategories } from './utils/LocalStore';
 import { Constants } from './utils/Constants';
 import './style.scss';
@@ -26,7 +25,9 @@ const defaults = {
 const store = createStore(
   rootReducer,
   defaults,
+  /* window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() */
   DEBUG ? applyMiddleware(logger) : undefined
+  
 );
 
 render((
@@ -36,4 +37,3 @@ render((
         </Provider>
     </HashRouter>
 ), document.getElementById('root'));
-registerServiceWorker();
