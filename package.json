@@ -5,7 +5,7 @@
   "homepage": "https://nycuma.github.io/spendings-tracker",
   "devDependencies": {
     "gh-pages": "^2.0.1",
-    "react-scripts": "^2.1.8",
+    "react-scripts": "^5.0.1",
     "redux-logger": "^3.0.6"
   },
   "dependencies": {
